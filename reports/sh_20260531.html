@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报（2026年5月31日）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height: 1.8; }
+  .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px 40px 100px; }
+  h1 { text-align: center; color: #c0392b; font-size: 26px; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: #888; font-size: 14px; margin-bottom: 30px; border-bottom: 2px solid #c0392b; padding-bottom: 15px; }
+  h2 { color: #c0392b; font-size: 18px; margin: 28px 0 12px; border-left: 4px solid #c0392b; padding-left: 10px; display: flex; align-items: center; gap: 8px; }
+  h3 { color: #555; font-size: 15px; margin: 14px 0 8px; }
+  p { margin-bottom: 10px; text-align: justify; font-size: 15px; }
+  .highlight { background: #fff8e1; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #f39c12; margin: 12px 0; }
+  .danger { background: #ffeaea; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #e74c3c; margin: 12px 0; }
+  .info { background: #eaf4fe; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #3498db; margin: 12px 0; }
+  .tip { background: #e8f8ef; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #27ae60; margin: 12px 0; }
+  .speak-btn { background: none; border: none; cursor: pointer; font-size: 16px; margin-left: 6px; vertical-align: middle; }
+  .speak-btn:hover { opacity: 0.7; }
+  .speaking { animation: pulse 1s infinite; }
+  @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.3)} 100%{transform:scale(1)} }
+  .section { margin-bottom: 10px; padding: 8px; border-radius: 6px; transition: background 0.3s; }
+  .section.speaking-section { background: #fff9c4 !important; }
+  .footer { text-align: center; color: #999; font-size: 13px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+  .toc { background: #f8f9fa; padding: 16px 20px; border-radius: 8px; margin: 20px 0; }
+  .toc h3 { margin-top: 0; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin: 4px 0; }
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { padding-left: 20px; margin: 8px 0; }
+  li { margin-bottom: 6px; font-size: 15px; }
+
+  /* 底部控制栏 */
+  #tts-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 52px;
+    background: rgba(30,30,30,0.95); color: #fff;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,0.3);
+    font-size: 14px;
+  }
+  #tts-bar button {
+    background: #555; color: #fff; border: none; border-radius: 6px;
+    padding: 7px 16px; cursor: pointer; font-size: 14px; transition: background 0.2s;
+  }
+  #tts-bar button:hover { background: #777; }
+  #tts-bar button.active { background: #e67e22; }
+  #tts-bar label { font-size: 13px; }
+  #tts-bar input[type=range] { width: 100px; vertical-align: middle; }
+  #tts-status { font-size: 12px; color: #aaa; min-width: 120px; text-align: center; }
+</style>
+
+<!-- 语音播放器样式（已内置上方） -->
+</head>
+<body>
+
+<!-- 底部固定控制栏 HTML -->
+<div id="tts-bar">
+  <button onclick="ttsPlayAll()" title="全部朗读">▶ 全部朗读</button>
+  <button onclick="ttsPause()" title="暂停">⏸ 暂停</button>
+  <button onclick="ttsStop()" title="停止">⏹ 停止</button>
+  <label>语速 <input type="range" min="0.5" max="2" step="0.1" value="1" oninput="ttsSetRate(this.value)" style="width:90px;"> <span id="tts-rate-label">1x</span></label>
+  <span id="tts-status">就绪</span>
+</div>
+
+<div class="container">
+  <h1>🛡️ 留德安全汇报</h1>
+  <div class="subtitle">综合分析德国及全球最新安全动态 — 2026年5月31日 &nbsp;|&nbsp; 作者：德国热线（www.dolc.de）</div>
+
+  <div class="toc">
+    <h3>📋 目录</h3>
+    <ol>
+      <li><a href="#s1">本周重大安全事件综述</a></li>
+      <li><a href="#s2">多特蒙德枪击事件（5月29日）</a></li>
+      <li><a href="#s3">俄乌冲突升级与北约领土首次遭袭</a></li>
+      <li><a href="#s4">杜塞尔多夫中国男子遇刺案进展</a></li>
+      <li><a href="#s5">德国高级驾校迷奸案系列宣判追踪</a></li>
+      <li><a href="#s6">德国治安形势与犯罪数据统计</a></li>
+      <li><a href="#s7">电信诈骗防范提醒（AI换脸等新型手法）</a></li>
+      <li><a href="#s8">驻德使领馆最新安全提醒</a></li>
+      <li><a href="#s9">欧洲及全球安全形势综述</a></li>
+      <li><a href="#s10">实用安全建议</a></li>
+      <li><a href="#s11">紧急联系方式</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1节 -->
+  <div class="section" id="s1">
+    <h2>一、本周重大安全事件综述 <button class="speak-btn" onclick="ttsSpeakSection('s1')" title="朗读此节">🔊</button></h2>
+    <p>过去一周，德国及欧洲安全形势持续复杂多变。本周值得重点关注的安全事件包括：</p>
+    <ul>
+      <li><strong>多特蒙德市中心枪击事件</strong>（5月29日晚）：至少2人受伤，警方大规模出动，案件仍在调查中。</li>
+      <li><strong>俄罗斯无人机首次击中北约成员国领土</strong>（5月29日）：罗马尼亚公寓楼遭俄无人机撞击，NATO紧急表态，欧洲安全格局面临重大变化。</li>
+      <li><strong>杜塞尔多夫中国男子遇刺案</strong>持续受到关注：两名嫌疑人已被捕，驻杜塞尔多夫总领馆持续跟进。</li>
+      <li><strong>德国高级驾校跨国迷奸案</strong>系列宣判仍在进行中，邵之霆案预计6月宣判。</li>
+      <li><strong>电信诈骗</strong>持续高发，AI换脸、刷单、机票退改签等新型手法层出不穷。</li>
+    </ul>
+    <p>留德华人华侨及留学生群体应保持高度警惕，密切关注当地安全形势，加强自我防范意识。</p>
+  </div>
+
+  <!-- 第2节 -->
+  <div class="section" id="s2">
+    <h2>二、多特蒙德枪击事件（5月29日） <button class="speak-btn" onclick="ttsSpeakSection('s2')" title="朗读此节">🔊</button></h2>
+    <div class="danger">
+      <p><strong>⚠️ 事件概述：</strong>当地时间5月29日晚间，德国北威州重镇<strong>多特蒙德（Dortmund）市中心</strong>发生枪击事件。德国警方于5月30日发表正式声明确认此事。</p>
+    </div>
+    <h3>📊 事件详情</h3>
+    <ul>
+      <li><strong>发生时间：</strong>5月29日（周六）晚间</li>
+      <li><strong>发生地点：</strong>多特蒙德市中心（city center of Dortmund）</li>
+      <li><strong>伤亡情况：</strong>至少<strong>2人受伤</strong>，两名伤者均<strong>无生命危险</strong></li>
+      <li><strong>警方行动：</strong>案发后大量警力在事发区域展开大规模行动，行动持续至深夜</li>
+      <li><strong>案件状态：</strong>目前仍在调查中，警方表示将稍后公布更多详细信息</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>🔍 安全提醒：</strong>多特蒙德是北威州最大的城市之一，拥有众多华人华侨及留学生。请在上述区域及周边活动的侨胞近期提高警惕，避免深夜独自外出，留意周边可疑人员和异常情况。如遇紧急情况，请立即联系当地警方（拨打110）。</p>
+    </div>
+    <p>北威州近期治安案件频发，除此次多特蒙德枪击事件外，杜塞尔多夫中国男子遇刺案（5月24日）也发生在同一州。驻杜塞尔多夫总领馆已多次发布安全提醒，请在北威州居住的侨胞特别留意。</p>
+  </div>
+
+  <!-- 第3节 -->
+  <div class="section" id="s3">
+    <h2>三、俄乌冲突升级与北约领土首次遭袭 <button class="speak-btn" onclick="ttsSpeakSection('s3')" title="朗读此节">🔊</button></h2>
+    <div class="danger">
+      <p><strong>🚨 重大突破：</strong>当地时间5月29日凌晨，一架<strong>俄罗斯无人机击中北约成员国罗马尼亚</strong>境内一栋公寓楼，标志着俄乌冲突首次直接波及北约领土，引发国际社会高度关注。</p>
+    </div>
+    <h3>📊 事件详情</h3>
+    <ul>
+      <li><strong>发生时间：</strong>5月28-29日夜间</li>
+      <li><strong>撞击地点：</strong>罗马尼亚（与乌克兰接壤的边境地区）</li>
+      <li><strong>伤亡情况：</strong>公寓楼被撞击后起火，已疏散居民，<strong>2人受轻伤</strong></li>
+      <li><strong>NATO回应：</strong>NATO发表声明，谴责俄罗斯的"鲁莽行为"，承诺"保卫北约每一寸领土"</li>
+      <li><strong>背景：</strong>俄罗斯正在对乌克兰边境地区基础设施发动大规模无人机+导弹袭击，此次无人机偏离目标进入罗马尼亚境内</li>
+    </ul>
+    <h3>🌍 对德国及欧洲的影响</h3>
+    <p>此次事件标志着俄乌冲突的重大升级，具有以下重要意义：</p>
+    <ul>
+      <li><strong>NATO防御红线：</strong>这是NATO成员国领土首次在俄乌冲突中遭到直接打击，NATO已承诺加强防空部署</li>
+      <li><strong>德国防空压力增大：</strong>德国已承诺向NATO东部边境提供爱国者导弹系统，未来可能面临更大军事压力</li>
+      <li><strong>能源价格冲击：</strong>战争升级导致布伦特原油价格持续高位，德国经济增长预期仅0.4%，通胀率2.9%</li>
+      <li><strong>社会分化加剧：</strong>战争持续导致德国国内对军费开支、难民政策的争议持续升温，社会对立情绪上升</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>📌 对留德华人的影响：</strong>虽然战争未直接波及德国本土，但战争引发的经济衰退、社会分化、右翼势力抬头等次生影响，可能间接增加在德华人的不安全感。建议在德侨胞关注当地社会治安动态，避免参与政治集会和抗议活动。</p>
+    </div>
+  </div>
+
+  <!-- 第4节 -->
+  <div class="section" id="s4">
+    <h2>四、杜塞尔多夫中国男子遇刺案进展 <button class="speak-btn" onclick="ttsSpeakSection('s4')" title="朗读此节">🔊</button></h2>
+    <div class="danger">
+      <p><strong>案件回顾：</strong>当地时间5月24日晚，德国北威州杜塞尔多夫市某公寓内，一名<strong>38岁中国男子</strong>被发现身中致命刀伤，尽管立即采取了心肺复苏措施，仍当场死亡。</p>
+    </div>
+    <h3>📊 最新进展</h3>
+    <ul>
+      <li><strong>嫌疑人情况：</strong>当地警方已逮捕<strong>两名嫌疑人</strong>，案件正在进一步调查中</li>
+      <li><strong>驻杜塞尔多夫总领馆介入：</strong>总领馆对此案高度重视，已紧急介入并向当地警方交涉，要求尽快查明案情、惩治凶手</li>
+      <li><strong>使领馆提醒：</strong>总领馆特别提醒领区内的中国公民（尤其是北威州华人华侨、中餐从业人员）提高安全防范意识，加强自我防护</li>
+    </ul>
+    <div class="info">
+      <p><strong>📞 驻杜塞尔多夫总领馆联系方式：</strong></p>
+      <p>领事保护电话：<strong>+49-211-5508044</strong>（24小时）</p>
+      <p>网址：http://dusseldorf.china-consulate.org</p>
+    </div>
+    <p>这是近期第二起涉及在德中国公民的严重暴力犯罪案件。此前，柏林中国留学生冯志毅失联身亡事件（5月14-25日）亦引发广泛关注。提醒在德侨胞：独居时注意门窗安全，避免与不明身份人员发生纠纷，定期与亲友保持联系。</p>
+  </div>
+
+  <!-- 第5节 -->
+  <div class="section" id="s5">
+    <h2>五、德国高级驾校迷奸案系列宣判追踪 <button class="speak-btn" onclick="ttsSpeakSection('s5')" title="朗读此节">🔊</button></h2>
+    <div class="highlight">
+      <p><strong>案件综述：</strong>"德国高级驾校"系一个通过Telegram加密群组组织的跨国迷奸团伙，主要针对在德中国女性实施迷奸、偷拍等犯罪行为。核心8人团伙多为国内985高校毕业、在德留学或工作的高学历人员，案件由中德警方于2024年11月联合侦破。</p>
+    </div>
+    <h3>📊 已宣判情况（截至5月31日）</h3>
+    <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+      <tr style="background:#c0392b; color:#fff;"><th style="padding:8px; border:1px solid #ccc;">被告人</th><th style="padding:8px; border:1px solid #ccc;">背景</th><th style="padding:8px; border:1px solid #ccc;">判决结果</th></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">张大鹏</td><td style="padding:8px; border:1px solid #ccc;">哈工大本科、图宾根大学硕士</td><td style="padding:8px; border:1px solid #ccc;">14年有期徒刑 + 预防性羁押</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">蒋中懿（蒋某）</td><td style="padding:8px; border:1px solid #ccc;">中国籍，在德留学生</td><td style="padding:8px; border:1px solid #ccc;">11年3个月</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">周同</td><td style="padding:8px; border:1px solid #ccc;">中国籍</td><td style="padding:8px; border:1px solid #ccc;">5年9个月</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">钟某</td><td style="padding:8px; border:1px solid #ccc;">慕尼黑案件</td><td style="padding:8px; border:1px solid #ccc;">11年3个月（4月14日宣判）</td></tr>
+    </table>
+    <h3>⏳ 待审案件</h3>
+    <ul>
+      <li><strong>邵之霆（Zhiting S.）</strong>：柏林州法院审理中，预计<strong>6月加庭宣判</strong>。邵某被称为"技术顾问"，负责制作迷药和偷拍设备</li>
+      <li><strong>翁偲哲</strong>：已在美国被捕，面临<strong>25年至终身监禁</strong></li>
+    </ul>
+    <div class="tip">
+      <p><strong>💡 安全提醒：</strong>此类案件提醒在德中国女性：参加社交活动时要格外小心，不要接受陌生人提供的饮料，尽量与信任的朋友结伴出行，遇到可疑情况立即报警或联系使领馆。</p>
+    </div>
+  </div>
+
+  <!-- 第6节 -->
+  <div class="section" id="s6">
+    <h2>六、德国治安形势与犯罪数据统计 <button class="speak-btn" onclick="ttsSpeakSection('s6')" title="朗读此节">🔊</button></h2>
+    <h3>📊 德国联邦刑警局（BKA）2025年犯罪统计报告核心数据</h3>
+    <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+      <tr style="background:#c0392b; color:#fff;"><th style="padding:8px; border:1px solid #ccc;">犯罪类型</th><th style="padding:8px; border:1px solid #ccc;">趋势</th><th style="padding:8px; border:1px solid #ccc;">备注</th></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">总体犯罪数量</td><td style="padding:8px; border:1px solid #ccc;">↓ 5.6%</td><td style="padding:8px; border:1px solid #ccc;">表面下降，但严重犯罪上升</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">性犯罪</td><td style="padding:8px; border:1px solid #ccc;">↑ 2.8%</td><td style="padding:8px; border:1px solid #ccc;">持续上升趋势</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">强奸罪</td><td style="padding:8px; border:1px solid #ccc;">↑ 71.7%（自2018年）</td><td style="padding:8px; border:1px solid #ccc;">八年累计增幅惊人</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">入室盗窃</td><td style="padding:8px; border:1px solid #ccc;">↑ 5.7%</td><td style="padding:8px; border:1px solid #ccc;">留学生公寓为高发区</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">右翼暴力犯罪</td><td style="padding:8px; border:1px solid #ccc;">1598起（创九年来新高）</td><td style="padding:8px; border:1px solid #ccc;">连续三年上升</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">网络攻击</td><td style="padding:8px; border:1px solid #ccc;">超30万起/年</td><td style="padding:8px; border:1px solid #ccc;">年损失超2000亿欧元</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">儿童嫌疑人</td><td style="padding:8px; border:1px solid #ccc;">明显增加</td><td style="padding:8px; border:1px solid #ccc;">青少年犯罪低龄化</td></tr>
+    </table>
+    <h3>🚉 火车站及公共交通治安问题</h3>
+    <p>德国各大城市火车站（特别是柏林、法兰克福、多特蒙德、莱比锡等）周边治安环境持续恶化：</p>
+    <ul>
+      <li><strong>扒窃案件高发：</strong>游客、留学生是主要受害群体，背包尽量背在胸前</li>
+      <li><strong>持刀伤人事件：</strong>法兰克福Bahnhofstraße持刀伤人案（4月18日）嫌疑人仍在逃</li>
+      <li><strong>精神状态异常人员：</strong>莱比锡汽车冲撞事件（5月4日）嫌疑人存在精神健康问题，此类无差别袭击难以预防</li>
+    </ul>
+    <div class="danger">
+      <p><strong>⚠️ 特别提醒：</strong>暑期将至，德国各大城市火车站人流密集，请旅德侨胞在火车站、地铁站、公交车上特别注意保管好个人财物，避免在候车时低头看手机。如遇持刀威胁或抢劫，优先保证人身安全，事后立即报警。</p>
+    </div>
+  </div>
+
+  <!-- 第7节 -->
+  <div class="section" id="s7">
+    <h2>七、电信诈骗防范提醒（AI换脸等新型手法） <button class="speak-btn" onclick="ttsSpeakSection('s7')" title="朗读此节">🔊</button></h2>
+    <div class="danger">
+      <p><strong>📊 数据警示：</strong>2024年1-11月，中国全国起诉电信诈骗相关犯罪嫌疑人<strong>6.7万人</strong>，同比<strong>增长58.5%</strong>。诈骗犯罪手段持续升级，智能化、精准化趋势明显。</p>
+    </div>
+    <h3>🕵️ 当前主流诈骗手法</h3>
+    <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+      <tr style="background:#c0392b; color:#fff;"><th style="padding:8px; border:1px solid #ccc;">诈骗类型</th><th style="padding:8px; border:1px solid #ccc;">手法描述</th><th style="padding:8px; border:1px solid #ccc;">防范要点</th></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">冒充公检法</td><td style="padding:8px; border:1px solid #ccc;">冒充中国"警察""检察官"，谎称涉案，要求转账至"安全账户"</td><td style="padding:8px; border:1px solid #ccc;">中国公检法机关不会通过电话办案，更不会要求转账</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">AI换脸视频诈骗</td><td style="padding:8px; border:1px solid #ccc;">利用AI换脸技术冒充亲友视频通话，要求借款或转账</td><td style="padding:8px; border:1px solid #ccc;">视频通话中要求对方做特定动作（如摸脸、转身）识别真伪</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">刷单返利诈骗</td><td style="padding:8px; border:1px solid #ccc;">以小利引诱，逐步加大投入后拒绝返现</td><td style="padding:8px; border:1px solid #ccc;">任何"刷单""刷信誉"都是诈骗，果断拒绝</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">机票退改签</td><td style="padding:8px; border:1px solid #ccc;">发送虚假航班取消/改签短信，套取银行卡信息</td><td style="padding:8px; border:1px solid #ccc;">通过航空公司官网或官方APP核实，不点击陌生链接</td></tr>
+      <tr><td style="padding:8px; border:1px solid #ccc;">冒充使领馆</td><td style="padding:8px; border:1px solid #ccc;">谎称"护照过期""有包裹未领取"，要求提供个人信息</td><td style="padding:8px; border:1px solid #ccc;">使领馆不会通过电话索要银行卡信息或要求转账</td></tr>
+      <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">虚拟换汇</td><td style="padding:8px; border:1px solid #ccc;">通过微信群、留学生论坛发布"优惠换汇"信息，收钱后拉黑</td><td style="padding:8px; border:1px solid #ccc;">换汇请通过正规银行渠道，不轻信"优惠汇率"</td></tr>
+    </table>
+    <div class="info">
+      <p><strong>📞 反诈咨询渠道：</strong></p>
+      <ul>
+        <li>中国反诈中心：<strong>96110</strong>（境内拨打）</li>
+        <li>中国驻德国使领馆领事保护电话：见文末"紧急联系方式"</li>
+        <li>腾讯反诈中心：通过微信小程序"腾讯反诈"进行举报和咨询</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 第8节 -->
+  <div class="section" id="s8">
+    <h2>八、驻德使领馆最新安全提醒 <button class="speak-btn" onclick="ttsSpeakSection('s8')" title="朗读此节">🔊</button></h2>
+    <div class="info">
+      <p><strong>📢 中国驻德国大使馆及驻慕尼黑、法兰克福、汉堡、杜塞尔多夫总领馆持续发布安全提醒，请留德侨胞密切留意。</strong></p>
+    </div>
+    <h3>📋 最新提醒要点（综合5月发布内容）</h3>
+    <ul>
+      <li><strong>提高防范意识：</strong>密切关注当地安全形势，避免前往治安复杂区域，夜间尽量减少单独外出</li>
+      <li><strong>防范盗抢：</strong>妥善保管护照、居留证等重要证件，备份复印件；避免在公共场所显露贵重物品；驾车时不要让行李留在车内</li>
+      <li><strong>警惕电信诈骗：</strong>详见第七节，使领馆不会通过电话索要银行卡信息或要求转账</li>
+      <li><strong>注意交通安全：</strong>暑期将至，自驾出游增多，请严格遵守当地交通规则，不疲劳驾驶、不酒后驾车</li>
+      <li><strong>加强住所安全：</strong>出门前检查门窗是否锁好，长期外出可请邻居帮忙留意</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>📌 特别提醒：</strong>欧盟《环境犯罪指令》已于5月21日在德国正式实施，在德人员应注意遵守当地环保法规，避免因不了解法律而触犯刑律。此外，德国将于近期进一步强化欧盟EES（电子出入境系统）在全部边境口岸的执行力度，出入德国时请预留充足时间。</p>
+    </div>
+  </div>
+
+  <!-- 第9节 -->
+  <div class="section" id="s9">
+    <h2>九、欧洲及全球安全形势综述 <button class="speak-btn" onclick="ttsSpeakSection('s9')" title="朗读此节">🔊</button></h2>
+    <h3>🌍 欧洲安全形势</h3>
+    <ul>
+      <li><strong>俄乌冲突持续升级：</strong>俄罗斯对乌克兰发动大规模无人机+导弹袭击（5月23日单日600架无人机+高超音速导弹），并首次直接打击NATO成员国罗马尼亚领土（5月29日）。战争外溢效应日益明显。</li>
+      <li><strong>NATO防空压力剧增：</strong>NATO承诺"保卫每一寸领土"，德国已决定将爱国者导弹系统重新部署至土耳其，并考虑进一步加强NATO东翼防御。</li>
+      <li><strong>右翼势力持续抬头：</strong>德国右翼暴力犯罪创九年来新高（1598起），AfD民调支持率持续走高。法国、奥地利等国右翼政党同样势头强劲，欧洲政治版图持续分化。</li>
+      <li><strong>反犹主义严重恶化：</strong>46%在德犹太社群曾遭受针对性攻击，68%感到不安全。2024年反犹事件较2023年增加77%。</li>
+      <li><strong>欧盟移民与难民庇护公约全面实施：</strong>6月起，欧盟新规正式生效，边境快速筛查、责任分担、遣返平台等机制将改变欧洲难民政策格局，可能引发新的社会争议。</li>
+    </ul>
+    <h3>🌐 全球安全形势</h3>
+    <ul>
+      <li><strong>美伊关系：</strong>美伊60天停火协议草案（5月27日披露）内容包括全线停火、解除石油封锁、解冻120-250亿美元伊朗资产。以色列强烈反对，黎巴嫩局势仍不稳定。</li>
+      <li><strong>霍尔木兹海峡危机：</strong>伊朗战争导致中东原油供应受阻，布伦特原油价格逼近98美元/桶，IEA警告成员国战略石油储备仅够维持六周。</li>
+      <li><strong>汉坦病毒邮轮疫情：</strong>"洪迪厄斯号"极地探险邮轮疫情持续，已致3人死亡，7人疑似感染。WHO已介入协调，4名德国乘客返法兰克福后居家隔离45天。</li>
+      <li><strong>叙利亚难民返乡：</strong>欧盟推出叙利亚难民返乡补助计划，但安全形势能否保障返乡人员基本权利仍存疑。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>📌 综合分析：</strong>当前全球安全环境正处于新一轮动荡期。俄乌冲突的外溢效应、中东局势的持续紧张、以及欧美关系的深刻变化，都将对在德华人的安全环境产生间接但深远的影响。建议持续关注国际形势变化，合理安排出行计划。</p>
+    </div>
+  </div>
+
+  <!-- 第10节 -->
+  <div class="section" id="s10">
+    <h2>十、实用安全建议 <button class="speak-btn" onclick="ttsSpeakSection('s10')" title="朗读此节">🔊</button></h2>
+    <h3>🏠 居住安全</h3>
+    <div class="tip">
+      <ul>
+        <li>出门前及夜间就寝前，务必检查门窗是否锁好</li>
+        <li>不要在门缝、信箱放置钥匙备用（德国入室盗窃案中，30%是通过未锁门窗进入）</li>
+        <li>长期外出（如假期回国）前，请邻居或朋友定期查看住所，不要在社交媒体上公开外出计划</li>
+        <li>独居者可在门口放置几双男士鞋，制造有人同住的假象</li>
+      </ul>
+    </div>
+    <h3>🚶 出行安全</h3>
+    <div class="tip">
+      <ul>
+        <li>避免深夜独自外出，如必须外出，选择照明良好、人流较多的路线</li>
+        <li>在火车站、地铁站、公交车上，背包尽量背在胸前，随时留意周边可疑人员</li>
+        <li>不要将行李放在无人看管的行李架上，在火车站候车时不要低头看手机</li>
+        <li>自驾出行时，不要在车内遗留任何物品（包括空包、购物袋），停车选择有人看守的停车场</li>
+        <li>使用出租车或网约车（如Uber）时，上车前核对车牌号，行程中分享位置给亲友</li>
+      </ul>
+    </div>
+    <h3>💻 网络安全</h3>
+    <div class="tip">
+      <ul>
+        <li>不要点击来历不明的链接，不要下载可疑附件</li>
+        <li>为不同账户设置不同密码，启用双重验证（2FA）</li>
+        <li>使用公共WiFi时，不要进行网上银行、支付宝等涉及资金的操作</li>
+        <li>定期备份重要数据，防范勒索软件攻击（德国2025年遭受超30万起网络攻击）</li>
+      </ul>
+    </div>
+    <h3>🧠 心理健康</h3>
+    <div class="tip">
+      <ul>
+        <li>留学期间出现焦虑、抑郁等情绪问题请及时寻求帮助，不要独自承受</li>
+        <li>柏林中国留学生冯志毅失联身亡事件提醒我们：心理健康与身体健康同样重要</li>
+        <li><strong>心理援助热线（免费、匿名）：</strong>Telefonseelsorge — <strong>0800 111 0 111</strong>（全德通用，支持中文转接服务请提前查询）</li>
+        <li>各高校均设有心理咨询中心（Psychologische Beratungsstelle），留学生可免费使用</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 第11节 -->
+  <div class="section" id="s11">
+    <h2>十一、紧急联系方式 <button class="speak-btn" onclick="ttsSpeakSection('s11')" title="朗读此节">🔊</button></h2>
+    <div class="info">
+      <h3>🇩🇪 德国本地紧急电话</h3>
+      <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+        <tr style="background:#c0392b; color:#fff;"><th style="padding:8px; border:1px solid #ccc;">服务</th><th style="padding:8px; border:1px solid #ccc;">电话号码</th><th style="padding:8px; border:1px solid #ccc;">说明</th></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;"><strong>报警（Police）</strong></td><td style="padding:8px; border:1px solid #ccc;"><strong>110</strong></td><td style="padding:8px; border:1px solid #ccc;">全德统一，免费，24小时</td></tr>
+        <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;"><strong>消防/急救（Feuerwehr/Rettungsdienst）</strong></td><td style="padding:8px; border:1px solid #ccc;"><strong>112</strong></td><td style="padding:8px; border:1px solid #ccc;">全德统一，免费，24小时</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">医疗急救（Ärztlicher Bereitschaftsdienst）</td><td style="padding:8px; border:1px solid #ccc;">116 117</td><td style="padding:8px; border:1px solid #ccc;">非工作时间医生值班</td></tr>
+        <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">电信诈骗举报</td><td style="padding:8px; border:1px solid #ccc;">116 116</td><td style="padding:8px; border:1px solid #ccc;">银行卡丢失冻结</td></tr>
+      </table>
+
+      <h3>🇨🇳 中国驻德国使领馆领事保护电话</h3>
+      <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+        <tr style="background:#c0392b; color:#fff;"><th style="padding:8px; border:1px solid #ccc;">机构</th><th style="padding:8px; border:1px solid #ccc;">领区</th><th style="padding:8px; border:1px solid #ccc;">领事保护电话</th></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">驻德国大使馆（柏林）</td><td style="padding:8px; border:1px solid #ccc;">柏林、勃兰登堡州等</td><td style="padding:8px; border:1px solid #ccc;"><strong>+49-30-27588551</strong></td></tr>
+        <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">驻慕尼黑总领馆</td><td style="padding:8px; border:1px solid #ccc;">巴伐利亚州</td><td style="padding:8px; border:1px solid #ccc;"><strong>+49-89-17301680</strong></td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">驻法兰克福总领馆</td><td style="padding:8px; border:1px solid #ccc;">黑森州、莱法州、萨尔州</td><td style="padding:8px; border:1px solid #ccc;"><strong>+49-69-75085536</strong></td></tr>
+        <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">驻汉堡总领馆</td><td style="padding:8px; border:1px solid #ccc;">汉堡、不来梅、石荷州、下萨克森州</td><td style="padding:8px; border:1px solid #ccc;"><strong>+49-40-3610918</strong></td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">驻杜塞尔多夫总领馆</td><td style="padding:8px; border:1px solid #ccc;">北威州</td><td style="padding:8px; border:1px solid #ccc;"><strong>+49-211-5508044</strong></td></tr>
+        <tr style="background:#f9f9f9;"><td style="padding:8px; border:1px solid #ccc;">外交部全球领事保护热线（中国境内）</td><td style="padding:8px; border:1px solid #ccc;">全德国</td><td style="padding:8px; border:1px solid #ccc;"><strong>+86-10-12308</strong></td></tr>
+      </table>
+
+      <h3>🧠 心理援助热线（德国）</h3>
+      <ul>
+        <li><strong>Telefonseelsorge（全德）:</strong> 0800 111 0 111 / 0800 111 0 222（免费、匿名，24小时）</li>
+        <li><strong>Nummer gegen Kummer（儿童/青少年）:</strong> 116 111（免费，周一至周六13-19点）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><strong>作者署名：德国热线（www.dolc.de）</strong></p>
+    <p>本报告综合分析德国及全球最新安全新闻事件，供留德华人华侨留学生参考。</p>
+    <p>© 2026 德国热线 dolc.de — 保留所有权利</p>
+    <p style="margin-top:8px; font-size:12px; color:#bbb;">生成时间：2026年5月31日 | 工作模式：自动化安全汇报生成系统</p>
+  </div>
+</div>
+
+<!-- 完整 Web Speech API 语音播放引擎 -->
+<script>
+(function(){
+  "use strict";
+  var synth = window.speechSynthesis;
+  var utter = null;
+  var currentSection = null;
+  var isPaused = false;
+  var rate = 1.0;
+  var sections = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11'];
+  var currentIndex = -1;
+  var speakingAll = false;
+
+  // 获取段落纯文本
+  function getSectionText(id) {
+    var el = document.getElementById(id);
+    if (!el) return '';
+    var clone = el.cloneNode(true);
+    // 移除朗读按钮文本
+    var btns = clone.querySelectorAll('.speak-btn');
+    btns.forEach(function(b){ b.remove(); });
+    return clone.innerText || clone.textContent || '';
+  }
+
+  // 高亮当前节
+  function highlightSection(id) {
+    sections.forEach(function(sid){
+      var el = document.getElementById(sid);
+      if (el) el.classList.remove('speaking-section');
+    });
+    var el = document.getElementById(id);
+    if (el) el.classList.add('speaking-section');
+  }
+
+  // 清除高亮
+  function clearHighlight() {
+    sections.forEach(function(sid){
+      var el = document.getElementById(sid);
+      if (el) el.classList.remove('speaking-section');
+    });
+  }
+
+  // 设置状态
+  function setStatus(msg) {
+    var el = document.getElementById('tts-status');
+    if (el) el.textContent = msg;
+  }
+
+  // 朗读单个章节
+  window.ttsSpeakSection = function(id) {
+    ttsStop();
+    var text = getSectionText(id);
+    if (!text) return;
+    currentSection = id;
+    highlightSection(id);
+    utter = new SpeechSynthesisUtterance(text);
+    utter.rate = rate;
+    utter.lang = 'zh-CN';
+    utter.onend = function(){
+      clearHighlight();
+      setStatus('就绪');
+      currentSection = null;
+    };
+    utter.onerror = function(e){
+      clearHighlight();
+      setStatus('读取错误');
+      currentSection = null;
+    };
+    setStatus('正在朗读: ' + id);
+    synth.speak(utter);
+  };
+
+  // 全部朗读（逐节）
+  window.ttsPlayAll = function() {
+    ttsStop();
+    speakingAll = true;
+    currentIndex = 0;
+    setStatus('全部朗读中...');
+    speakNext();
+  };
+
+  function speakNext() {
+    if (!speakingAll || currentIndex >= sections.length) {
+      speakingAll = false;
+      clearHighlight();
+      setStatus('朗读完成');
+      return;
+    }
+    var id = sections[currentIndex];
+    var text = getSectionText(id);
+    if (!text) {
+      currentIndex++;
+      speakNext();
+      return;
+    }
+    highlightSection(id);
+    utter = new SpeechSynthesisUtterance(text);
+    utter.rate = rate;
+    utter.lang = 'zh-CN';
+    utter.onend = function(){
+      clearHighlight();
+      currentIndex++;
+      speakNext();
+    };
+    utter.onerror = function(e){
+      clearHighlight();
+      currentIndex++;
+      speakNext();
+    };
+    setStatus('朗读中 (' + (currentIndex+1) + '/' + sections.length + '): ' + id);
+    synth.speak(utter);
+  };
+
+  // 暂停
+  window.ttsPause = function() {
+    if (synth.speaking && !synth.paused) {
+      synth.pause();
+      isPaused = true;
+      setStatus('已暂停');
+    } else if (synth.paused) {
+      synth.resume();
+      isPaused = false;
+      setStatus('继续朗读...');
+    }
+  };
+
+  // 停止
+  window.ttsStop = function() {
+    speakingAll = false;
+    currentIndex = -1;
+    if (synth.speaking || synth.pending) {
+      synth.cancel();
+    }
+    clearHighlight();
+    setStatus('已停止');
+    currentSection = null;
+    isPaused = false;
+  };
+
+  // 设置语速
+  window.ttsSetRate = function(val) {
+    rate = parseFloat(val);
+    var label = document.getElementById('tts-rate-label');
+    if (label) label.textContent = rate.toFixed(1) + 'x';
+    // 如果正在朗读，重新以新语速朗读当前节
+    if (synth.speaking && currentSection) {
+      var id = currentSection;
+      synth.cancel();
+      setTimeout(function(){ ttsSpeakSection(id); }, 100);
+    }
+  };
+
+  // 页面卸载时停止
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
+})();
+</script>
+
+</body>
+</html>

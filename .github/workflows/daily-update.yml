@@ -1,0 +1,32 @@
+name: Daily security report update
+
+on:
+  schedule:
+    # 06:15 UTC is 07:15 or 08:15 in Germany depending on DST.
+    - cron: "15 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download and index today's report
+        run: python3 scripts/update_report.py
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update daily security report"
+          file_pattern: "reports/*.html reports.json index.html"
