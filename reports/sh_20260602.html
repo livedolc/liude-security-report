@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 - 2026年6月2日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #333; line-height: 1.8; padding-bottom: 80px; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.header { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 30px; border-radius: 12px; margin-bottom: 24px; text-align: center; }
+.header h1 { font-size: 28px; margin-bottom: 8px; }
+.header .date { font-size: 16px; opacity: 0.9; }
+.header .author { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+.section { background: white; border-radius: 10px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.section h2 { color: #1a237e; font-size: 20px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #e8eaf6; display: flex; align-items: center; justify-content: space-between; }
+.section h2 .read-btn { font-size: 14px; background: none; border: 1px solid #1a237e; color: #1a237e; padding: 4px 12px; border-radius: 16px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.section h2 .read-btn:hover { background: #1a237e; color: white; }
+.section h2 .read-btn.active { background: #ff6f00; border-color: #ff6f00; color: white; }
+.section h2 .read-btn.playing { background: #ff6f00; border-color: #ff6f00; color: white; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.section p { margin-bottom: 12px; text-align: justify; }
+.highlight-box { background: #fff3e0; border-left: 4px solid #ff9800; padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+.danger-box { background: #ffebee; border-left: 4px solid #d32f2f; padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+.info-box { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+.success-box { background: #e8f5e9; border-left: 4px solid #388e3c; padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+.section.highlight { background: #fffde7; }
+.toc { background: white; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.toc h3 { color: #1a237e; margin-bottom: 12px; font-size: 18px; }
+.toc ol { padding-left: 20px; }
+.toc li { margin-bottom: 6px; }
+.toc a { color: #283593; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+th { background: #1a237e; color: white; padding: 10px 12px; text-align: left; }
+td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+tr:nth-child(even) { background: #f5f5f5; }
+.footer { text-align: center; padding: 20px; color: #666; font-size: 13px; }
+.section-reading { background: #fff9c4 !important; transition: background 0.3s; }
+/* Bottom control bar */
+#speech-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); color: white; padding: 10px 20px; z-index: 9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; backdrop-filter: blur(10px); }
+#speech-bar button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.2s; white-space: nowrap; }
+#speech-bar button:hover { background: rgba(255,255,255,0.3); }
+#speech-bar button.active { background: #ff6f00; border-color: #ff6f00; }
+#speech-bar .speed-control { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+#speech-bar .speed-control input[type="range"] { width: 80px; accent-color: #ff6f00; }
+#speech-bar .speed-label { min-width: 30px; text-align: center; }
+#speech-bar .status { font-size: 13px; opacity: 0.8; margin-left: auto; }
+</style>
+</head>
+<body>
+
+<!-- Bottom fixed control bar -->
+<div id="speech-bar">
+  <button onclick="readAll()">▶ 全部朗读</button>
+  <button onclick="pauseResume()">⏸ 暂停</button>
+  <button onclick="stopRead()">⏹ 停止</button>
+  <div class="speed-control">
+    <span>语速</span>
+    <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed(this.value)">
+    <span class="speed-label" id="speedLabel">1x</span>
+  </div>
+  <span class="status" id="readStatus">就绪</span>
+</div>
+
+<div class="container">
+
+<div class="header">
+  <h1>留德安全汇报</h1>
+  <div class="date">2026年6月2日 星期二</div>
+  <div class="author">作者：德国热线（www.dolc.de）</div>
+</div>
+
+<div class="toc">
+  <h3>本期目录</h3>
+  <ol>
+    <li><a href="#s1">多特蒙德市中心枪击事件持续调查</a></li>
+    <li><a href="#s2">杜塞尔多夫中国公民遇刺身亡案件后续</a></li>
+    <li><a href="#s3">俄乌冲突急剧升级：全境导弹袭击</a></li>
+    <li><a href="#s4">伊朗暂停美伊对话，霍尔木兹海峡再临封锁风险</a></li>
+    <li><a href="#s5">欧盟移民与庇护公约6月11日全面实施</a></li>
+    <li><a href="#s6">驻德国使领馆再次发布安全提醒</a></li>
+    <li><a href="#s7">德国社会治安与经济形势</a></li>
+    <li><a href="#s8">电信诈骗持续高发防范提醒</a></li>
+    <li><a href="#s9">夏季实用安全指南与紧急联系方式</a></li>
+  </ol>
+</div>
+
+<!-- Section 1 -->
+<div class="section" id="s1">
+  <h2>
+    一、多特蒙德市中心枪击事件持续调查
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>5月29日晚间，德国多特蒙德市中心发生枪击事件，警方于5月30日证实该消息。根据目前掌握的信息，至少2人在事件中受伤，伤者均无生命危险。事发后大批警力在当地展开行动并持续至深夜，警方已成立谋杀调查组展开全面调查。</p>
+  <div class="danger-box">
+    <strong>安全提醒：</strong>近期德国西部主要城市治安事件频发。建议在多特蒙德及周边地区的华人华侨留学生提高警惕，避免深夜独自外出，远离人员密集区域和酒吧聚集区。如遇紧急情况，立即拨打110报警。
+  </div>
+  <p>值得注意的背景：5月24日，杜塞尔多夫一名38岁中国公民在公寓内遇刺身亡，两名嫌疑人已被捕；5月29日多特蒙德枪击发生前数日，汉堡恐袭未遂案嫌疑人仍在司法审理中。德国城市公共安全形势持续受到关注，BfV（联邦宪法保卫局）此前已警告极端主义威胁处于高位。</p>
+</div>
+
+<!-- Section 2 -->
+<div class="section" id="s2">
+  <h2>
+    二、杜塞尔多夫中国公民遇刺身亡案件后续
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>5月24日晚，杜塞尔多夫一名38岁中国籍男子在公寓内遭利器袭击身亡。案发后两名嫌疑人被警方逮捕。中国驻杜塞尔多夫总领馆第一时间启动领事保护应急机制，紧急联系德方警方了解案情，敦促尽快查明真相、依法严惩凶手。</p>
+  <div class="highlight-box">
+    <strong>领保提示：</strong>总领馆提醒领区内中国公民提高安全意识，密切关注当地治安与交通状况，严格遵守法律法规，避免前往危险区域。如遇紧急情况，应保持冷静，及时报警并联系总领馆求助。<br>
+    <strong>总领馆领保电话：</strong>+49-211-55080446
+  </div>
+  <p>今年以来，德国发生多起涉及华人社区的安全事件，包括中餐从业人员遭盗抢的恶性案件、"德国高级驾校"跨国迷奸案系列宣判、慕尼黑华裔夫妇间谍案等，华人社区安全防范意识需进一步提高。</p>
+</div>
+
+<!-- Section 3 -->
+<div class="section" id="s3">
+  <h2>
+    三、俄乌冲突急剧升级：全境导弹袭击
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>6月2日凌晨2时15分许，俄罗斯对乌克兰全境发动了大规模空袭，乌克兰大部分地区拉响空袭警报。首都基辅遭到弹道导弹直接攻击，持续响起剧烈爆炸声。在奥博隆区，多辆汽车被导弹碎片击中起火，多处空地同时起火，大量市民涌入地铁站避难。</p>
+  <p>第聂伯市在袭击中遭受严重打击，至少4人死亡、16人受伤。部分地区出现断电。这是近期俄乌冲突中规模较大的一次全境空袭行动，表明冲突仍在持续升级。</p>
+  <div class="info-box">
+    <strong>对在德华人的影响：</strong>俄乌冲突持续升级可能通过能源价格、供应链中断、难民安置等渠道间接影响德国社会。此前美伊战争已导致德国煤油危机和通胀高企（CPI 2.9%），俄乌新动态需持续关注。在德华人如计划前往东欧地区，请务必关注外交部安全提醒和目的地安全评估。
+  </div>
+</div>
+
+<!-- Section 4 -->
+<div class="section" id="s4">
+  <h2>
+    四、伊朗暂停美伊对话，霍尔木兹海峡再临封锁风险
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>6月1日，鉴于以色列在黎巴嫩的持续军事行动，伊朗谈判团队宣布暂停通过中间人同美国的对话和文本交换。伊朗外交部长阿拉格齐明确表示："任何一条战线上的停火遭到破坏，等同于所有战线上的停火遭到破坏。" 伊朗方面要求以色列立即停止在加沙和黎巴嫩的军事行动并完全撤军。</p>
+  <p>地区抵抗阵线和伊朗已制定计划，准备彻底封锁霍尔木兹海峡，同时启动包括曼德海峡在内的其他战线。5月31日至6月1日，以军扩大在黎军事行动，以军越过利塔尼河展开进攻，贝鲁特代希耶地区遭到空袭。6月1日，美军中央司令部成功拦截两枚目标为驻科威特美军基地的伊朗弹道导弹，伊朗伊斯兰革命卫队同时公布击落美军无人机的视频。</p>
+  <p>与此同时，美国总统特朗普6月1日表示预计将在"未来一周内"与伊朗达成谅解备忘录，延长停火并重新开放霍尔木兹海峡。国际原油期货价格在6月1日盘中一度涨超5%。</p>
+  <div class="danger-box">
+    <strong>对在德华人的影响：</strong>霍尔木兹海峡是全球石油运输咽喉，若再度封锁将严重冲击全球能源供应，推高德国燃油和取暖成本。美伊谈判虽有进展但变数极大，建议提前做好应对能源价格波动的准备。
+  </div>
+</div>
+
+<!-- Section 5 -->
+<div class="section" id="s5">
+  <h2>
+    五、欧盟移民与庇护公约6月11日全面实施
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>经过多年艰难谈判，欧盟《移民与庇护公约》将于2026年6月11日全面实施。该公约被视为欧盟移民政策改革的"历史性妥协"，全面收紧了移民管控。6月1日，欧洲议会与欧盟理事会还就修订后的"难民与移民遣返条例"达成协议，将进一步加快成员国遣返非法移民的程序，并计划在境外设立"遣返中心"。</p>
+  <div class="highlight-box">
+    <strong>对在德华人的潜在影响：</strong>
+    <ul>
+      <li><strong>居留审批趋严：</strong>庇护和居留申请审核标准将统一收紧，建议持长签/蓝卡者关注续签政策变化</li>
+      <li><strong>边境管控加强：</strong>德国自2024年9月起在陆地边境实施护照检查已常态化</li>
+      <li><strong>旅行出行影响：</strong>EES生物识别出入境系统持续运行，口岸通关可能延时，建议国际旅行预留充足时间</li>
+      <li><strong>合法身份保护：</strong>公约主要针对非法移民和庇护申请，持有效签证/居留的合法华人不受直接影响</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Section 6 -->
+<div class="section" id="s6">
+  <h2>
+    六、驻德国使领馆再次发布安全提醒
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>6月1日，中国驻德国使领馆再次发布安全提醒。今年以来，德国发生多起恶性治安案件，使领馆特此提醒近期来德及在德中国公民全面防范各类安全风险：</p>
+  <div class="info-box">
+    <strong>使领馆安全提醒要点：</strong>
+    <ol>
+      <li><strong>提高安全防范意识：</strong>及时关注所在地区治安动态，避免前往车站、集会、游行等人员密集区域</li>
+      <li><strong>加强人身财产防护：</strong>妥善保管护照等身份证件，避免在公共场所显露贵重物品</li>
+      <li><strong>警惕电信网络诈骗：</strong>切勿轻信陌生来电、短信和邮件，不随意点击不明链接</li>
+      <li><strong>注意交通安全：</strong>遵守当地交通法规，乘坐公共交通时注意随身物品</li>
+      <li><strong>保持通讯畅通：</strong>出行前告知家人行程安排，保持与亲友定期联系</li>
+    </ol>
+  </div>
+  <p>此前5月27日，驻杜塞尔多夫总领馆也发布特别提醒，呼吁领区内中国公民加强安全防范，密切关注当地治安与交通状况，并提供了领事保护应急联系电话。</p>
+</div>
+
+<!-- Section 7 -->
+<div class="section" id="s7">
+  <h2>
+    七、德国社会治安与经济形势
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p><strong>治安形势：</strong>根据BKA发布的2025年度犯罪统计报告，虽然整体犯罪总量下降5.6%，但多项指标令人担忧——性犯罪增加2.8%，入室盗窃增加5.7%，强奸案件自2018年以来累计上升71.7%。右翼暴力犯罪连续三年上升，2025年达到1598起，创九年来新高。反犹事件较2023年增加77%，46%的犹太社群成员遭受过针对性攻击。</p>
+  <p><strong>经济困境：</strong>德国经济增长预期大幅下调至0.4%—0.6%，通胀率CPI维持2.9%高位。美伊战争冲击能源价格，WTI原油突破93美元/桶，战略石油储备降至近两年半最低。默茨总理执政一周年支持率跌至13%—29%，联合政府支持率仅13%，85%选民表示不满。AfD民调持续走高，政治极化加剧。</p>
+  <p><strong>民防建设：</strong>5月20日，德国内阁批准100亿欧元民防计划，2029年前完成。计划摒弃冷战掩体模式，改造地下停车场、隧道和地铁站为避难所，采购1000余台特种车辆，升级全国警报系统。</p>
+  <table>
+    <tr><th>指标</th><th>数据</th><th>趋势</th></tr>
+    <tr><td>整体犯罪总量</td><td>BKA 2025年报</td><td>↓5.6%</td></tr>
+    <tr><td>性犯罪</td><td>同比</td><td>↑2.8%</td></tr>
+    <tr><td>入室盗窃</td><td>同比</td><td>↑5.7%</td></tr>
+    <tr><td>右翼暴力犯罪</td><td>1598起</td><td>连续三年上升</td></tr>
+    <tr><td>经济增长预期</td><td>0.4%—0.6%</td><td>大幅下调</td></tr>
+    <tr><td>通胀率CPI</td><td>2.9%</td><td>15个月高位</td></tr>
+    <tr><td>WTI原油</td><td>突破93美元/桶</td><td>持续高位</td></tr>
+  </table>
+</div>
+
+<!-- Section 8 -->
+<div class="section" id="s8">
+  <h2>
+    八、电信诈骗持续高发防范提醒
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>电信诈骗在在德华人社区中持续高发。据中国检察机关数据，2024年1—11月起诉电信诈骗犯罪嫌疑人6.7万人，同比增加58.5%。在德华人需特别警惕以下新型诈骗手法：</p>
+  <div class="danger-box">
+    <strong>重点防范的诈骗类型：</strong>
+    <ul>
+      <li><strong>冒充公检法：</strong>谎称涉嫌洗钱、偷渡等犯罪，要求转账至"安全账户"</li>
+      <li><strong>AI换脸视频诈骗：</strong>利用深度伪造技术冒充亲友视频通话，骗取钱财</li>
+      <li><strong>假警察诈骗：</strong>近期有案例显示，假冒警察骗走受害者19万欧元</li>
+      <li><strong>机票退改签诈骗：</strong>冒充航空公司或旅行社，以航班取消为由诱导点击钓鱼链接</li>
+      <li><strong>刷单返利诈骗：</strong>以高回报兼职诱骗先期投入资金</li>
+      <li><strong>虚拟换汇诈骗：</strong>非正规渠道换汇被骗，资金无法追回</li>
+    </ul>
+  </div>
+  <div class="success-box">
+    <strong>防骗核心原则：</strong>公检法不会通过电话办案、不会要求转账至"安全账户"；任何要求先行转账的投资都是诈骗；AI换脸可通过要求对方做特定动作来验证真伪；涉及钱财务必当面或通过已知可靠渠道确认。
+  </div>
+</div>
+
+<!-- Section 9 -->
+<div class="section" id="s9">
+  <h2>
+    九、夏季实用安全指南与紧急联系方式
+    <button class="read-btn" onclick="readSection(this)">🔊 朗读此节</button>
+  </h2>
+  <p>夏季来临，各类户外活动增加，请各位在德华人华侨留学生注意以下安全事项：</p>
+  <div class="info-box">
+    <strong>居住安全：</strong>检查住处门窗锁具，独居者注意反锁房门；离开时关闭燃气和电器；邻里互助，发现可疑人员及时报警。<br><br>
+    <strong>出行安全：</strong>避免深夜独自前往偏僻区域；火车站、旅游景点注意防盗；自驾出行遵守交通规则，长途驾车注意休息。<br><br>
+    <strong>社交安全：</strong>谨慎交友，尤其对网络认识的新朋友保持警惕；参加聚会注意饮食安全，不接受陌生人提供的饮料；"德国高级驾校"案警示：熟人作案风险不可忽视。<br><br>
+    <strong>心理健康：</strong>留学生独自在异国他乡，如有心理压力请及时寻求帮助。德国心理咨询热线：<strong>0800/111 0 111</strong>（免费匿名）。
+  </div>
+  <p><strong>紧急联系方式汇总：</strong></p>
+  <table>
+    <tr><th>机构</th><th>电话/方式</th></tr>
+    <tr><td>德国紧急报警</td><td>110（警察）/ 112（消防急救）</td></tr>
+    <tr><td>中国驻德国大使馆</td><td>+49-30-27588551</td></tr>
+    <tr><td>驻汉堡总领馆</td><td>+49-40-81976030</td></tr>
+    <tr><td>驻慕尼黑总领馆</td><td>+49-89-7248191</td></tr>
+    <tr><td>驻杜塞尔多夫总领馆</td><td>+49-211-55080446</td></tr>
+    <tr><td>驻法兰克福总领馆</td><td>+49-69-75080146</td></tr>
+    <tr><td>外交部全球领保热线</td><td>+86-10-12308 或 +86-10-65612308</td></tr>
+    <tr><td>德国心理咨询热线</td><td>0800/111 0 111（免费匿名）</td></tr>
+    <tr><td>德国反诈热线</td><td>116 006</td></tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>德国热线 www.dolc.de | 留德安全汇报</p>
+  <p>本报告内容仅供参考，不构成任何法律或专业建议。</p>
+  <p>如遇紧急情况，请立即拨打当地报警电话并联系使领馆。</p>
+</div>
+
+</div>
+
+<script>
+// Web Speech API Engine
+const sections = document.querySelectorAll('.section');
+const statusEl = document.getElementById('readStatus');
+let currentUtterance = null;
+let currentIndex = -1;
+let isReading = false;
+let isPaused = false;
+
+function getZhVoice() {
+  const voices = speechSynthesis.getVoices();
+  return voices.find(v => v.lang.startsWith('zh')) || voices.find(v => v.lang.startsWith('zh-CN')) || null;
+}
+
+function updateSpeed(val) {
+  document.getElementById('speedLabel').textContent = parseFloat(val).toFixed(1) + 'x';
+  if (currentUtterance) {
+    currentUtterance.rate = parseFloat(val);
+  }
+}
+
+function readSection(btn) {
+  const section = btn.closest('.section');
+  const index = Array.from(sections).indexOf(section);
+  speechSynthesis.cancel();
+  isPaused = false;
+  currentIndex = index;
+  speakSection(index);
+  setActiveBtn(btn);
+}
+
+function readAll() {
+  speechSynthesis.cancel();
+  isPaused = false;
+  currentIndex = 0;
+  clearAllHighlights();
+  speakNext();
+  statusEl.textContent = '正在朗读：第1节';
+}
+
+function speakSection(index) {
+  if (index >= sections.length) {
+    stopRead();
+    return;
+  }
+  clearAllHighlights();
+  const section = sections[index];
+  section.classList.add('section-reading');
+
+  const text = section.innerText.replace(/[🔊朗读此节▶全部朗读⏸暂停⏹停止]/g, '').trim();
+  const utterance = new SpeechSynthesisUtterance(text);
+  const voice = getZhVoice();
+  if (voice) utterance.voice = voice;
+  utterance.lang = 'zh-CN';
+  utterance.rate = parseFloat(document.getElementById('speedSlider').value);
+
+  utterance.onend = function() {
+    section.classList.remove('section-reading');
+    if (isReading && currentIndex < sections.length - 1) {
+      currentIndex++;
+      speakNext();
+    } else {
+      isReading = false;
+      statusEl.textContent = '朗读完毕';
+      clearAllBtns();
+    }
+  };
+  utterance.onerror = function() {
+    section.classList.remove('section-reading');
+    isReading = false;
+    statusEl.textContent = '朗读出错';
+  };
+
+  currentUtterance = utterance;
+  speechSynthesis.speak(utterance);
+}
+
+function speakNext() {
+  isReading = true;
+  const title = sections[currentIndex].querySelector('h2').childNodes[0].textContent.trim();
+  statusEl.textContent = '正在朗读：' + title;
+  speakSection(currentIndex);
+}
+
+function pauseResume() {
+  if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+    isPaused = false;
+    statusEl.textContent = '继续朗读';
+  } else if (speechSynthesis.speaking) {
+    speechSynthesis.pause();
+    isPaused = true;
+    statusEl.textContent = '已暂停';
+  }
+}
+
+function stopRead() {
+  speechSynthesis.cancel();
+  isReading = false;
+  isPaused = false;
+  currentIndex = -1;
+  currentUtterance = null;
+  statusEl.textContent = '已停止';
+  clearAllHighlights();
+  clearAllBtns();
+}
+
+function setActiveBtn(activeBtn) {
+  clearAllBtns();
+  activeBtn.classList.add('active', 'playing');
+}
+
+function clearAllBtns() {
+  document.querySelectorAll('.read-btn').forEach(b => {
+    b.classList.remove('active', 'playing');
+  });
+}
+
+function clearAllHighlights() {
+  sections.forEach(s => s.classList.remove('section-reading'));
+}
+
+// Preload voices
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = function() {};
+}
+speechSynthesis.getVoices();
+</script>
+
+</body>
+</html>
