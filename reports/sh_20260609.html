@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 — 2026年6月9日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.8;
+  padding-bottom: 100px;
+}
+.header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+.header h1 { font-size: 28px; margin-bottom: 10px; letter-spacing: 2px; }
+.header .subtitle { font-size: 14px; opacity: 0.8; }
+.header .date { font-size: 16px; margin-top: 8px; opacity: 0.9; }
+.header .author { font-size: 13px; margin-top: 6px; opacity: 0.7; }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.section {
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: background 0.3s;
+}
+.section.active {
+  background: #fffde7;
+  box-shadow: 0 2px 16px rgba(255, 193, 7, 0.3);
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 10px;
+}
+.section-title .read-btn {
+  font-size: 14px;
+  background: #0f3460;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.section-title .read-btn:hover { background: #1a5276; }
+.section p {
+  margin-bottom: 12px;
+  text-indent: 2em;
+  position: relative;
+}
+.section p .para-btn {
+  display: inline-block;
+  font-size: 12px;
+  background: #e8e8e8;
+  color: #555;
+  border: none;
+  border-radius: 4px;
+  padding: 1px 8px;
+  margin-right: 6px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.2s;
+}
+.section p .para-btn:hover { background: #0f3460; color: #fff; }
+.section ul { margin: 10px 0 10px 20px; }
+.section ul li { margin-bottom: 6px; }
+.highlight-box {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+}
+.highlight-box.danger {
+  background: #ffeaea;
+  border-left-color: #e74c3c;
+}
+.highlight-box.info {
+  background: #e3f2fd;
+  border-left-color: #2196f3;
+}
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #999;
+  font-size: 13px;
+}
+.footer a { color: #0f3460; text-decoration: none; }
+.emergency-box {
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.emergency-box h3 { color: #ffc107; margin-bottom: 12px; font-size: 18px; }
+.emergency-box .contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 13px;
+}
+@media (max-width: 500px) {
+  .emergency-box .contact-grid { grid-template-columns: 1fr; }
+}
+/* --- 语音播放器样式 --- */
+#speech-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.88);
+  color: #fff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 9999;
+  flex-wrap: wrap;
+  backdrop-filter: blur(10px);
+}
+#speech-controls button {
+  background: #0f3460;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#speech-controls button:hover { background: #1a5276; }
+#speech-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+#speech-controls .speed-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+#speech-controls input[type="range"] {
+  width: 80px;
+  accent-color: #0f3460;
+}
+#speech-controls .speed-label {
+  font-size: 12px;
+  min-width: 30px;
+  text-align: center;
+}
+#speech-status {
+  font-size: 12px;
+  color: #aaa;
+  min-width: 100px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div id="speech-controls">
+  <button id="btn-play-all" title="全部朗读">▶ 全部朗读</button>
+  <button id="btn-pause" title="暂停" disabled>⏸ 暂停</button>
+  <button id="btn-stop" title="停止" disabled>⏹ 停止</button>
+  <div class="speed-group">
+    <span>语速:</span>
+    <input type="range" id="speed-slider" min="0.5" max="2" step="0.1" value="1">
+    <span class="speed-label" id="speed-label">1.0x</span>
+  </div>
+  <span id="speech-status">就绪</span>
+</div>
+
+<div class="header">
+  <h1>🛡️ 留德安全汇报</h1>
+  <div class="date">2026年6月9日（周二）</div>
+  <div class="subtitle">综合分析德国及全球最新安全事件</div>
+  <div class="author">作者：德国热线（www.dolc.de）</div>
+</div>
+
+<div class="container">
+
+  <!-- 一、中东冲突 -->
+  <div class="section" id="sec1">
+    <div class="section-title">
+      一、中东冲突急剧升级：伊朗以色列互射导弹
+      <button class="read-btn" onclick="readSection('sec1')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>过去48小时，中东局势出现了2026年开战以来最危险的一轮升级。6月7日（周日），伊朗自4月以来首次向以色列发射约10枚弹道导弹，以色列全境拉响防空警报。作为回应，6月8日以色列战机空袭了黎巴嫩贝鲁特南郊——这是以色列首次将打击范围从伊朗境内扩大到黎巴嫩首都地区。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>所幸目前双方均声称"暂时收手"，但分析人士普遍认为，这种"打了又停"的模式随时可能再次引爆。与此同时，也门胡塞武装于6月8日宣布对红海实施"全面封锁"，全球航运再受冲击。布伦特原油价格已逼近98美元/桶，德国加油站油价持续高企。</p>
+    <div class="highlight-box danger">
+      <strong>⚠️ 对留德华人的影响：</strong>能源价格持续走高推升生活成本；航空公司可能增加燃油附加费，暑假回国机票价格面临上涨压力；建议近期有出行计划的同胞提前购票。
+    </div>
+  </div>
+
+  <!-- 二、FCAS项目崩溃 -->
+  <div class="section" id="sec2">
+    <div class="section-title">
+      二、法德FCAS战斗机项目突然崩溃
+      <button class="read-btn" onclick="readSection('sec2')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>6月8日，在柏林ILA国际航空航天展开幕当天，德国和法国政府突然宣布终止"未来空战系统"（FCAS）联合研发项目。该项目原计划投资逾千亿欧元，是欧洲最大规模的防务合作，目标是在2040年前研制出下一代战斗机及配套无人机群，被视为欧洲防务自主的核心支柱。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>据《明镜》周刊披露，柏林方面是单方面做出决定，令巴黎感到意外。数月来，空客（Airbus）与达索（Dassault）两家军工巨头在知识产权、出口权和工作份额分配上存在严重分歧，最终导致项目不可挽回地破裂。此举被视为默茨政府对法国总统马克龙欧洲防务自主愿景的沉重打击。</p>
+    <div class="highlight-box info">
+      <strong>📌 解读：</strong>FCAS的失败意味着德国未来可能加速转向采购美制F-35等现成战机，这将进一步加深欧洲对美国的安全依赖。对在德华人而言，这也意味着德国防务政策的不确定性增加，可能影响国家预算分配和社会舆论走向。
+    </div>
+  </div>
+
+  <!-- 三、伦敦四方峰会 -->
+  <div class="section" id="sec3">
+    <div class="section-title">
+      三、伦敦四方峰会：乌克兰和平"五条件"
+      <button class="read-btn" onclick="readSection('sec3')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>6月7日，英国首相斯塔默、法国总统马克龙、德国总理默茨与乌克兰总统泽连斯基在伦敦举行四方会晤。会后发表联合声明，提出推动俄乌停火的五条框架条件，包括全面停火、尊重主权领土完整、安全保障机制等关键内容。这是西方国家首次以"法德英+乌克兰"的四边机制协调对俄立场，标志着欧洲在俄乌问题上寻求更积极的斡旋角色。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>然而，就在几天前（6月5日），普京在圣彼得堡国际经济论坛上公开拒绝了泽连斯基的直接会面提议，并称赞德国选项党（AfD），暗示俄方当前无意让步。军事层面，俄军近期持续对乌克兰发动大规模空袭，前线形势依然胶着。</p>
+  </div>
+
+  <!-- 四、德国国内 -->
+  <div class="section" id="sec4">
+    <div class="section-title">
+      四、德国国内：体育喜讯难掩政治阴霾
+      <button class="read-btn" onclick="readSection('sec4')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>6月7日，德国网球名将亚历山大·兹维列夫在法网男单决赛中苦战五盘击败意大利选手科博利，夺得个人首座大满贯冠军。这是德国体育界本周最大的喜讯，在战火与经济忧虑中给德国民众带来了难得的振奋时刻。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>但政坛方面，默茨总理的处境持续恶化。福萨（Forsa）最新民调显示，联合政府的支持率仅剩13%，默茨个人支持率约29%，而选择党（AfD）在多项民调中持续领先。6月1日联邦政府在助学贷款（Bafög）改革上爆发严重内讧，社民党与自民党相互指责。北威州最新数据显示，反犹人身攻击事件同比激增78%，极右翼暴力犯罪仍在上升。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>经济层面，伊朗战争持续冲击能源价格，德国经济研究所（IW）将2026年增长预期从0.9%下调至0.4%，通胀率维持在2.9%的高位。联邦国防军被曝后勤告急——大量坦克出现故障且缺乏备件，国防能力引发担忧。</p>
+  </div>
+
+  <!-- 五、华人社区安全 -->
+  <div class="section" id="sec5">
+    <div class="section-title">
+      五、华人社区安全提醒
+      <button class="read-btn" onclick="readSection('sec5')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button><strong>电信诈骗持续严峻。</strong>冒充公检法、AI换脸视频诈骗、假警察骗取高额现金、刷单诈骗、机票退改签等手法不断翻新。2024年中国检察机关已起诉电信诈骗嫌疑人6.7万人，同比激增58.5%。随着2026世界杯（6月11日开幕）临近，近期已出现大量虚假世界杯门票诈骗网站，请务必通过官方渠道购票。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button><strong>学术科研审查趋严。</strong>继5月20日慕尼黑华裔夫妇被控间谍罪后，德国联邦宪法保卫局（BfV）多次公开警告中国情报活动已转向学术科研领域。中国留学生在实验室接触敏感技术或在科技企业实习时，可能面临更严格的背景审查。建议在涉及敏感技术领域时注意合规，避免不必要的法律风险。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button><strong>"高级驾校"迷奸案持续发酵。</strong>该案核心成员中，主犯张大鹏被判14年+预防性羁押，蒋中懿11年3个月，周同5年9个月。在美涉案人员翁偲哲可能面临25年至终身监禁。此案对所有在德华人敲响了警钟——请警惕以"帮助融入""提供便利"为名的陌生人接触，保护好个人信息和人身安全。</p>
+    <div class="highlight-box danger">
+      <strong>⚠️ 紧急提醒：</strong>杜塞尔多夫38岁中国公民5月24日遇刺身亡案两名嫌疑人已被捕，总领馆已介入。请在德同胞提高警惕，避免深夜单独外出，不在社交媒体上公开行踪，遇可疑情况立即拨打110报警。
+    </div>
+  </div>
+
+  <!-- 六、世界杯出行安全 -->
+  <div class="section" id="sec6">
+    <div class="section-title">
+      六、2026世界杯明日开幕：出行安全提示
+      <button class="read-btn" onclick="readSection('sec6')">🔊 朗读此节</button>
+    </div>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>2026年美加墨世界杯将于6月11日正式开幕，德国队已抵达美国进行最后的热身备战。如果您计划前往美国或加拿大观赛，请注意以下几点：提前确认EVUS或签证有效状态；购买正规渠道的球票和旅行保险；了解当地紧急联系方式；注意当地治安情况，避开高风险区域。</p>
+    <p><button class="para-btn" onclick="readParagraph(this)">▶</button>对于在德观看比赛的同胞：德国各大城市将在公共场所设置大屏幕直播（Public Viewing），建议结伴出行，保管好随身财物，适量饮酒，避免参与高风险庆祝活动。此前法兰克福机场汉莎客机起落架事故（6月4日）也提醒我们——世界杯期间航空客流激增，出行请预留充足时间。</p>
+  </div>
+
+  <!-- 七、安全建议 -->
+  <div class="section" id="sec7">
+    <div class="section-title">
+      七、综合安全建议
+      <button class="read-btn" onclick="readSection('sec7')">🔊 朗读此节</button>
+    </div>
+    <ul>
+      <li><strong>居安思危：</strong>关注中国驻德国使领馆官网和微信公众号（"中国驻德国大使馆""领事直通车"），及时获取最新安全提醒。</li>
+      <li><strong>防骗第一：</strong>凡自称中国公检法要求转账、交现金、提供银行卡密码的，一律为诈骗。接到可疑电话立即挂断，通过官方渠道核实。</li>
+      <li><strong>出行谨慎：</strong>避免深夜独自前往火车站、地铁站等人流密集但安保薄弱的区域。世界杯期间Public Viewing人潮涌动，注意财物安全。</li>
+      <li><strong>信息安全：</strong>不随意在社交媒体公开住址、行程、财务状况等个人信息。警惕来历不明的Telegram/WhatsApp群组邀请。</li>
+      <li><strong>心理健康：</strong>近期接连发生的华人遇害和留学生意外身亡事件可能引发焦虑。如有需要，请拨打德国心理咨询热线0800-1110111（24小时免费）。</li>
+      <li><strong>保险核查：</strong>确认您的医疗保险、第三方责任险和旅行保险均在有效期内，了解理赔流程。</li>
+    </ul>
+  </div>
+
+  <!-- 紧急联系方式 -->
+  <div class="emergency-box">
+    <h3>📞 紧急联系方式</h3>
+    <div class="contact-grid">
+      <div>德国报警电话：<strong>110</strong></div>
+      <div>德国急救/火警：<strong>112</strong></div>
+      <div>中国驻德使馆领事保护：<strong>+49-30-27588551</strong></div>
+      <div>驻汉堡总领馆：<strong>+49-40-81976030</strong></div>
+      <div>驻慕尼黑总领馆：<strong>+49-89-20602280</strong></div>
+      <div>驻法兰克福总领馆：<strong>+49-69-75085548</strong></div>
+      <div>驻杜塞尔多夫总领馆：<strong>+49-211-90996390</strong></div>
+      <div>外交部全球领保热线：<strong>+86-10-12308</strong></div>
+      <div>德国心理咨询热线：<strong>0800-1110111</strong></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>本报告由 <strong>德国热线（www.dolc.de）</strong> 于2026年6月9日编制发布</p>
+    <p>信息来源：权威新闻机构公开报道 | 仅供参考，具体安全建议请以使领馆官方发布为准</p>
+  </div>
+</div>
+
+<script>
+// ========== 语音播放引擎 ==========
+let synth = window.speechSynthesis;
+let utterance = null;
+let currentSection = null;
+let isPaused = false;
+let allParagraphs = [];
+let currentParaIndex = -1;
+let isSpeakingAll = false;
+
+// 获取中文语音
+function getChineseVoice() {
+  let voices = synth.getVoices();
+  // 优先匹配zh-CN
+  for (let v of voices) {
+    if (v.lang === 'zh-CN') return v;
+  }
+  // fallback: 任意中文
+  for (let v of voices) {
+    if (v.lang.startsWith('zh')) return v;
+  }
+  return voices[0];
+}
+
+// 确保voices加载
+function loadVoices() {
+  return new Promise((resolve) => {
+    let voices = synth.getVoices();
+    if (voices.length > 0) { resolve(voices); return; }
+    synth.onvoiceschanged = () => resolve(synth.getVoices());
+  });
+}
+
+// 获取语速
+function getRate() {
+  return parseFloat(document.getElementById('speed-slider').value);
+}
+
+// 更新状态文字
+function setStatus(text) {
+  document.getElementById('speech-status').textContent = text;
+}
+
+// 高亮段落
+function highlightPara(para) {
+  document.querySelectorAll('.section p').forEach(p => p.style.background = '');
+  if (para) para.style.background = '#fff9c4';
+}
+
+// 移除所有高亮
+function clearAllHighlights() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.section p').forEach(p => p.style.background = '');
+}
+
+// 朗读单个段落
+async function readParagraph(btn) {
+  await loadVoices();
+  synth.cancel();
+  clearAllHighlights();
+  isSpeakingAll = false;
+  isPaused = false;
+
+  let para = btn.parentElement;
+  let section = para.closest('.section');
+  section.classList.add('active');
+  highlightPara(para);
+
+  let text = para.textContent.replace(/^▶/, '').trim();
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = getChineseVoice();
+  utterance.rate = getRate();
+  utterance.lang = 'zh-CN';
+
+  utterance.onend = () => {
+    section.classList.remove('active');
+    highlightPara(null);
+    setStatus('就绪');
+    updateButtons(false);
+  };
+
+  utterance.onerror = (e) => {
+    if (e.error !== 'canceled' && e.error !== 'interrupted') {
+      setStatus('出错');
+    }
+    updateButtons(false);
+  };
+
+  setStatus('朗读中…');
+  updateButtons(true);
+  synth.speak(utterance);
+}
+
+// 朗读指定章节
+async function readSection(sectionId) {
+  await loadVoices();
+  synth.cancel();
+  clearAllHighlights();
+  isSpeakingAll = false;
+  isPaused = false;
+
+  let section = document.getElementById(sectionId);
+  section.classList.add('active');
+
+  let paras = section.querySelectorAll('p');
+  allParagraphs = Array.from(paras);
+  currentParaIndex = 0;
+  isSpeakingAll = true;
+
+  setStatus('朗读中…');
+  updateButtons(true);
+  speakNextInSection(section);
+}
+
+function speakNextInSection(section) {
+  if (currentParaIndex >= allParagraphs.length) {
+    section.classList.remove('active');
+    clearAllHighlights();
+    setStatus('就绪');
+    updateButtons(false);
+    isSpeakingAll = false;
+    return;
+  }
+
+  let para = allParagraphs[currentParaIndex];
+  highlightPara(para);
+  let text = para.textContent.replace(/^▶/, '').trim();
+
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = getChineseVoice();
+  utterance.rate = getRate();
+  utterance.lang = 'zh-CN';
+
+  utterance.onend = () => {
+    currentParaIndex++;
+    if (isSpeakingAll && !isPaused) {
+      speakNextInSection(section);
+    }
+  };
+
+  utterance.onerror = (e) => {
+    if (e.error !== 'canceled' && e.error !== 'interrupted') {
+      setStatus('出错');
+    }
+    updateButtons(false);
+  };
+
+  synth.speak(utterance);
+}
+
+// 全部朗读
+async function readAll() {
+  await loadVoices();
+  synth.cancel();
+  clearAllHighlights();
+  isPaused = false;
+  isSpeakingAll = true;
+
+  let sections = document.querySelectorAll('.section');
+  allParagraphs = [];
+  sections.forEach(s => {
+    s.querySelectorAll('p').forEach(p => allParagraphs.push({el: p, section: s}));
+  });
+
+  if (allParagraphs.length === 0) return;
+
+  currentParaIndex = 0;
+  currentSection = allParagraphs[0].section;
+  currentSection.classList.add('active');
+
+  setStatus('全部朗读中…');
+  updateButtons(true);
+  speakNextAll();
+}
+
+function speakNextAll() {
+  if (currentParaIndex >= allParagraphs.length) {
+    clearAllHighlights();
+    setStatus('朗读完成');
+    updateButtons(false);
+    isSpeakingAll = false;
+    return;
+  }
+
+  let item = allParagraphs[currentParaIndex];
+
+  // 切换section高亮
+  if (currentSection !== item.section) {
+    if (currentSection) currentSection.classList.remove('active');
+    currentSection = item.section;
+    currentSection.classList.add('active');
+  }
+
+  highlightPara(item.el);
+  let text = item.el.textContent.replace(/^▶/, '').trim();
+
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = getChineseVoice();
+  utterance.rate = getRate();
+  utterance.lang = 'zh-CN';
+
+  utterance.onend = () => {
+    currentParaIndex++;
+    if (isSpeakingAll && !isPaused) {
+      speakNextAll();
+    }
+  };
+
+  utterance.onerror = (e) => {
+    if (e.error !== 'canceled' && e.error !== 'interrupted') {
+      setStatus('出错');
+    }
+    updateButtons(false);
+  };
+
+  synth.speak(utterance);
+}
+
+// 暂停
+function pauseSpeech() {
+  if (synth.speaking && !isPaused) {
+    synth.pause();
+    isPaused = true;
+    setStatus('已暂停');
+    document.getElementById('btn-pause').textContent = '▶ 继续';
+  }
+}
+
+// 继续
+function resumeSpeech() {
+  if (isPaused) {
+    synth.resume();
+    isPaused = false;
+    setStatus('朗读中…');
+    document.getElementById('btn-pause').textContent = '⏸ 暂停';
+  }
+}
+
+// 停止
+function stopSpeech() {
+  synth.cancel();
+  clearAllHighlights();
+  isPaused = false;
+  isSpeakingAll = false;
+  allParagraphs = [];
+  currentParaIndex = -1;
+  currentSection = null;
+  setStatus('已停止');
+  document.getElementById('btn-pause').textContent = '⏸ 暂停';
+  updateButtons(false);
+}
+
+// 更新按钮状态
+function updateButtons(speaking) {
+  document.getElementById('btn-play-all').disabled = speaking;
+  document.getElementById('btn-pause').disabled = !speaking;
+  document.getElementById('btn-stop').disabled = !speaking;
+  if (!speaking) {
+    document.getElementById('btn-pause').textContent = '⏸ 暂停';
+    isPaused = false;
+  }
+}
+
+// 事件绑定
+document.getElementById('btn-play-all').addEventListener('click', readAll);
+document.getElementById('btn-pause').addEventListener('click', function() {
+  if (isPaused) resumeSpeech();
+  else pauseSpeech();
+});
+document.getElementById('btn-stop').addEventListener('click', stopSpeech);
+
+// 语速滑块
+let speedSlider = document.getElementById('speed-slider');
+let speedLabel = document.getElementById('speed-label');
+speedSlider.addEventListener('input', function() {
+  speedLabel.textContent = parseFloat(this.value).toFixed(1) + 'x';
+  // 如果正在朗读，更新当前utterance的语速
+  if (synth.speaking && utterance) {
+    synth.cancel();
+    // 重新从当前位置开始
+    if (isSpeakingAll) {
+      if (allParagraphs.length > 0) {
+        // 简单方案：停止当前
+        stopSpeech();
+        setStatus('请重新开始朗读以应用新语速');
+      }
+    }
+  }
+});
+
+// 预加载voices
+loadVoices();
+setStatus('就绪');
+</script>
+</body>
+</html>
