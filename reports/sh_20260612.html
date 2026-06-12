@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 2026年6月12日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.8; color: #333; background: #f5f5f5; padding: 20px; padding-bottom: 80px; }
+  .container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; }
+  .header { background: linear-gradient(135deg, #1a3a5c, #2d5f8a); color: #fff; padding: 30px 40px; text-align: center; }
+  .header h1 { font-size: 24px; margin-bottom: 8px; letter-spacing: 2px; }
+  .header .date { font-size: 16px; opacity: 0.9; }
+  .header .author { font-size: 14px; margin-top: 8px; opacity: 0.8; }
+  .content { padding: 30px 40px; }
+  .section { margin-bottom: 28px; padding: 20px 24px; background: #fafbfc; border-radius: 8px; border-left: 4px solid #2d5f8a; }
+  .section h2 { font-size: 18px; color: #1a3a5c; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .section h2 .title-text { flex: 1; }
+  .section p, .section li { font-size: 15px; color: #444; line-height: 1.9; }
+  .section ul { padding-left: 20px; margin-top: 8px; }
+  .section li { margin-bottom: 6px; }
+  .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 3px; font-weight: 600; }
+  .tag { display: inline-block; background: #e8f4f8; color: #1a3a5c; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px; }
+  .tag.red { background: #fde8e8; color: #c0392b; }
+  .tag.orange { background: #fef3e2; color: #e67e22; }
+  .tag.green { background: #e8f8f0; color: #27ae60; }
+  .emergency-box { background: #fff5f5; border: 1px solid #e74c3c; border-radius: 8px; padding: 16px 20px; margin-top: 16px; }
+  .emergency-box h3 { color: #c0392b; margin-bottom: 10px; font-size: 16px; }
+  .emergency-box table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .emergency-box td { padding: 6px 10px; border-bottom: 1px solid #f0d0d0; }
+  .emergency-box td:first-child { font-weight: 600; white-space: nowrap; width: 140px; color: #c0392b; }
+  .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; border-top: 1px solid #eee; }
+  .read-btn { background: #2d5f8a; color: #fff; border: none; padding: 4px 12px; border-radius: 14px; font-size: 12px; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .read-btn:hover { background: #1a3a5c; }
+  .read-btn.reading { background: #e67e22; }
+  /* 语音播放器样式 */
+  #tts-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); color: #fff; padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 9999; backdrop-filter: blur(8px); }
+  #tts-bar button { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+  #tts-bar button:hover { background: rgba(255,255,255,0.25); }
+  #tts-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
+  #tts-bar label { font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  #tts-bar input[type=range] { width: 100px; accent-color: #4fc3f7; }
+  .tts-highlight { background: #fff176 !important; transition: background 0.3s; }
+  @media (max-width: 600px) { .content { padding: 20px 16px; } .section { padding: 14px 16px; } .header { padding: 20px; } }
+</style>
+</head>
+<body>
+
+<div id="tts-bar">
+  <button id="tts-play-all" onclick="ttsPlayAll()">▶ 全部朗读</button>
+  <button id="tts-pause" onclick="ttsPause()">⏸ 暂停</button>
+  <button id="tts-stop" onclick="ttsStop()">⏹ 停止</button>
+  <label>语速: <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1" onchange="ttsSetRate(this.value)"> <span id="tts-rate-val">1x</span></label>
+</div>
+
+<div class="container">
+  <div class="header">
+    <h1>🛡️ 留德安全汇报</h1>
+    <div class="date">2026年6月12日 · 周四</div>
+    <div class="author">德国热线（www.dolc.de）</div>
+  </div>
+  <div class="content">
+
+    <div class="section" id="sec-1">
+      <h2><span class="title-text"><span class="tag red">⚡ 重要</span> 欧盟移民与庇护公约今日全面实施</span><button class="read-btn" onclick="ttsPlaySection(1)">🔊 朗读此节</button></h2>
+      <p>6月12日，欧盟《移民与庇护公约》正式在所有成员国全面生效。这是欧盟移民政策近二十年来最大规模的改革，对在德华人华侨及留学生的居留与出入境产生直接影响：</p>
+      <ul>
+        <li><span class="highlight">边境快速筛查</span>：入境时将进行7天内快速审查，包括生物特征采集和安全评估</li>
+        <li><span class="highlight">加速遣返机制</span>：被拒绝庇护申请者将面临更快速的遣返程序，各成员国需配合执行</li>
+        <li><span class="highlight">统一庇护标准</span>：欧盟各国适用统一的庇护认定标准，减少"庇护购物"现象</li>
+        <li><span class="highlight">责任分担机制</span>：成员国通过接收2.1万人、支付4.2亿欧元或提供运营支持三种方式分担责任</li>
+        <li>对在德华人的建议：出行务必携带有效居留证件，出入境预留更充足时间以应对更严格的边境检查</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-2">
+      <h2><span class="title-text"><span class="tag orange">⚽ 关注</span> 2026世界杯今日开幕：安全提示</span><button class="read-btn" onclick="ttsPlaySection(2)">🔊 朗读此节</button></h2>
+      <p>2026年美加墨世界杯今日拉开帷幕，德国各大城市将举办Public Viewing活动。安全提示如下：</p>
+      <ul>
+        <li>人群密集场所注意防盗，手机钱包贴身保管</li>
+        <li>警惕<span class="highlight">世界杯假门票诈骗</span>：仅通过FIFA官方渠道购票，社交媒体低价票多为骗局</li>
+        <li>Public Viewing现场注意饮酒适度，远离冲突人群</li>
+        <li>赴美观赛者注意美国入境政策变化，确保签证和文件齐全</li>
+        <li>赛事期间酒吧和球迷聚集区域治安事件可能增多，深夜避免独自前往</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-3">
+      <h2><span class="title-text"><span class="tag red">⚠️ 警示</span> 默茨对华强硬表态：留德华人需关注</span><button class="read-btn" onclick="ttsPlaySection(3)">🔊 朗读此节</button></h2>
+      <p>6月11日，德国总理默茨在联邦议院发表讲话，宣称在欧盟应对"不遵守规则"的国家时，德国"不能也不会袖手旁观"。此番言论被多家外媒解读为德国将采取更强硬对华政策的信号。</p>
+      <ul>
+        <li>欧盟领导人将于6月18-19日在布鲁塞尔举行峰会，重点讨论中国"产能过剩"和补贴议题</li>
+        <li>可能影响：在德华人留学生和科研人员面临更严格的学术审查和安全背景调查</li>
+        <li>此前的"慕尼黑华人间谍案"已导致BfV警告中国情报活动转向学术科研领域，部分高校加强了对合作项目的审查</li>
+        <li>建议：在德华人保持低调，学术合作中注意合规，避免涉及敏感技术领域的不必要接触</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-4">
+      <h2><span class="title-text"><span class="tag red">🔴 危急</span> 美伊冲突持续升级：停火名存实亡</span><button class="read-btn" onclick="ttsPlaySection(4)">🔊 朗读此节</button></h2>
+      <p>美伊冲突持续恶化，对在德华人间接影响显著：</p>
+      <ul>
+        <li><span class="highlight">6月10日新一轮交火</span>：美军直升机在霍尔木兹海峡被击落，美军空袭伊朗防空系统，伊朗反击巴林第五舰队和科威特美军基地</li>
+        <li>4月8日达成的临时停火协议已名存实亡，伊朗6月7日向以色列发射约10枚弹道导弹</li>
+        <li>布伦特原油逼近98美元/桶，德国通胀压力持续，增长预期仅0.4%-0.6%</li>
+        <li>胡塞武装宣布全面封锁红海，全球航运受到严重冲击</li>
+        <li>建议：在德华人关注燃油和物价波动，避免前往中东地区旅行，关注驻伊朗使领馆安全提醒</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-5">
+      <h2><span class="title-text"><span class="tag orange">🌍 国际</span> 俄乌冲突最新动态</span><button class="read-btn" onclick="ttsPlaySection(5)">🔊 朗读此节</button></h2>
+      <p>俄乌冲突仍在激烈进行，6月12日最新动态：</p>
+      <ul>
+        <li>乌克兰远程无人机打击俄罗斯多座石化工厂，最远打击目标距边境超过1200公里</li>
+        <li>乌军打击克里米亚大桥，据称摧毁50辆军用车辆</li>
+        <li>欧盟新一轮对俄制裁提议禁止使用"北溪"天然气管道</li>
+        <li>俄军6月10日夜间出动200+架无人机袭击乌克兰多个城市</li>
+        <li>泽连斯基6月4日致信普京提议直接会面，普京在圣彼得堡国际经济论坛上公开拒绝</li>
+        <li>对在德华人影响：能源价格持续高位，德国经济承压，难民安置压力增大</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-6">
+      <h2><span class="title-text"><span class="tag green">🛡️ 防务</span> 柏林航展与德国安全转型</span><button class="read-btn" onclick="ttsPlaySection(6)">🔊 朗读此节</button></h2>
+      <p>6月10-14日，第55届柏林国际航空展举行，军事装备展区大幅扩容，无人机系统密集亮相，防务议题成为焦点。这反映欧洲多国正加速安全战略调整。</p>
+      <ul>
+        <li>德国宣布设立<span class="highlight">AI安全研究所</span>，分析AI模型风险</li>
+        <li>百亿欧元民防计划持续推进：2029年前改造地下停车场、隧道、地铁站为避难所</li>
+        <li>BKA发布2025年PMK报告：政治动机犯罪85,837起创历史新高，极右翼占半数以上</li>
+        <li>柏林家族犯罪上升11%，685人涉案</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-7">
+      <h2><span class="title-text"><span class="tag red">🚨 防范</span> 电信诈骗持续高发</span><button class="read-btn" onclick="ttsPlaySection(7)">🔊 朗读此节</button></h2>
+      <p>针对在德华人的电信诈骗依然猖獗，近期主要手法：</p>
+      <ul>
+        <li><span class="highlight">冒充公检法</span>：自称中国使领馆或公安局，要求转账"保释金"或"配合调查"</li>
+        <li><span class="highlight">AI换脸视频诈骗</span>：利用AI技术伪造亲友视频通话骗取钱财</li>
+        <li><span class="highlight">世界杯门票诈骗</span>：社交媒体低价出售伪造世界杯门票</li>
+        <li><span class="highlight">机票退改签诈骗</span>：冒充航空公司发送虚假退改签链接</li>
+        <li><span class="highlight">虚拟换汇骗局</span>：微信群"优惠汇率"换汇，转账后即被拉黑</li>
+        <li>反诈口诀：不轻信、不转账、不泄露个人信息；遇疑拨使领馆领保电话核实</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-8">
+      <h2><span class="title-text"><span class="tag orange">👥 社区</span> 华人社区安全动态</span><button class="read-btn" onclick="ttsPlaySection(8)">🔊 朗读此节</button></h2>
+      <ul>
+        <li><span class="highlight">杜塞尔多夫38岁中国公民遇刺案</span>（5月24日）：两名嫌疑人已被捕，驻杜塞尔多夫总领馆持续跟进</li>
+        <li><span class="highlight">"德国高级驾校"跨国迷奸案</span>：核心成员已陆续宣判，主犯张大鹏14年+预防性羁押，蒋中懿11年3个月，邵之霆6月待审</li>
+        <li><span class="highlight">学术审查趋严</span>：慕尼黑华人间谍案后续发酵，BfV警告学术领域情报渗透，在德华人科研人员面临更多审查</li>
+        <li><span class="highlight">中餐从业者盗抢案</span>：北威州地区仍频发，驻杜塞尔多夫总领馆持续关注</li>
+      </ul>
+    </div>
+
+    <div class="section" id="sec-9">
+      <h2><span class="title-text">📋 实用安全建议</span><button class="read-btn" onclick="ttsPlaySection(9)">🔊 朗读此节</button></h2>
+      <ul>
+        <li><strong>居住安全</strong>：确保门窗锁具完好，独居者安装额外安全装置；陌生人敲门先确认身份</li>
+        <li><strong>出行安全</strong>：火车站和公共交通注意防盗，夜间避免独行偏僻路段；世界杯期间人群聚集处格外留意</li>
+        <li><strong>社交安全</strong>：饮品不离视线，不接受陌生人递来的饮料；网络交友保持警惕</li>
+        <li><strong>信息保护</strong>：不向陌生人透露个人及银行信息，公检法不会电话要求转账</li>
+        <li><strong>心理健康</strong>：学业和生活压力及时求助，德国心理援助热线0800/1110111</li>
+        <li><strong>应急准备</strong>：手机保存使领馆领保电话，了解居住地就近警局和医院位置</li>
+      </ul>
+    </div>
+
+    <div class="section emergency-box" id="sec-10">
+      <h3>🆘 紧急联系方式</h3>
+      <table>
+        <tr><td>德国紧急报警</td><td>110</td></tr>
+        <tr><td>德国急救/火警</td><td>112</td></tr>
+        <tr><td>中国驻德使馆领保</td><td>+49-30-27588551</td></tr>
+        <tr><td>驻汉堡总领馆领保</td><td>+49-40-81976030</td></tr>
+        <tr><td>驻慕尼黑总领馆领保</td><td>+49-89-724498146</td></tr>
+        <tr><td>驻法兰克福总领馆领保</td><td>+49-69-69538633</td></tr>
+        <tr><td>驻杜塞尔多夫总领馆领保</td><td>+49-211-54385279</td></tr>
+        <tr><td>外交部全球领保热线</td><td>+86-10-12308</td></tr>
+        <tr><td>德国心理援助热线</td><td>0800/1110111</td></tr>
+      </table>
+    </div>
+
+  </div>
+  <div class="footer">德国热线 www.dolc.de · 留德安全汇报 · 每日更新</div>
+</div>
+
+<script>
+const synth = window.speechSynthesis;
+let ttsUtterances = [];
+let ttsCurrentSection = -1;
+let ttsIsPlaying = false;
+let ttsIsPaused = false;
+let ttsRate = 1;
+
+function getSections() {
+  return Array.from(document.querySelectorAll('.section'));
+}
+
+function getSectionText(idx) {
+  const sec = getSections()[idx];
+  if (!sec) return '';
+  const h2 = sec.querySelector('h2 .title-text');
+  const title = h2 ? h2.textContent.trim() : '';
+  const body = Array.from(sec.querySelectorAll('p, li')).map(el => el.textContent.trim()).join('。');
+  return title + '。' + body;
+}
+
+function ttsSetRate(val) {
+  ttsRate = parseFloat(val);
+  document.getElementById('tts-rate-val').textContent = ttsRate.toFixed(1) + 'x';
+}
+
+function ttsHighlight(idx) {
+  getSections().forEach((s, i) => {
+    if (i === idx) s.classList.add('tts-highlight');
+    else s.classList.remove('tts-highlight');
+  });
+  const btn = getSections()[idx]?.querySelector('.read-btn');
+  if (btn) { btn.classList.add('reading'); btn.textContent = '🔊 朗读中'; }
+}
+
+function ttsClearHighlight() {
+  getSections().forEach(s => {
+    s.classList.remove('tts-highlight');
+    const btn = s.querySelector('.read-btn');
+    if (btn) { btn.classList.remove('reading'); btn.textContent = '🔊 朗读此节'; }
+  });
+}
+
+function ttsBuildUtterances(startIdx) {
+  const sections = getSections();
+  ttsUtterances = [];
+  for (let i = startIdx; i < sections.length; i++) {
+    const text = getSectionText(i);
+    if (!text) continue;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN';
+    u.rate = ttsRate;
+    const idx = i;
+    u.onstart = () => { ttsCurrentSection = idx; ttsHighlight(idx); };
+    u.onend = () => { ttsClearHighlight(); };
+    u.onerror = () => { ttsClearHighlight(); };
+    ttsUtterances.push(u);
+  }
+}
+
+function ttsPlayAll() {
+  synth.cancel();
+  ttsClearHighlight();
+  ttsBuildUtterances(0);
+  ttsIsPlaying = true;
+  ttsIsPaused = false;
+  let chain = ttsUtterances[0];
+  for (let i = 1; i < ttsUtterances.length; i++) {
+    chain = chain;
+    ttsUtterances[i-1].onend = (function(nextU, idx) {
+      return function() {
+        ttsClearHighlight();
+        synth.speak(nextU);
+      };
+    })(ttsUtterances[i], i);
+  }
+  ttsUtterances[ttsUtterances.length-1].onend = () => { ttsClearHighlight(); ttsIsPlaying = false; };
+  synth.speak(ttsUtterances[0]);
+}
+
+function ttsPlaySection(idx) {
+  synth.cancel();
+  ttsClearHighlight();
+  ttsBuildUtterances(idx);
+  ttsIsPlaying = true;
+  ttsIsPaused = false;
+  for (let i = 1; i < ttsUtterances.length; i++) {
+    ttsUtterances[i-1].onend = (function(nextU) {
+      return function() {
+        ttsClearHighlight();
+        synth.speak(nextU);
+      };
+    })(ttsUtterances[i]);
+  }
+  ttsUtterances[ttsUtterances.length-1].onend = () => { ttsClearHighlight(); ttsIsPlaying = false; };
+  synth.speak(ttsUtterances[0]);
+}
+
+function ttsPause() {
+  if (synth.speaking && !synth.paused) {
+    synth.pause();
+    ttsIsPaused = true;
+  } else if (synth.paused) {
+    synth.resume();
+    ttsIsPaused = false;
+  }
+}
+
+function ttsStop() {
+  synth.cancel();
+  ttsClearHighlight();
+  ttsIsPlaying = false;
+  ttsIsPaused = false;
+  ttsCurrentSection = -1;
+}
+
+// Auto-select zh-CN voice when available
+function setZhVoice() {
+  const voices = synth.getVoices();
+  const zhVoice = voices.find(v => v.lang === 'zh-CN') || voices.find(v => v.lang.startsWith('zh'));
+  if (zhVoice) {
+    const origBuild = ttsBuildUtterances;
+    ttsBuildUtterances = function(startIdx) {
+      origBuild(startIdx);
+      ttsUtterances.forEach(u => { u.voice = zhVoice; });
+    };
+  }
+}
+if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = setZhVoice;
+setZhVoice();
+</script>
+</body>
+</html>
