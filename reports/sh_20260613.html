@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 — 2026年6月13日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.8;
+  padding-bottom: 100px;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.header {
+  background: linear-gradient(135deg, #c00, #900);
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+  margin-top: 20px;
+}
+.header h1 { font-size: 26px; margin-bottom: 10px; }
+.header .meta { font-size: 14px; opacity: 0.9; }
+.header .author { font-size: 13px; opacity: 0.8; margin-top: 5px; }
+.header .author a { color: #ffd; text-decoration: none; }
+.content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.section-title {
+  font-size: 20px;
+  color: #c00;
+  border-left: 4px solid #c00;
+  padding-left: 12px;
+  margin: 28px 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title:first-child { margin-top: 0; }
+.btn-read {
+  background: #c00; color: #fff; border: none;
+  padding: 4px 12px; border-radius: 14px; cursor: pointer;
+  font-size: 13px; display: inline-flex; align-items: center; gap: 4px;
+  transition: background 0.2s; white-space: nowrap;
+}
+.btn-read:hover { background: #900; }
+p { margin-bottom: 12px; text-indent: 2em; font-size: 15px; }
+p.highlight {
+  background: #fff9c4;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin: 6px -4px 14px;
+  transition: background 0.3s;
+}
+.alert {
+  background: #fff3cd;
+  border-left: 4px solid #f90;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.alert strong { color: #c00; }
+.contacts {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+.contacts h3 { color: #c00; margin-bottom: 8px; font-size: 16px; }
+.contacts ul { padding-left: 20px; }
+.contacts li { margin-bottom: 5px; }
+.footer {
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  margin-top: 20px;
+  padding: 15px;
+}
+.footer a { color: #666; text-decoration: none; }
+
+/* === Voice Player Bar === */
+.player-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.88); color: #fff;
+  padding: 10px 20px;
+  display: flex; align-items: center; gap: 15px;
+  z-index: 9999; backdrop-filter: blur(6px);
+  flex-wrap: wrap; justify-content: center;
+}
+.player-bar button {
+  background: #444; color: #fff; border: none;
+  padding: 8px 18px; border-radius: 6px; cursor: pointer;
+  font-size: 14px; transition: background 0.2s;
+}
+.player-bar button:hover { background: #666; }
+.player-bar button.primary { background: #c00; }
+.player-bar button.primary:hover { background: #900; }
+.player-bar .speed-group {
+  display: flex; align-items: center; gap: 8px; font-size: 13px;
+}
+.player-bar input[type="range"] { width: 100px; accent-color: #c00; }
+.player-bar .speed-label { min-width: 40px; text-align: center; }
+.player-status {
+  font-size: 12px; color: #aaa; margin-left: auto;
+}
+/* === Mobile tweaks === */
+@media (max-width: 600px) {
+  .container { padding: 10px; }
+  .content { padding: 15px; }
+  .header h1 { font-size: 20px; }
+  .section-title { font-size: 17px; }
+  p { font-size: 14px; }
+  .player-bar { padding: 8px 10px; gap: 8px; }
+  .player-bar button { padding: 6px 12px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== 底部语音播放控制栏 ==================== -->
+<div class="player-bar" id="playerBar">
+  <button class="primary" id="btnPlayAll" onclick="playAll()" title="朗读全文">▶ 全部朗读</button>
+  <button id="btnPause" onclick="togglePause()" title="暂停/继续">⏸ 暂停</button>
+  <button id="btnStop" onclick="stopAll()" title="停止朗读">⏹ 停止</button>
+  <div class="speed-group">
+    <span>语速</span>
+    <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed()">
+    <span class="speed-label" id="speedLabel">1x</span>
+  </div>
+  <span class="player-status" id="playerStatus">就绪</span>
+</div>
+
+<div class="container">
+
+<div class="header">
+  <h1>留德安全汇报</h1>
+  <div class="meta">2026年6月13日 · 星期六</div>
+  <div class="author">作者：<a href="https://www.dolc.de">德国热线（www.dolc.de）</a></div>
+</div>
+
+<div class="content">
+
+<!-- ===== 第一节 ===== -->
+<h2 class="section-title" data-section="1">
+  一、德国政治动机犯罪创历史新高
+  <button class="btn-read" onclick="readSection(1)">🔊 朗读此节</button>
+</h2>
+<p>6月9日，德国联邦刑事警察局（BKA）发布2025年度政治动机犯罪（PMK）统计报告，数据令人警醒：全年报告政治动机犯罪85,837起，同比增长2%，过去十年内翻了一番，创历史最高纪录。其中暴力犯罪达4,156起，为十年来最高水平。</p>
+<p>按意识形态划分，右翼和极右翼犯罪约占总数的半数，是最大的犯罪来源。内政部长多布林特（Alexander Dobrindt）明确表示"绝大多数犯罪由右翼和极右翼犯罪者实施"，同时左翼极端主义暴力犯罪也在显著上升。反犹犯罪达6,548起（+5%），宗教动机犯罪1,983起（+5.7%），仇恨犯罪总计22,159起，其中仇外犯罪占比超过80%。</p>
+<p>BKA局长明希（Holger Muench）特别指出社交媒体是推动社会两极分化的关键因素，仇恨和煽动性内容加速激进化进程，最坏情况下导致线下世界的严重犯罪。此外，报告首次详细描述了"虚无主义犯罪"（Nihilistische Kriminalität）新现象——多为年轻男性犯罪者，利用数字网络诱导弱势群体自残、勒索乃至逼迫自杀。汉堡少年法庭正在审理的"白虎"案中，一名男子被控胁迫13岁跨性别青少年自杀等多起虐待性网络犯罪。</p>
+<p>北莱茵-威斯特法伦州的身体反犹袭击同比上升78%，这一数据尤其触目惊心。生活在德国的华人华侨和留学生群体，同样面临着仇外犯罪上升带来的安全隐忧。</p>
+
+<!-- ===== 第二节 ===== -->
+<h2 class="section-title" data-section="2">
+  二、FCAS战斗机项目崩溃：欧洲防务大地震
+  <button class="btn-read" onclick="readSection(2)">🔊 朗读此节</button>
+</h2>
+<p>6月8日，德国和法国正式宣布放弃联合研发新一代战斗机——未来空战系统（FCAS），这一价值超千亿欧元的项目在历经九年争吵后宣告崩溃。默茨总理与马克龙总统确认，空中客车与达索航空无法解决多年的技术主导权、知识产权归属和工作分配争端。法国达索坚持凭借"阵风"战机经验主导开发，而德国空客要求更公平的技术准入和就业分配，双方在几乎所有环节存在根本分歧。</p>
+<p>这是欧洲防务合作史上最沉重的打击之一。FCAS的失败暴露了欧洲防务自主的结构性弱点：当涉及工作分配、技术准入和政治影响力分配时，国家利益优先于欧洲一体化。欧盟长期以来倡导的"战略自主"理念在现实中难以落地。德国已组建"Team Gen 6"企业联合体探索替代方案，并认真考虑加入英意日主导的全球空战计划（GCAP），同时对美制F-35战机的依赖将进一步加深。</p>
+<p>对在德华人而言，这一事件可能间接加速德国国防预算扩张，影响社会福利和其他公共支出。欧洲安全格局的重新洗牌也意味着地缘政治不确定性持续升高。</p>
+
+<!-- ===== 第三节 ===== -->
+<h2 class="section-title" data-section="3">
+  三、霍尔木兹海峡危机反复，油价冲击持续
+  <button class="btn-read" onclick="readSection(3)">🔊 朗读此节</button>
+</h2>
+<p>过去一周，霍尔木兹海峡局势经历剧烈波动。6月11日，伊朗在美国打击后宣布关闭海峡，引发全球能源市场恐慌；当日晚间特朗普取消计划中的军事打击、声称谈判成功，海峡一度重开。但至6月12日，通行状况仍远未恢复常态，商业运量极为有限。全球约20%的贸易石油和90%以上的液化天然气流经该海峡，每一次中断都直接冲击德国经济。</p>
+<p>布伦特原油目前徘徊在98美元/桶附近，虽较战事高峰时约120美元/桶有所回落，但仍显著高于战前60-72美元区间。德国联邦政府已确认燃油折扣（Tankrabatt）将于7月1日到期，届时油价可能进一步上涨。国际能源署（IEA）将伊朗战争称为"有史以来最大的能源安全挑战之一"。</p>
+<p>美伊之间正在起草一页纸的停火备忘录，内容包括伊朗暂停铀浓缩、美国解冻部分制裁资金、双方重新开放海峡。但6月8-10日期间美伊在海峡周边发生新一轮军事交火，局势仍高度不确定。建议在德华人关注油价变化，合理安排出行和家庭预算。</p>
+
+<!-- ===== 第四节 ===== -->
+<h2 class="section-title" data-section="4">
+  四、欧盟移民与庇护公约6月12日正式全面实施
+  <button class="btn-read" onclick="readSection(4)">🔊 朗读此节</button>
+</h2>
+<p>经过多年谈判，欧盟《移民与庇护公约》于2026年6月12日起在全部成员国全面实施，德国已完成国内立法配套。新制度核心变化包括：边境快速筛查（7天内完成初步审查）、加速遣返程序、27国统一的庇护标准、以及责任分担机制（2.1万人和4.2亿欧元）。德媒Tagesspiegel评论称这是"右翼民粹主义的礼物"，TAZ则直指"人权被废除"。</p>
+<p>对于在德华人华侨，尤其是持居留许可、正在办理或计划申请庇护的人士，新规可能带来直接影响：审批速度加快但门槛提高，遣返程序简化，边境管控趋严。建议有相关需求的同胞密切关注移民局（Ausländerbehörde）的最新通知，必要时咨询专业律师。</p>
+
+<!-- ===== 第五节 ===== -->
+<h2 class="section-title" data-section="5">
+  五、2026世界杯期间安全提示
+  <button class="btn-read" onclick="readSection(5)">🔊 朗读此节</button>
+</h2>
+<p>2026美加墨世界杯于6月11日在墨西哥城揭幕，将持续至7月19日。中国驻美国、加拿大、墨西哥使领馆已发布观赛安全提示。对于留守德国的华人球迷，请注意以下事项：</p>
+<p><strong>Public Viewing安全：</strong>德国各大城市设有公共观赛区，人流量极大。保管好个人财物，谨防扒窃；避免携带大量现金和贵重物品；提前熟悉紧急出口位置；散场时注意踩踏风险，尤其携带儿童的家庭。</p>
+<p><strong>假门票诈骗：</strong>赴美观赛的同胞务必通过FIFA官方渠道购票，警惕社交媒体和二手平台上的超低价门票。近期已出现多起世界杯假门票诈骗案件。</p>
+<p><strong>网络博彩：</strong>世界杯期间博彩广告激增，请理性参与，警惕非法博彩平台和钓鱼链接。</p>
+
+<!-- ===== 第六节 ===== -->
+<h2 class="section-title" data-section="6">
+  六、在德华人社区安全提醒
+  <button class="btn-read" onclick="readSection(6)">🔊 朗读此节</button>
+</h2>
+<p><strong>电信诈骗持续高发。驻德国使领馆多次发布警示，以下类型需格外警惕：</strong></p>
+<p>冒充公检法诈骗——诈骗分子冒充中国驻德使领馆、国内公检法机关，声称当事人涉及刑事案件，要求转账至"安全账户"。请牢记：使领馆和国内公检法机关不会通过电话要求转账汇款。</p>
+<p>AI换脸视频诈骗——利用AI技术伪造亲友面貌和声音实施诈骗。如接到视频通话要求转账，务必通过其他渠道二次确认身份。</p>
+<p>虚假换汇诈骗——在微信群、朋友圈发布"优惠换汇"信息，收款后消失。请通过银行等正规渠道换汇。</p>
+<p>机票退改签诈骗——冒充航空公司客服，以航班取消为由诱导点击钓鱼链接。世界杯期间此类诈骗尤其活跃。</p>
+<p><strong>中餐从业者安全：</strong>北威州中餐从业人员盗抢案件近期持续高发，杜塞尔多夫总领馆已多次介入并发布安全提醒。建议从业者加强店铺安防，避免深夜单独营业，大额现金及时存入银行。</p>
+<p><strong>学术科研环境提醒：</strong>鉴于近期慕尼黑华裔夫妇间谍案引发的高度关注，在德华人留学生和科研人员可能面临更严格的学术审查。建议遵守学术规范，妥善处理敏感数据和资料，遇到不当调查及时联系使领馆和律师。</p>
+
+<!-- ===== 第七节 ===== -->
+<h2 class="section-title" data-section="7">
+  七、德国经济与社会形势概览
+  <button class="btn-read" onclick="readSection(7)">🔊 朗读此节</button>
+</h2>
+<p>德国当前面临多重挑战。INSA最新民调显示默茨总理支持率跌至上任以来最低，联盟党支持率已被AfD超越，71%选民对政府不满。联合国安理会席位竞选失败和FCAS项目崩溃进一步冲击默茨政府威信。</p>
+<p>经济方面，德国2026年增长预期维持在0.4%-0.6%低位，欧元区通胀升至3.2%。伊朗战争推高能源价格，布伦特原油维持98美元/桶高位。Bafög改革争议、护理改革削减福利、燃油折扣到期等多重民生压力叠加。</p>
+<p>社会治安方面，除前述政治动机犯罪创历史新高外，多特蒙德枪击劫持事件（6月2-3日）、格尔利茨建筑坍塌（6月7日）、上巴伐利亚校车事故致一名儿童死亡（6月10日）等事件提醒我们日常安全不容忽视。柏林有轨电车脱轨事故也引发对公共交通安全的关注。</p>
+
+<!-- ===== 第八节 ===== -->
+<h2 class="section-title" data-section="8">
+  八、实用安全建议
+  <button class="btn-read" onclick="readSection(8)">🔊 朗读此节</button>
+</h2>
+<p><strong>居家安全：</strong>确保门窗锁具完好，不在社交媒体公开住址和行程；长期外出请邻居或朋友帮忙照看；警惕冒充水电工、快递员等入室作案。</p>
+<p><strong>出行安全：</strong>深夜避免独自在火车站、地铁站等治安薄弱区域逗留；乘坐公共交通时看管好随身物品；自驾出行关注DWD天气预警，夏季雷暴天气多发。</p>
+<p><strong>网络安全：</strong>不点击不明链接，不向陌生人透露个人信息和银行账户；警惕社交媒体上的投资理财、换汇、租房等虚假信息；为重要账户启用双重认证。</p>
+<p><strong>社交安全：</strong>参加聚会注意饮品安全，不接陌生人递来的开封饮料；留学生交友谨慎，初到德国建议通过学校官方渠道结识朋友。</p>
+<p><strong>心理健康：</strong>远离家乡求学工作压力大，如感焦虑抑郁及时求助。德国大学通常提供免费心理咨询服务，也可拨打德国华人心理咨询热线。</p>
+<p><strong>应急准备：</strong>熟记住所附近警察局和医院位置；手机保存紧急联系人；建议家中常备急救包、瓶装水和手电筒。</p>
+
+<div class="alert">
+  <strong>⚠️ 安全提醒：</strong>本汇报所有信息来自公开新闻渠道和官方发布。如遇紧急情况，请立即拨打德国报警电话110或急救电话112。安全无小事，防范于未然。
+</div>
+
+<!-- ===== 第九节 ===== -->
+<h2 class="section-title" data-section="9">
+  九、紧急联系方式
+  <button class="btn-read" onclick="readSection(9)">🔊 朗读此节</button>
+</h2>
+<div class="contacts">
+  <h3>德国紧急电话</h3>
+  <ul>
+    <li>报警：<strong>110</strong></li>
+    <li>急救/火警：<strong>112</strong></li>
+    <li>医疗急救（非危及生命）：<strong>116117</strong></li>
+    <li>反诈骗热线：<strong>0800-2000235</strong>（Verbraucherzentrale）</li>
+  </ul>
+</div>
+<div class="contacts">
+  <h3>中国驻德国使领馆</h3>
+  <ul>
+    <li>驻德国大使馆：030-27588529（领事保护）</li>
+    <li>驻法兰克福总领馆：069-75085549</li>
+    <li>驻慕尼黑总领馆：089-17301618</li>
+    <li>驻杜塞尔多夫总领馆：0211-90996390</li>
+    <li>驻汉堡总领馆：040-82276018</li>
+    <li>外交部全球领事保护热线：<strong>+86-10-12308</strong> 或 <strong>+86-10-59913991</strong></li>
+  </ul>
+</div>
+
+</div><!-- .content -->
+
+<div class="footer">
+  <p>本报告由 <a href="https://www.dolc.de">德国热线（www.dolc.de）</a> 自动生成</p>
+  <p>数据来源：BKA、DWD、DW、tagesschau.de等公开媒体 | 生成时间：2026年6月13日</p>
+  <p>声明：本报告仅供信息参考，不构成法律或安全建议。如有疑问请咨询专业人士。</p>
+</div>
+
+</div><!-- .container -->
+
+<!-- ==================== Web Speech API 语音播放引擎 ==================== -->
+<script>
+(function() {
+  const synth = window.speechSynthesis;
+  let isPaused = false;
+  let isSpeaking = false;
+  let currentSectionIndex = -1;
+  let currentParaIndex = 0;
+  let allSections = [];
+  let speed = 1.0;
+  let pendingReadAll = false;
+  let pendingReadSection = -1;
+
+  // Collect all section paragraphs grouped by section
+  function collectSections() {
+    allSections = [];
+    const titles = document.querySelectorAll('.section-title');
+    titles.forEach(function(titleEl) {
+      const secNum = titleEl.getAttribute('data-section');
+      let paras = [];
+      let next = titleEl.nextElementSibling;
+      while (next && !next.classList.contains('section-title')) {
+        if (next.tagName === 'P') {
+          paras.push(next);
+        } else if (next.classList.contains('contacts') || next.classList.contains('alert')) {
+          // Also read contacts/alert text
+          paras.push(next);
+        }
+        next = next.nextElementSibling;
+      }
+      allSections.push({ num: parseInt(secNum), title: titleEl, paras: paras });
+    });
+  }
+  collectSections();
+
+  function updateStatus(text) {
+    document.getElementById('playerStatus').textContent = text;
+  }
+
+  function clearHighlight() {
+    document.querySelectorAll('p.highlight, .contacts.highlight, .alert.highlight').forEach(function(el) {
+      el.classList.remove('highlight');
+    });
+  }
+
+  function highlightPara(para) {
+    clearHighlight();
+    if (para) para.classList.add('highlight');
+  }
+
+  function speakText(text, callback) {
+    return new Promise(function(resolve) {
+      synth.cancel();
+      var utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-CN';
+      utter.rate = speed;
+      utter.volume = 1;
+
+      // Try to find a zh-CN voice
+      var voices = synth.getVoices();
+      for (var i = 0; i < voices.length; i++) {
+        if (voices[i].lang === 'zh-CN' || voices[i].lang === 'zh-TW' || voices[i].lang === 'zh') {
+          utter.voice = voices[i];
+          break;
+        }
+      }
+
+      utter.onend = function() { resolve(); };
+      utter.onerror = function(e) {
+        if (e.error !== 'interrupted') {
+          console.error('Speech error:', e.error);
+        }
+        resolve();
+      };
+      synth.speak(utter);
+    });
+  }
+
+  async function readParagraphs(sectionObj, startIdx) {
+    var paras = sectionObj.paras;
+    for (var i = startIdx; i < paras.length; i++) {
+      if (!isSpeaking && !pendingReadAll) { break; }
+      if (isPaused) {
+        currentParaIndex = i;
+        currentSectionIndex = allSections.indexOf(sectionObj);
+        return; // wait for resume
+      }
+      currentParaIndex = i;
+      currentSectionIndex = allSections.indexOf(sectionObj);
+      highlightPara(paras[i]);
+      updateStatus('朗读中: 第' + (currentSectionIndex + 1) + '节, 段落 ' + (i + 1) + '/' + paras.length);
+      // Scroll to para
+      paras[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      await speakText(paras[i].innerText);
+      if (!isSpeaking && !pendingReadAll) { break; }
+    }
+    currentParaIndex = 0;
+    clearHighlight();
+  }
+
+  async function readAllSections(startFrom) {
+    pendingReadAll = true;
+    isSpeaking = true;
+    isPaused = false;
+    document.getElementById('btnPause').textContent = '⏸ 暂停';
+
+    for (var s = startFrom; s < allSections.length; s++) {
+      if (!isSpeaking && !pendingReadAll) { break; }
+      currentSectionIndex = s;
+      currentParaIndex = 0;
+
+      // Scroll section title into view
+      allSections[s].title.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // First speak the section title
+      var titleText = allSections[s].title.textContent.replace('🔊 朗读此节', '').trim();
+      updateStatus('朗读中: 第' + (s + 1) + '/' + allSections.length + '节 - ' + titleText.substring(0, 20) + '...');
+      await speakText(titleText);
+
+      if (!isSpeaking && !pendingReadAll) { break; }
+      if (isPaused) {
+        currentSectionIndex = s;
+        currentParaIndex = 0;
+        return;
+      }
+
+      // Then speak each paragraph
+      await readParagraphs(allSections[s], 0);
+      if (!isSpeaking && !pendingReadAll) { break; }
+      if (isPaused) { return; }
+    }
+
+    // Finished
+    isSpeaking = false;
+    pendingReadAll = false;
+    currentSectionIndex = -1;
+    currentParaIndex = 0;
+    clearHighlight();
+    updateStatus('朗读完成');
+    document.getElementById('btnPause').textContent = '⏸ 暂停';
+  }
+
+  window.playAll = function() {
+    synth.cancel();
+    isPaused = false;
+    isSpeaking = true;
+    pendingReadAll = true;
+    document.getElementById('btnPause').textContent = '⏸ 暂停';
+    updateStatus('准备朗读全文...');
+    // Need to ensure voices are loaded
+    if (synth.getVoices().length === 0) {
+      synth.onvoiceschanged = function() {
+        synth.onvoiceschanged = null;
+        readAllSections(0);
+      };
+    } else {
+      readAllSections(0);
+    }
+  };
+
+  window.readSection = function(sectionNum) {
+    synth.cancel();
+    isPaused = false;
+    isSpeaking = true;
+    pendingReadAll = false;
+    pendingReadSection = sectionNum;
+    document.getElementById('btnPause').textContent = '⏸ 暂停';
+    updateStatus('准备朗读第' + sectionNum + '节...');
+
+    var sectionObj = allSections.find(function(s) { return s.num === sectionNum; });
+    if (!sectionObj) return;
+
+    // Ensure voices are loaded
+    var doRead = function() {
+      var titleText = sectionObj.title.textContent.replace('🔊 朗读此节', '').trim();
+      currentSectionIndex = allSections.indexOf(sectionObj);
+      updateStatus('朗读: ' + titleText.substring(0, 25) + '...');
+      sectionObj.title.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      speakText(titleText).then(function() {
+        if (!isSpeaking) return;
+        readParagraphs(sectionObj, 0).then(function() {
+          if (pendingReadSection === sectionNum) {
+            isSpeaking = false;
+            pendingReadSection = -1;
+            updateStatus('第' + sectionNum + '节朗读完成');
+          }
+        });
+      });
+    };
+
+    if (synth.getVoices().length === 0) {
+      synth.onvoiceschanged = function() {
+        synth.onvoiceschanged = null;
+        doRead();
+      };
+    } else {
+      doRead();
+    }
+  };
+
+  window.togglePause = function() {
+    if (!isSpeaking) return;
+    if (isPaused) {
+      // Resume
+      isPaused = false;
+      document.getElementById('btnPause').textContent = '⏸ 暂停';
+      updateStatus('继续朗读...');
+      if (pendingReadAll) {
+        readAllSections(currentSectionIndex);
+      } else if (pendingReadSection !== -1) {
+        var sectionObj = allSections[currentSectionIndex];
+        if (sectionObj) {
+          readParagraphs(sectionObj, currentParaIndex);
+        }
+      }
+    } else {
+      // Pause
+      synth.cancel();
+      isPaused = true;
+      document.getElementById('btnPause').textContent = '▶ 继续';
+      updateStatus('已暂停');
+    }
+  };
+
+  window.stopAll = function() {
+    synth.cancel();
+    isSpeaking = false;
+    isPaused = false;
+    pendingReadAll = false;
+    pendingReadSection = -1;
+    currentSectionIndex = -1;
+    currentParaIndex = 0;
+    clearHighlight();
+    document.getElementById('btnPause').textContent = '⏸ 暂停';
+    updateStatus('已停止');
+  };
+
+  window.updateSpeed = function() {
+    speed = parseFloat(document.getElementById('speedSlider').value);
+    document.getElementById('speedLabel').textContent = speed.toFixed(1) + 'x';
+    updateStatus('语速: ' + speed.toFixed(1) + 'x');
+  };
+
+  // Ensure voices populate on first interaction
+  window.addEventListener('load', function() {
+    if (synth.getVoices().length === 0) {
+      synth.onvoiceschanged = function() {
+        synth.onvoiceschanged = null;
+      };
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
