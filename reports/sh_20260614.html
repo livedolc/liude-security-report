@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 - 2026年6月14日 | 德国热线</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.8;
+    color: #2c2c2c;
+    background: #f5f5f0;
+    padding: 0 0 120px 0;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2c5282 100%);
+    color: #fff;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 28px; margin-bottom: 8px; letter-spacing: 1px; }
+  .header .subtitle { font-size: 14px; opacity: 0.9; }
+  .meta { text-align: center; color: #888; font-size: 13px; margin: 16px 0; }
+  .author { text-align: center; color: #555; font-size: 14px; margin-bottom: 24px; }
+  .author a { color: #2c5282; text-decoration: none; font-weight: 600; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .intro {
+    background: #fff;
+    border-left: 4px solid #2c5282;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .intro p { font-size: 15px; }
+  .section {
+    background: #fff;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section h2 {
+    color: #1a3a5c;
+    font-size: 19px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .section h2 .title-text { flex: 1; }
+  .section h2 .num {
+    display: inline-block;
+    background: #2c5282;
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .section p { font-size: 15px; margin-bottom: 12px; text-align: justify; }
+  .section ul { margin: 8px 0 8px 22px; font-size: 15px; }
+  .section li { margin-bottom: 6px; }
+  .section.highlight {
+    background: #fffde7;
+    border-left: 4px solid #f57c00;
+  }
+  .section.highlight h2 { color: #c25e00; }
+  .alert-box {
+    background: #fff3e0;
+    border-left: 4px solid #ff6f00;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 4px;
+  }
+  .alert-box strong { color: #c25e00; }
+  .tip-box {
+    background: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 4px;
+  }
+  .tip-box strong { color: #1b5e20; }
+  .footer {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    margin-top: 30px;
+    padding: 20px;
+  }
+  .footer strong { color: #1a3a5c; }
+  /* 朗读按钮 */
+  .read-btn {
+    background: #2c5282;
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .read-btn:hover { background: #1a3a5c; }
+  .read-btn.reading { background: #f57c00; }
+  /* 朗读中的高亮 */
+  .section.reading {
+    background: #fff9c4 !important;
+    border-left: 4px solid #f57c00 !important;
+    box-shadow: 0 4px 12px rgba(245, 124, 0, 0.2);
+    transition: all 0.3s;
+  }
+  /* 底部固定控制栏 */
+  .control-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(20, 20, 20, 0.92);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+  .control-bar button {
+    background: #2c5282;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .control-bar button:hover { background: #1a3a5c; }
+  .control-bar button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .control-bar .speed-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .control-bar .speed-control input[type=range] {
+    width: 120px;
+    cursor: pointer;
+  }
+  .control-bar .speed-value {
+    color: #ffd54f;
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .control-bar .status {
+    color: #ffd54f;
+    font-size: 13px;
+    min-width: 100px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- 底部固定控制栏 -->
+<div class="control-bar">
+  <button id="btnPlayAll">▶ 全部朗读</button>
+  <button id="btnPause">⏸ 暂停</button>
+  <button id="btnResume" style="display:none;">▶ 继续</button>
+  <button id="btnStop">⏹ 停止</button>
+  <div class="speed-control">
+    <span>语速:</span>
+    <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+    <span class="speed-value" id="speedValue">1.0x</span>
+  </div>
+  <div class="status" id="status">就绪</div>
+</div>
+
+<div class="header">
+  <h1>🇩🇪 留德安全汇报</h1>
+  <div class="subtitle">2026年6月14日 · 星期日 · 第154期</div>
+</div>
+
+<div class="container">
+  <div class="meta">📅 发布日期：2026年6月14日 09:00 (CEST)</div>
+  <div class="author">作者：<a href="https://www.dolc.de" target="_blank">德国热线（www.dolc.de）</a></div>
+
+  <div class="intro">
+    <p>亲爱的留德华人华侨、留学生朋友们：<br>
+    周末好！本周德国及全球安全形势呈现"地缘冲突寻求破局、国内治安压力不减、电信诈骗持续高发"的复杂局面。俄乌冲突进入第1571天，欧洲正在为"两手准备"；美伊停火协议即将签署；德国加速将民航纳入国防体系；汉堡机场突发安全事件疏散；2026世界杯火热进行中；电信诈骗与中餐从业者盗抢案件仍需高度警惕。请大家密切关注本报告，做好个人安全防范。</p>
+  </div>
+
+  <div class="section" data-section="1">
+    <h2><span class="num">1</span><span class="title-text">德国政府将民航纳入国家防御体系</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>6月13日，德国政府正式批准<strong>"未来十五年航空战略文件"</strong>，明确将民用航空资源纳入国家防御体系。文件指出："在国防情况下，民用资源（首先是运输工具和基础设施）既用于满足民众和经济需求，也用于保障联邦国防军完成任务。"</p>
+    <p>这意味着德国政府正在加速推进"军民融合"模式，国防部长皮斯托利乌斯于今年4月已发布德国二战后首份独立军事战略，目标在<strong>2039年前建成欧洲最强常规军队</strong>，并正式将俄罗斯确定为"德国及欧洲-大西洋空间安全的主要威胁"。</p>
+    <div class="alert-box"><strong>🇩🇪 留德提示：</strong>德国国防转型可能带来部分交通基础设施临时征用、空中管制变化等情况，请大家关注德铁(DB)、机场通告，留意出行提醒。</div>
+  </div>
+
+  <div class="section highlight" data-section="2">
+    <h2><span class="num">2</span><span class="title-text">汉堡机场突发安全事件 大规模紧急疏散</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>6月12日上午，德国<strong>汉堡机场候机区因一起"警务事件"被紧急疏散</strong>。警方要求所有已通过安检的旅客离开候机区域，部分已登机的乘客也被要求下机，航班运行受到明显影响，多班次延误。警方未透露具体原因和威胁来源，并表示将"全面搜查相关航站楼区域"。</p>
+    <p>截至目前，警方尚未公布事件性质，也未确认是否涉及恐袭。这是继慕尼黑机场塔台6月7日烟雾疏散后，德国主要航空枢纽在不到一周内再次发生的安全事件。</p>
+    <div class="alert-box"><strong>⚠️ 出行提示：</strong>近期赴德或经德国转机的中国公民，请预留充足时间通过安检，关注机场与航司通知，遇紧急情况听从现场人员指挥有序撤离。</div>
+  </div>
+
+  <div class="section" data-section="3">
+    <h2><span class="num">3</span><span class="title-text">俄乌冲突第1571天 欧洲"两手准备"</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>6月13日，俄乌冲突进入<strong>第1571天</strong>，持续时间已超过俄罗斯参加一战、二战的总和。当天全球目光集中在美伊即将签署的和平协议上，但俄乌战场仍未现停火曙光。</p>
+    <p>乌方持续加大对俄腹地能源基础设施打击力度；6月4日泽连斯基公开致信普京提议第三国会晤，遭普京以"无意义"拒绝；普京提出由德国前总理施罗德担任调解人，并于6月5日在克里姆林宫举行"友好会面"。</p>
+    <p>欧洲正采取"两手准备"：一方面通过第20轮对俄制裁及900亿欧元援乌贷款，并筹划第21轮制裁(首次纳入渔业)；另一方面主动释放对俄接触信号，6月7日英法德乌四方伦敦会谈提出"立即停火+以当前战线为基础+欧洲联合部队进驻"的三项和平方案核心内容，并计划在6月15日G7峰会上争取特朗普支持。</p>
+  </div>
+
+  <div class="section" data-section="4">
+    <h2><span class="num">4</span><span class="title-text">美伊停火协议即将签署 霍尔木兹海峡重开</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>伊朗外长阿拉格齐6月12日表示，伊朗和美国"可能在未来几天内"签署一份<strong>谅解备忘录</strong>，特朗普称"可能本周末在欧洲签署"。备忘录将把停火再延长60天，并要求黎巴嫩实现停火。</p>
+    <p>核心内容包括：霍尔木兹海峡重开(美方坚持"不收通行费"，伊方坚持"主权收费")、在伊朗境内稀释高丰度浓缩铀、60天内分批解冻伊朗约240亿美元被冻结资产。以色列国防部长卡茨明确反对从黎巴嫩、叙利亚、加沙"安全区"撤军，并指示以军"做好准备"。</p>
+    <div class="tip-box"><strong>📊 油市影响：</strong>布伦特原油已从战时峰值回落，但仍逼近98美元/桶，德国Tankrabatt(燃油税折扣)7月1日到期，能源价格仍是德国通胀主因之一。</div>
+  </div>
+
+  <div class="section highlight" data-section="5">
+    <h2><span class="num">5</span><span class="title-text">2026世界杯火热进行 安全提示请收好</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>2026世界杯已于6月11日在墨西哥城揭幕，由美国、加拿大、墨西哥联合举办，是首次三国共同主办、48支球队扩军后的首届赛事，持续至7月19日。</p>
+    <p>德国队已于近日抵达美国备战。德国各大城市(柏林、慕尼黑、汉堡、法兰克福等)均设有Public Viewing公共观赛区，预计吸引数十万球迷聚集。请大家注意：</p>
+    <ul>
+      <li>🚨 <strong>防扒防盗</strong>：公共观赛区域人群密集，是扒窃、拎包、抢劫高发地，务必妥善保管护照、钱包、手机</li>
+      <li>🎟️ <strong>假门票预警</strong>：FIFA官方仅通过 fifa.com/tickets 销售，凡"加微信/私下转账/远低于面值"几乎都是骗局</li>
+      <li>👟 <strong>防踩踏</strong>：避免挤入人群核心区，留意紧急出口标识，饮酒适量保持清醒</li>
+      <li>✈️ <strong>赴美观赛</strong>：提前办理美签、关注机票诈骗、勿轻信"包机+酒店+球票"打包低价套餐</li>
+    </ul>
+  </div>
+
+  <div class="section" data-section="6">
+    <h2><span class="num">6</span><span class="title-text">德国治安：政治动机犯罪与中餐从业者安全</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>BKA于6月9日发布的2025年度政治动机犯罪(PMK)报告显示：<strong>全年报告85,837起，十年翻倍，暴力犯罪4,156起创十年新高</strong>，反犹事件6,548起同比+5%，BKA警告"虚无主义犯罪"新现象。北威州身体反犹袭击同比+78%。</p>
+    <p>针对中餐从业人员的盗抢恶性案件持续高发。驻杜塞尔多夫总领馆已多次发布安全提醒，敦促警方加大保护力度。建议中餐从业者：</p>
+    <ul>
+      <li>营业期间及打烊后保持警惕，陌生人敲门勿轻易开门</li>
+      <li>营业款及贵重物品不存放在店中，当日结清入银行</li>
+      <li>与当地警方建立联系，遇可疑情况立即报警(110)</li>
+    </ul>
+  </div>
+
+  <div class="section highlight" data-section="7">
+    <h2><span class="num">7</span><span class="title-text">电信诈骗持续高发 请牢记"三不一多"</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <p>驻德使领馆近期多次发布反诈警示。当前高发骗局包括：</p>
+    <ul>
+      <li>🎭 <strong>冒充公检法</strong>：谎称"涉案""包裹藏毒""限期自首"施压转账</li>
+      <li>🤖 <strong>AI换脸换声</strong>：视频/语音冒充亲友、同学、老板借款</li>
+      <li>🎫 <strong>世界杯假门票</strong>：FIFA官方未授权任何微信/私人渠道</li>
+      <li>✈️ <strong>机票退改签</strong>：假冒航司客服诱导"手续费"或"保证金"</li>
+      <li>💱 <strong>虚拟换汇</strong>：微信群"高汇率"私下换汇多涉洗钱陷阱</li>
+    </ul>
+    <div class="tip-box"><strong>🛡️ 反诈口诀：</strong>未知链接不点击，陌生来电不轻信，个人信息不透露，转账汇款多核实。如遇可疑情况，<strong>立即挂断并拨打使领馆领事保护电话</strong>。</div>
+  </div>
+
+  <div class="section" data-section="8">
+    <h2><span class="num">8</span><span class="title-text">夏季安全实用指南</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <ul>
+      <li>🏠 <strong>居住安全</strong>：关好门窗、装好猫眼、订外卖备注"放门口勿按门铃"、公寓楼道感应灯损坏及时报修</li>
+      <li>🚶 <strong>出行安全</strong>：深夜不独行偏僻路段、火车站/地铁注意背包反背、网约车核对车牌</li>
+      <li>💬 <strong>社交安全</strong>：陌生网友/换汇/代购邀请慎入、约见面选公共场所并告知朋友</li>
+      <li>🧠 <strong>心理健康</strong>：学业/工作/签证压力可拨打留德华人心理援助热线，必要时及时就医</li>
+      <li>☀️ <strong>夏季防灾</strong>：雷暴天气避开大树/广告牌/水域；高温注意防中暑</li>
+    </ul>
+  </div>
+
+  <div class="section highlight" data-section="9">
+    <h2><span class="num">9</span><span class="title-text">📞 紧急联系方式</span><button class="read-btn" data-action="read">🔊 朗读此节</button></h2>
+    <ul>
+      <li>🚨 <strong>德国报警</strong>：110(匪警/急救)</li>
+      <li>🚒 <strong>火警/救护</strong>：112</li>
+      <li>🇨🇳 <strong>外交部全球领事保护与服务应急热线</strong>：+86-10-12308 / +86-10-65612308</li>
+      <li>🇩🇪 <strong>驻德国大使馆</strong>：+49-30-27588-0(柏林)</li>
+      <li>🇩🇪 <strong>驻汉堡总领馆</strong>：+49-40-8197-5030</li>
+      <li>🇩🇪 <strong>驻慕尼黑总领馆</strong>：+49-89-1739-1616</li>
+      <li>🇩🇪 <strong>驻法兰克福总领馆</strong>：+49-69-9075-3508</li>
+      <li>🇩🇪 <strong>驻杜塞尔多夫总领馆</strong>：+49-211-9099-6400</li>
+      <li>🇩🇪 <strong>反诈热线</strong>：+86-96110(国内)；德国可联系当地警方</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p><strong>德国热线 (www.dolc.de)</strong> · 服务留德华人华侨留学生 25年</p>
+    <p>本报告由德国热线编辑团队综合德新社、人民日报、新华社、央视新闻、BKA公报等公开信息整理，仅供参考。</p>
+    <p>© 2026 德国热线 · 如需转载请保留作者署名</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sections = document.querySelectorAll('.section[data-section]');
+  const btnPlayAll = document.getElementById('btnPlayAll');
+  const btnPause = document.getElementById('btnPause');
+  const btnResume = document.getElementById('btnResume');
+  const btnStop = document.getElementById('btnStop');
+  const speedSlider = document.getElementById('speedSlider');
+  const speedValue = document.getElementById('speedValue');
+  const statusEl = document.getElementById('status');
+
+  let currentSectionIdx = 0;
+  let isPaused = false;
+  let isPlaying = false;
+  let currentUtterance = null;
+  let readButtons = []; // 各节按钮引用
+
+  speedSlider.addEventListener('input', function() {
+    speedValue.textContent = parseFloat(this.value).toFixed(1) + 'x';
+    // 实时调整正在朗读的语速
+    if (currentUtterance) {
+      // 通过 cancel + restart 实现语速即时生效
+      if (isPlaying && !isPaused) {
+        const text = currentUtterance.text;
+        const sectionIdx = currentSectionIdx;
+        window.speechSynthesis.cancel();
+        speakSection(sectionIdx);
+      }
+    }
+  });
+
+  function getSectionText(section) {
+    // 收集该节所有 p / ul 内容
+    let texts = [];
+    section.querySelectorAll('h2, p, li, .alert-box, .tip-box').forEach(el => {
+      // 跳过按钮文本
+      if (el.classList.contains('read-btn')) return;
+      let t = el.textContent.trim();
+      if (t) texts.push(t);
+    });
+    return texts.join('。');
+  }
+
+  function highlightSection(idx) {
+    sections.forEach(s => s.classList.remove('reading'));
+    if (idx >= 0 && idx < sections.length) {
+      sections[idx].classList.add('reading');
+      sections[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function setSectionButtonState(idx, state) {
+    // state: 'reading' / 'done' / null
+    if (idx < 0 || idx >= readButtons.length) return;
+    const btns = readButtons[idx];
+    btns.forEach(btn => {
+      if (state === 'reading') {
+        btn.textContent = '⏸ 朗读中...';
+        btn.classList.add('reading');
+      } else {
+        btn.textContent = '🔊 朗读此节';
+        btn.classList.remove('reading');
+      }
+    });
+  }
+
+  function speakSection(idx) {
+    if (idx >= sections.length) {
+      // 全部完成
+      isPlaying = false;
+      statusEl.textContent = '✅ 朗读完成';
+      btnPlayAll.disabled = false;
+      sections.forEach(s => s.classList.remove('reading'));
+      readButtons.forEach(btns => btns.forEach(b => { b.textContent = '🔊 朗读此节'; b.classList.remove('reading'); }));
+      return;
+    }
+    currentSectionIdx = idx;
+    highlightSection(idx);
+    setSectionButtonState(idx, 'reading');
+    statusEl.textContent = `朗读第 ${idx + 1}/${sections.length} 节`;
+
+    const text = getSectionText(sections[idx]);
+    if (!text) {
+      // 跳过空节
+      speakSection(idx + 1);
+      return;
+    }
+
+    currentUtterance = new SpeechSynthesisUtterance(text);
+    currentUtterance.lang = 'zh-CN';
+    currentUtterance.rate = parseFloat(speedSlider.value);
+    currentUtterance.pitch = 1.0;
+    currentUtterance.volume = 1.0;
+
+    currentUtterance.onend = function() {
+      setSectionButtonState(idx, null);
+      if (isPlaying && !isPaused) {
+        speakSection(idx + 1);
+      } else if (!isPlaying) {
+        statusEl.textContent = '已停止';
+      }
+    };
+
+    currentUtterance.onerror = function(e) {
+      console.warn('TTS error:', e);
+      setSectionButtonState(idx, null);
+    };
+
+    window.speechSynthesis.speak(currentUtterance);
+  }
+
+  function playAll() {
+    if (!('speechSynthesis' in window)) {
+      alert('您的浏览器不支持 Web Speech API 语音合成功能。');
+      return;
+    }
+    // 尝试加载中文语音
+    let voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0) {
+      // 等待voices加载
+      window.speechSynthesis.onvoiceschanged = function() {
+        voices = window.speechSynthesis.getVoices();
+      };
+    }
+    window.speechSynthesis.cancel();
+    isPlaying = true;
+    isPaused = false;
+    btnPlayAll.disabled = true;
+    btnPause.style.display = '';
+    btnResume.style.display = 'none';
+    speakSection(0);
+  }
+
+  function pause() {
+    if (window.speechSynthesis.speaking && !isPaused) {
+      window.speechSynthesis.pause();
+      isPaused = true;
+      btnPause.style.display = 'none';
+      btnResume.style.display = '';
+      statusEl.textContent = '⏸ 已暂停';
+    }
+  }
+
+  function resume() {
+    if (isPaused) {
+      window.speechSynthesis.resume();
+      isPaused = false;
+      btnPause.style.display = '';
+      btnResume.style.display = 'none';
+      statusEl.textContent = `▶ 继续朗读第 ${currentSectionIdx + 1} 节`;
+    }
+  }
+
+  function stop() {
+    window.speechSynthesis.cancel();
+    isPlaying = false;
+    isPaused = false;
+    btnPlayAll.disabled = false;
+    btnPause.style.display = '';
+    btnResume.style.display = 'none';
+    sections.forEach(s => s.classList.remove('reading'));
+    readButtons.forEach(btns => btns.forEach(b => { b.textContent = '🔊 朗读此节'; b.classList.remove('reading'); }));
+    statusEl.textContent = '⏹ 已停止';
+  }
+
+  btnPlayAll.addEventListener('click', playAll);
+  btnPause.addEventListener('click', pause);
+  btnResume.addEventListener('click', resume);
+  btnStop.addEventListener('click', stop);
+
+  // 给每节标题旁的"朗读此节"按钮绑定事件
+  sections.forEach((section, idx) => {
+    const btns = section.querySelectorAll('.read-btn');
+    readButtons.push(btns);
+    btns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (!('speechSynthesis' in window)) {
+          alert('您的浏览器不支持 Web Speech API 语音合成功能。');
+          return;
+        }
+        // 如果正在朗读，先停止
+        window.speechSynthesis.cancel();
+        isPlaying = true;
+        isPaused = false;
+        btnPlayAll.disabled = true;
+        btnPause.style.display = '';
+        btnResume.style.display = 'none';
+        // 重置所有按钮
+        readButtons.forEach(bs => bs.forEach(b => { b.textContent = '🔊 朗读此节'; b.classList.remove('reading'); }));
+        speakSection(idx);
+      });
+    });
+  });
+
+  // 初始化：预加载 voices
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+  }
+})();
+</script>
+
+</body>
+</html>
