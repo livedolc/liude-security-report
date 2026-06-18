@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 — 2026年6月18日</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.8;
+    padding-bottom: 100px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .header h1 { font-size: 2em; margin-bottom: 8px; }
+  .header .subtitle { font-size: 1em; opacity: 0.85; }
+  .header .author { font-size: 0.9em; opacity: 0.7; margin-top: 8px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 20px; }
+
+  .section {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .section.active {
+    background: #fffde7;
+    box-shadow: 0 4px 20px rgba(255,193,7,0.3);
+    border-left: 4px solid #ff9800;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+  }
+  .section-header h2 {
+    font-size: 1.3em;
+    color: #1a1a2e;
+    flex: 1;
+  }
+  .section-header .section-number {
+    background: #0f3460;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  .section-title-wrap {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .read-section-btn {
+    background: #0f3460;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+  .read-section-btn:hover { background: #1a4a7a; }
+  .read-section-btn:disabled { background: #999; cursor: not-allowed; }
+
+  .section p { margin-bottom: 12px; text-align: justify; }
+  .section ul { margin: 10px 0 10px 20px; }
+  .section li { margin-bottom: 6px; }
+
+  .highlight-box {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .danger-box {
+    background: #ffebee;
+    border-left: 4px solid #f44336;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .info-box {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .emergency-box {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  .emergency-box h3 { color: #ff9800; margin-bottom: 12px; }
+  .emergency-box .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .emergency-box .contact-item {
+    background: rgba(255,255,255,0.08);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9em;
+  }
+  .date-badge {
+    background: #0f3460;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    margin-right: 8px;
+  }
+  .tag {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #555;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75em;
+    margin-right: 4px;
+  }
+  .tag.red { background: #ffcdd2; color: #c62828; }
+  .tag.orange { background: #ffe0b2; color: #e65100; }
+  .tag.blue { background: #bbdefb; color: #1565c0; }
+  .tag.green { background: #c8e6c9; color: #2e7d32; }
+
+  /* 语音播放器样式 */
+  .audio-control-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    z-index: 9999;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.3);
+  }
+  .audio-control-bar button {
+    background: #0f3460;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .audio-control-bar button:hover { background: #1a4a7a; transform: translateY(-1px); }
+  .audio-control-bar button:disabled { background: #555; cursor: not-allowed; transform: none; }
+  .audio-control-bar button.play-all { background: #2e7d32; }
+  .audio-control-bar button.play-all:hover { background: #388e3c; }
+  .audio-control-bar button.pause { background: #e65100; }
+  .audio-control-bar button.pause:hover { background: #ef6c00; }
+  .audio-control-bar button.stop { background: #c62828; }
+  .audio-control-bar button.stop:hover { background: #d32f2f; }
+  .audio-control-bar .speed-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .audio-control-bar .speed-group label { font-size: 0.85em; }
+  .audio-control-bar .speed-group input[type=range] {
+    width: 100px;
+    accent-color: #ff9800;
+  }
+  .audio-control-bar .speed-display {
+    background: rgba(255,255,255,0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    min-width: 42px;
+    text-align: center;
+  }
+  .audio-control-bar .status {
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.4em; }
+    .container { padding: 12px; }
+    .section { padding: 16px; }
+    .audio-control-bar { padding: 10px; gap: 8px; }
+    .audio-control-bar button { padding: 6px 12px; font-size: 0.8em; }
+    .emergency-box .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 底部固定语音控制栏 -->
+<div class="audio-control-bar" id="audioBar">
+  <button class="play-all" onclick="readAll()" id="btnPlayAll" title="朗读全部章节">▶ 全部朗读</button>
+  <button class="pause" onclick="pauseResume()" id="btnPause" title="暂停/继续" disabled>⏸ 暂停</button>
+  <button class="stop" onclick="stopReading()" id="btnStop" title="停止朗读" disabled>⏹ 停止</button>
+  <div class="speed-group">
+    <label for="speedSlider">语速:</label>
+    <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed()">
+    <span class="speed-display" id="speedDisplay">1.0x</span>
+  </div>
+  <span class="status" id="readingStatus">就绪</span>
+</div>
+
+<div class="header">
+  <h1>🛡️ 留德安全汇报</h1>
+  <div class="subtitle">2026年6月18日 · 星期四</div>
+  <div class="author">作者：德国热线（www.dolc.de）</div>
+</div>
+
+<div class="container">
+
+  <!-- 第1节：本周重点安全事件 -->
+  <div class="section" id="sec1">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">1</span>
+        <h2>本周重点安全事件速览</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(1)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p>过去一周，德国及全球安全形势出现多个值得华人社群高度关注的动态。本期汇报将聚焦：<span class="tag red">哥廷根枪击案</span>嫌犯仍在逃、<span class="tag orange">美伊和平协议</span>正式敲定、<span class="tag blue">G7峰会</span>闭幕及对华政策走向、<span class="tag orange">图林根"NSU 2.0"排外威胁信</span>事件、<span class="tag blue">以色列军工入驻柏林</span>引发争议、<span class="tag green">2026世界杯</span>持续进行中的安全提示，以及电信诈骗最新预警。</p>
+    
+    <div class="highlight-box">
+      <strong>📌 本期要点：</strong>哥廷根枪击案嫌疑人仍在逃，警方全境搜捕；美伊6月19日将正式签署和平协议，霍尔木兹海峡全面开放；G7峰会闭幕，对华贸易议题升温；图林根州出现"东德2.0"排外信件。
+    </div>
+  </div>
+
+  <!-- 第2节：哥廷根枪击案追踪 -->
+  <div class="section" id="sec2">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">2</span>
+        <h2>哥廷根枪击案：16岁嫌疑人在逃，警察重伤</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(2)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月13日</span>哥廷根市（Göttingen）在"文化之夜"（KulturNacht）城市节期间发生严重枪击事件。据警方通报，当晚两大家族在Weender Tor区域爆发激烈冲突并开枪，一名赶来处置的警察被击中身受重伤。嫌疑人年仅<strong>16岁</strong>，事发后逃离现场，目前仍在逃。</p>
+    
+    <div class="danger-box">
+      <strong>⚠️ 安全提醒：</strong>嫌疑人可能持有枪支，警方正在下萨克森州及周边地区展开大规模搜捕。居住在哥廷根及周边城市的华人同胞请保持警觉，避免前往治安敏感区域。如发现可疑人员，请立即拨打110报警，切勿自行接触。
+    </div>
+
+    <p>据《Stern》等媒体报道，事件涉及两个有移民背景的"大家族"（Großfamilien）之间的长期恩怨。警方已建立专门的线索收集平台（Hinweisportal），呼吁目击者上传现场视频和照片协助破案。受伤警察经手术后已脱离生命危险，但伤势严重。</p>
+
+    <p>这起事件再次暴露了德国部分城市"家族犯罪"（Clan-Kriminalität）问题的严峻性。根据柏林警方此前公布的数据，2025年柏林家族犯罪案件达952起，同比上升11%，685人涉案，其中暴力犯罪占比达23%。</p>
+  </div>
+
+  <!-- 第3节：美伊和平协议 -->
+  <div class="section" id="sec3">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">3</span>
+        <h2>美伊和平协议达成：霍尔木兹海峡重开</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(3)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月14-15日</span>美国总统特朗普在社交媒体宣布"美伊协议现已完成"，正式批准霍尔木兹海峡"免费开放"，美国海军立即解除相关封锁。伊朗最高国家安全委员会随即确认，敲定6月19日在瑞士签署最终和平协议。</p>
+
+    <div class="info-box">
+      <strong>📋 协议核心内容：</strong>全线立即永久停火；美国解除对伊朗海上封锁并撤出周边区域；霍尔木兹海峡恢复通航；伊朗可自由出口石油；伊朗将浓缩铀稀释并保留在境内；冻结的约120-250亿美元资产分批解冻。
+    </div>
+
+    <p>此前双方经历38轮艰苦谈判，5月28日达成60天停火备忘录框架。6月10日，美军与伊朗在霍尔木兹海峡发生交火——一架美军直升机被击落、美军反击伊朗雷达站——一度令停火濒临破裂。最终在国际斡旋下（沙特、阿曼），双方重回谈判桌。</p>
+
+    <p><strong>对德国影响：</strong>海峡重开将显著缓解全球能源供应紧张，布伦特原油价格已从98美元/桶高位回落。这对深受能源价格上涨冲击的德国经济和在德华人日常生活构成重大利好——油价、取暖费和电价有望逐步回落。不过以色列方面强烈反对该协议，中东局势仍存变数。</p>
+  </div>
+
+  <!-- 第4节：G7峰会 -->
+  <div class="section" id="sec4">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">4</span>
+        <h2>G7峰会闭幕：背书和平协议，对华议题升温</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(4)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月15-17日</span>七国集团（G7）峰会在法国埃维昂莱班（Évian-les-Bains）举行，为期三天。峰会主要成果包括：</p>
+    <ul>
+      <li><strong>背书美伊协议：</strong>G7领导人一致欢迎美伊和平协议，承诺支持后续执行；</li>
+      <li><strong>乌克兰问题：</strong>重申支持乌克兰，呼吁俄方回到谈判桌；</li>
+      <li><strong>对华贸易：</strong>默茨总理在峰会期间表示欧盟将在6月18-19日峰会上讨论对华贸易政策，强调"去风险"但不"脱钩"；</li>
+      <li><strong>黎巴嫩停火：</strong>呼吁黎以双方立即停火，支持UNIFIL维和行动。</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>📌 华人关注：</strong>G7对华贸易"去风险"议题持续发酵，可能影响中资企业在德经营环境和在德华人学者的科研合作。默茨政府在6月11日联邦议院讲话中已明确表态"对华将采取更强硬方针"，建议在德华人在学术、商务活动中注意合规风险，保持低调谨慎。
+    </div>
+  </div>
+
+  <!-- 第5节：图林根排外威胁信 -->
+  <div class="section" id="sec5">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">5</span>
+        <h2>图林根"NSU 2.0"排外威胁信：19起案件</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(5)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">5月-6月</span>图林根州警方确认，5月份该州至少发生<strong>19起</strong>排外威胁信事件。这些信件内容包含反穆斯林污言秽语、新纳粹口号和谋杀幻想，部分甚至标注"NSU 2.0"字样。收信对象包括教育机构、警察局和左翼党（Die Linke）州议会党团。</p>
+
+    <div class="danger-box">
+      <strong>⚠️ 严重关切：</strong>信件信封上标注的寄件人为CDU州教育部长Christian Tischner，但经调查系冒用。此类带有"NSU"（国家社会主义地下组织）标签的威胁信件在德国历史上曾伴随多次严重暴力事件。尽管目前尚未发生实际人身攻击，但在德华人应警惕极右翼排外情绪升温的趋势。
+    </div>
+
+    <p>根据BKA于6月9日发布的《2025年政治动机犯罪统计报告》（PMK），2025年德国政治动机犯罪达85,837起，同比+2%，十年内翻倍。其中极右翼犯罪42,544起，占总数近一半；反犹犯罪6,548起，同比+5%。BKA特别指出"虚无主义犯罪"（nihilistische Kriminalität）这一新现象——犯罪者没有明确政治意识形态，纯粹以制造混乱和恐惧为目的。</p>
+  </div>
+
+  <!-- 第6节：柏林ILA航展与军工事件 -->
+  <div class="section" id="sec6">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">6</span>
+        <h2>柏林航展争议：军工扩容与抗议行动</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(6)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月10-14日</span>第55届柏林国际航空展（ILA）在柏林举行。本次航展军事装备展区大幅扩容、无人机系统密集亮相，被视为欧洲安全战略转型的风向标。航展期间还签署了一项引人瞩目的协议：<strong>以色列航空航天工业公司（IAI）</strong>与柏林州政府签署战略意向书，将在柏林Adlershof设立"创新中心"，开展军事航空与防务领域的研发和本地化生产。</p>
+
+    <p><span class="date-badge">6月10日</span>航展开幕当天，环保与反战组织"和平反对种族灭绝"（Peacefully against Genocide）的多名活动人士在通往展场的道路上用胶水将自己粘在地面，实施静坐封锁。抗议者反对武器和无人机展览，以及莱茵金属公司在柏林规划的弹药生产。警方于上午9时许开始清场。</p>
+
+    <div class="highlight-box">
+      <strong>📌 安全提示：</strong>柏林航展期间市区及展馆周边安保力量增强，但也可能出现抗议活动。由于航展聚焦军事议题，且涉及以色列军工企业在德设厂等敏感话题，在德华人如在公共场合讨论相关话题，请注意言辞分寸，避免卷入不必要的争议。
+    </div>
+  </div>
+
+  <!-- 第7节：汉堡机场与交通 -->
+  <div class="section" id="sec7">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">7</span>
+        <h2>汉堡机场安全事件与交通出行提醒</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(7)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月12日</span>汉堡机场发生安全事件：一名旅客在2号航站楼误触紧急门按钮，短暂进入安全禁区，触发机场警报系统。警方迅速将该旅客拘留并进行调查，但出于安全考虑仍下令对整个航站楼进行全面疏散和安全排查。事件导致数百名旅客滞留、航班延误长达3小时。</p>
+
+    <div class="info-box">
+      <strong>✈️ 夏季出行提示：</strong>欧洲夏季旅游旺季已至，各机场客流量大增。建议乘机出行至少提前2.5-3小时抵达机场。避免误触机场紧急设施；随身行李中勿携带可疑物品以免引发不必要的安检程序。同时注意航班信息和机场公告。
+    </div>
+
+    <p>此外，德国气象局（DWD）对德国南部部分地区发布了雷暴和强降雨预警。博登湖至图林根一带可能出现极端天气，建议计划前往该地区的同胞密切关注天气预警。</p>
+  </div>
+
+  <!-- 第8节：2026世界杯安全提醒 -->
+  <div class="section" id="sec8">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">8</span>
+        <h2>2026世界杯进行中：德国战绩与观赛安全</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(8)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><span class="date-badge">6月11日-7月19日</span>2026世界杯在美国、加拿大、墨西哥三国激战正酣。德国队首战<span class="tag green">7-1大胜</span>表现亮眼，英格兰4-2克罗地亚，哥伦比亚2-0乌兹别克斯坦。随着赛事推进，德国各地Public Viewing（公共观赛）活动持续火爆。</p>
+
+    <div class="danger-box">
+      <strong>⚠️ 观赛安全注意事项：</strong>
+      <ul>
+        <li><strong>防盗：</strong>公共观赛区人群密集，扒窃高发。贵重物品贴身放，背包前置，避免携带大量现金</li>
+        <li><strong>假门票诈骗：</strong>世界杯假门票诈骗在全球范围内频发，通过非官方渠道购票损失惨重——请务必通过FIFA官方渠道购票</li>
+        <li><strong>酒精控制：</strong>观赛时注意控制饮酒量，避免与人发生冲突。赛事胜负情绪容易引发纠纷</li>
+        <li><strong>夜间出行：</strong>深夜观赛结束后尽量结伴而行，避免走偏僻路段</li>
+        <li><strong>赴美观赛：</strong>如计划前往美国现场观赛，请注意美墨边境部分地区安全形势，提前购买旅行保险</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 第9节：电信诈骗 -->
+  <div class="section" id="sec9">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">9</span>
+        <h2>电信诈骗持续高发：五大类型识别与防范</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(9)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p>驻德使领馆多次发布安全提醒，电信诈骗仍然是针对在德华人最高发的安全威胁之一。据最高检数据，2024年1-11月中国起诉电信诈骗嫌疑人6.7万人，同比+58.5%。当前五大诈骗类型：</p>
+    <ul>
+      <li><strong>冒充公检法：</strong>谎称你涉嫌洗钱/诈骗等罪，要求转账至"安全账户"。记住：使领馆和公安机关不会通过电话要求转账！</li>
+      <li><strong>AI换脸诈骗：</strong>利用AI技术伪造亲友视频通话，以"紧急资金需求"为由诈骗。遇到视频借钱，务必通过其他渠道核实</li>
+      <li><strong>世界杯假门票：</strong>以低价世界杯门票为诱饵，付款后消失或用假票搪塞</li>
+      <li><strong>机票退改签：</strong>谎称航班取消/延误，诱导点击钓鱼链接或拨打假客服电话，套取银行卡信息</li>
+      <li><strong>虚拟换汇：</strong>在微信群/留学生群以"优惠汇率"吸引换汇，收款后拉黑</li>
+    </ul>
+    <div class="highlight-box"><strong>🛡️ 牢记"三不一多"：</strong>不轻信、不透露、不转账，多核实！遇到可疑情况，拨打中国反诈专线：<strong>+86-10-12308</strong></div>
+  </div>
+
+  <!-- 第10节：华人社区安全 -->
+  <div class="section" id="sec10">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">10</span>
+        <h2>华人社区安全动态汇总</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(10)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p>近期涉及在德华人社区的几项安全动态值得持续关注：</p>
+    <ul>
+      <li><strong>杜塞尔多夫中国公民遇刺案：</strong>5月24日，38岁中国男子在杜塞公寓内被刀刺身亡，两名嫌疑人被捕。驻杜塞尔多夫总领馆紧急介入并提出交涉。案件仍在审理中。</li>
+      <li><strong>"德国高级驾校"迷奸案收尾：</strong>系列判决接近尾声——主犯张大鹏14年+预防性羁押、蒋中懿11年3个月、周同5年9个月。此案对在德华人社群产生了极大震动和心理创伤。</li>
+      <li><strong>华人间谍案审查趋严：</strong>慕尼黑华裔夫妇被捕后，BfV警告中国情报活动转向学术科研领域。在德华人留学生和科研人员在签证、合作项目方面面临更严审查。</li>
+      <li><strong>中餐从业者盗抢案：</strong>北威州中餐从业人员遭遇盗抢案件持续高发。驻杜塞尔多夫总领馆敦促警方采取有效措施，并多次发布安全提醒。中餐协会建议餐饮业主加装监控、夜间保持照明、避免大额现金留存店内。</li>
+    </ul>
+  </div>
+
+  <!-- 第11节：夏季安全指南 -->
+  <div class="section" id="sec11">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">11</span>
+        <h2>夏季安全实用指南</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(11)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <p><strong>居住安全：</strong>确保住宅门锁完好，睡前检查门窗。独自居住的留学生建议告知信任的朋友自己的住址和行程。安装家用监控设备（注意遵守德国隐私法规）。</p>
+    <p><strong>出行安全：</strong>乘坐火车/公交时保持行李在视线范围内；夜间避免独自在火车站附近长时间逗留；使用共享出行APP而非路边招手叫车。</p>
+    <p><strong>社交安全：</strong>参加聚会时注意饮品安全，不接受陌生人递来的开封饮品。网络交友须谨慎，首次见面选择公共场所。</p>
+    <p><strong>防灾准备：</strong>德国夏季雷暴和冰雹频发。关注DWD天气预警APP（WarnWetter）；户外活动前查询天气；在车内常备应急物资（水、食物、毛毯）。</p>
+    <p><strong>心理健康：</strong>留学生活压力大，如感到焦虑、抑郁、孤独，请主动寻求帮助。德国各大学多设有心理咨询中心（Psychologische Beratungsstelle），服务免费且保密。也可拨打Telefonseelsorge热线：0800-1110111（24小时，德语）。</p>
+  </div>
+
+  <!-- 第12节：紧急联系方式 -->
+  <div class="section" id="sec12">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-number">12</span>
+        <h2>紧急联系方式汇总</h2>
+      </div>
+      <button class="read-section-btn" onclick="readSection(12)" title="朗读本节">🔊 朗读此节</button>
+    </div>
+    <div class="emergency-box">
+      <div class="contact-grid">
+        <div class="contact-item"><strong>🇩🇪 报警：</strong>110</div>
+        <div class="contact-item"><strong>🚑 急救/消防：</strong>112</div>
+        <div class="contact-item"><strong>🇨🇳 全球领保热线：</strong>+86-10-12308</div>
+        <div class="contact-item"><strong>🇨🇳 驻德使馆（柏林）：</strong>030-27588528</div>
+        <div class="contact-item"><strong>驻慕尼黑总领馆：</strong>089-17301618</div>
+        <div class="contact-item"><strong>驻法兰克福总领馆：</strong>069-75085545</div>
+        <div class="contact-item"><strong>驻杜塞尔多夫总领馆：</strong>0211-90996390</div>
+        <div class="contact-item"><strong>驻汉堡总领馆：</strong>040-82276018</div>
+        <div class="contact-item"><strong>心理危机热线（德语）：</strong>0800-1110111</div>
+        <div class="contact-item"><strong>反诈咨询：</strong>+86-10-12308</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>本报告由 <strong>德国热线（www.dolc.de）</strong> 编制 | 2026年6月18日</p>
+    <p>信息综合自：德国联邦刑警局（BKA）、德国联邦宪法保卫局（BfV）、德国气象局（DWD）、中国驻德国使领馆、新华社、Zeit Online、Stern、AA、The Left Berlin、FIFA等公开来源。</p>
+    <p style="margin-top:8px;color:#aaa;">提示：本报告仅供参考，不构成法律或安全建议。具体安全决策请结合自身情况判断。</p>
+  </div>
+
+</div>
+
+<!-- Web Speech API 语音播放引擎 -->
+<script>
+(function() {
+  const synth = window.speechSynthesis;
+  let utterance = null;
+  let isPaused = false;
+  let isReading = false;
+  let currentSectionIndex = -1;
+  let sectionQueue = [];
+  let currentCharIndex = 0;
+  let fullTextQueue = [];
+  let isReadingAll = false;
+  let speed = 1.0;
+
+  // 章节配置：id前缀 + 标题
+  const sectionMap = {
+    1: 'sec1', 2: 'sec2', 3: 'sec3', 4: 'sec4',
+    5: 'sec5', 6: 'sec6', 7: 'sec7', 8: 'sec8',
+    9: 'sec9', 10: 'sec10', 11: 'sec11', 12: 'sec12'
+  };
+
+  function getSectionText(num) {
+    const el = document.getElementById(sectionMap[num]);
+    if (!el) return '';
+    // 排除按钮文字，只取文本内容
+    const clone = el.cloneNode(true);
+    const btns = clone.querySelectorAll('button');
+    btns.forEach(b => b.remove());
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function highlightSection(num) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(sectionMap[num]);
+    if (el) {
+      el.classList.add('active');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function clearHighlight() {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  }
+
+  function updateButtons(state) {
+    const btnPlayAll = document.getElementById('btnPlayAll');
+    const btnPause = document.getElementById('btnPause');
+    const btnStop = document.getElementById('btnStop');
+    const statusEl = document.getElementById('readingStatus');
+    const sectionBtns = document.querySelectorAll('.read-section-btn');
+
+    switch(state) {
+      case 'reading':
+        btnPlayAll.disabled = true;
+        btnPause.disabled = false;
+        btnPause.textContent = '⏸ 暂停';
+        btnStop.disabled = false;
+        statusEl.textContent = '朗读中...';
+        sectionBtns.forEach(b => b.disabled = true);
+        break;
+      case 'paused':
+        btnPlayAll.disabled = true;
+        btnPause.disabled = false;
+        btnPause.textContent = '▶ 继续';
+        btnStop.disabled = false;
+        statusEl.textContent = '已暂停';
+        sectionBtns.forEach(b => b.disabled = true);
+        break;
+      case 'idle':
+        btnPlayAll.disabled = false;
+        btnPause.disabled = true;
+        btnPause.textContent = '⏸ 暂停';
+        btnStop.disabled = true;
+        statusEl.textContent = '就绪';
+        sectionBtns.forEach(b => b.disabled = false);
+        break;
+    }
+  }
+
+  function getZhVoice() {
+    const voices = synth.getVoices();
+    // 优先选择中文语音
+    let voice = voices.find(v => v.lang === 'zh-CN' || v.lang === 'zh-TW' || v.lang === 'zh-HK');
+    if (!voice) {
+      voice = voices.find(v => v.lang.startsWith('zh'));
+    }
+    // 部分浏览器没有中文语音，fallback到第一个
+    return voice || voices[0];
+  }
+
+  function speakText(text, onEnd, onBoundary) {
+    synth.cancel();
+    utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = speed;
+    utterance.voice = getZhVoice();
+
+    utterance.onend = function() {
+      if (onEnd) onEnd();
+    };
+
+    utterance.onboundary = function(e) {
+      if (onBoundary && e.charIndex !== undefined) {
+        onBoundary(e.charIndex);
+      }
+    };
+
+    utterance.onerror = function(e) {
+      if (e.error !== 'interrupted' && e.error !== 'canceled') {
+        console.error('Speech error:', e.error);
+      }
+      if (onEnd && e.error !== 'interrupted') onEnd();
+    };
+
+    synth.speak(utterance);
+  }
+
+  function readAllSections(startFrom) {
+    isReadingAll = true;
+    sectionQueue = [];
+    for (let i = (startFrom || 1); i <= 12; i++) {
+      const text = getSectionText(i);
+      if (text) sectionQueue.push({ num: i, text: text });
+    }
+    currentSectionIndex = 0;
+    readNextSection();
+  }
+
+  function readNextSection() {
+    if (currentSectionIndex >= sectionQueue.length) {
+      // 全部读完
+      finishReading();
+      return;
+    }
+    const section = sectionQueue[currentSectionIndex];
+    highlightSection(section.num);
+    updateButtons('reading');
+
+    speakText(
+      section.text,
+      // onEnd
+      function() {
+        currentSectionIndex++;
+        readNextSection();
+      },
+      // onBoundary
+      null
+    );
+  }
+
+  function finishReading() {
+    synth.cancel();
+    utterance = null;
+    isPaused = false;
+    isReading = false;
+    isReadingAll = false;
+    sectionQueue = [];
+    currentSectionIndex = -1;
+    clearHighlight();
+    updateButtons('idle');
+  }
+
+  // 公开函数
+  window.readSection = function(num) {
+    finishReading();
+    const text = getSectionText(num);
+    if (!text) return;
+    isReading = true;
+    currentSectionIndex = num;
+    highlightSection(num);
+    updateButtons('reading');
+
+    sectionQueue = [{ num: num, text: text }];
+    currentSectionIndex = 0;
+    isReadingAll = false;
+
+    speakText(text, function() {
+      finishReading();
+    });
+  };
+
+  window.readAll = function() {
+    finishReading();
+    readAllSections(1);
+  };
+
+  window.pauseResume = function() {
+    if (!utterance && !isPaused) return;
+
+    if (synth.speaking) {
+      // 正在朗读 -> 暂停
+      synth.pause();
+      isPaused = true;
+      updateButtons('paused');
+    } else if (synth.paused) {
+      // 已暂停 -> 继续
+      synth.resume();
+      isPaused = false;
+      updateButtons('reading');
+    } else if (isPaused) {
+      // 如果是之前暂停的状态，重新开始
+      isPaused = false;
+      if (isReadingAll && sectionQueue.length > 0 && currentSectionIndex >= 0) {
+        readNextSection();
+      } else if (currentSectionIndex > 0 && currentSectionIndex <= 12) {
+        window.readSection(currentSectionIndex);
+      }
+    }
+  };
+
+  window.stopReading = function() {
+    finishReading();
+  };
+
+  window.updateSpeed = function() {
+    const slider = document.getElementById('speedSlider');
+    const display = document.getElementById('speedDisplay');
+    speed = parseFloat(slider.value);
+    display.textContent = speed.toFixed(1) + 'x';
+
+    // 如果正在朗读，更新当前 utterance 的速率
+    if (utterance && (synth.speaking || synth.paused)) {
+      synth.cancel();
+      // 重新开始当前段落
+      const remainingText = utterance.text;
+      if (remainingText) {
+        utterance = new SpeechSynthesisUtterance(remainingText);
+        utterance.lang = 'zh-CN';
+        utterance.rate = speed;
+        utterance.voice = getZhVoice();
+
+        utterance.onend = function() {
+          if (isReadingAll) {
+            currentSectionIndex++;
+            readNextSection();
+          } else {
+            finishReading();
+          }
+        };
+
+        synth.speak(utterance);
+        if (isPaused) {
+          synth.pause();
+        }
+      }
+    }
+  };
+
+  // 确保语音列表已加载
+  if (synth.getVoices().length === 0) {
+    synth.onvoiceschanged = function() {
+      // 预加载语音列表
+      getZhVoice();
+    };
+  }
+})();
+</script>
+
+</body>
+</html>
