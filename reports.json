@@ -1,6 +1,11 @@
 {
   "reports": [
     {
+      "date": "2026-06-21",
+      "path": "reports/sh_20260621.html",
+      "source_url": "https://dolc.biz/security/sh_20260621.html"
+    },
+    {
       "date": "2026-06-20",
       "path": "reports/sh_20260620.html",
       "source_url": "https://dolc.biz/security/sh_20260620.html"
