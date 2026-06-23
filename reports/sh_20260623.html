@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 - 2026年6月23日</title>
+<style>
+body{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;max-width:800px;margin:0 auto;padding:20px;background:#f5f5f5;color:#333;line-height:1.8}
+h1{text-align:center;color:#c0392b;font-size:1.8em;border-bottom:3px solid #c0392b;padding-bottom:10px;margin-bottom:5px}
+.subtitle{text-align:center;color:#666;font-size:0.9em;margin-bottom:20px}
+h2{color:#2c3e50;font-size:1.3em;margin-top:25px;padding:8px 12px;background:#e8e8e8;border-left:4px solid #c0392b;position:relative}
+h3{color:#34495e;font-size:1.1em;margin-top:15px}
+p{text-indent:2em;margin:8px 0}
+.highlight{background:#fff3cd;padding:2px 6px;border-radius:3px;font-weight:bold}
+.warning{background:#f8d7da;color:#721c24;padding:10px 15px;border-radius:5px;border-left:4px solid #c0392b;margin:10px 0}
+.tip{background:#d4edda;color:#155724;padding:10px 15px;border-radius:5px;border-left:4px solid #28a745;margin:10px 0}
+ul{margin:5px 0 5px 2em}
+li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:0.95em}
+th,td{border:1px solid #ddd;padding:8px;text-align:left}
+th{background:#2c3e50;color:#fff}
+tr:nth-child(even){background:#f2f2f2}
+.footer{text-align:center;color:#999;font-size:0.8em;margin-top:30px;padding-top:15px;border-top:1px solid #ddd}
+.read-btn{display:inline-block;font-size:0.7em;cursor:pointer;padding:2px 8px;border-radius:3px;background:#c0392b;color:#fff;margin-left:8px;vertical-align:middle;border:none;line-height:1.4}
+.read-btn:hover{background:#a93226}
+/* 语音播放器样式 */
+.speech-player{position:fixed;bottom:0;left:0;width:100%;background:rgba(0,0,0,0.85);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:15px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.5)}
+.speech-player button{background:#c0392b;color:#fff;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:0.9em}
+.speech-player button:hover{background:#a93226}
+.speech-player button.pause-btn{background:#e67e22}
+.speech-player button.pause-btn:hover{background:#d35400}
+.speech-player button.stop-btn{background:#7f8c8d}
+.speech-player button.stop-btn:hover{background:#6c7a7d}
+.speed-control{display:flex;align-items:center;gap:5px;font-size:0.85em}
+.speed-control input[type=range]{width:100px;accent-color:#c0392b}
+.speed-label{font-size:0.8em;min-width:30px}
+.section-highlight{background:#fff9c4!important;transition:background 0.3s}
+</style>
+</head>
+<body>
+
+<div class="speech-player">
+  <button onclick="startReadAll()">▶ 全部朗读</button>
+  <button class="pause-btn" onclick="pauseResume()">⏸ 暂停</button>
+  <button class="stop-btn" onclick="stopRead()">⏹ 停止</button>
+  <div class="speed-control">
+    <span>语速</span>
+    <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" onchange="updateSpeed(this.value)">
+    <span class="speed-label" id="speedLabel">1x</span>
+  </div>
+</div>
+
+<h1>🛡️ 留德安全汇报</h1>
+<div class="subtitle">2026年6月23日 | 作者：德国热线（www.dolc.de） | 目标群体：留德华人华侨留学生</div>
+
+<h2 id="sec1">一、本周重点安全事件速览 🔊<button class="read-btn" onclick="readSection('sec1')">朗读此节</button></h2>
+<p>本周全球安全局势急剧变化，以下为留德华人需重点关注的事件：</p>
+<ul>
+<li><span class="highlight">🔥 美伊冲突再度升级</span>：6月21日美军打击伊朗三处核设施，伊朗发射40枚弹道导弹反击以色列，美国发布全球安全警报</li>
+<li><span class="highlight">🌡️ 欧洲极端热浪致命</span>：法国至少18人死亡，波尔多41.9°C破106年纪录，德国西南部逼近40°C</li>
+<li><span class="highlight">⚽ 世界杯赛事火热</span>：德国队两战全胜提前出线，Public Viewing防盗需警惕</li>
+<li><span class="highlight">⚔️ 俄乌冲突1570+天</span>：乌军无人机大规模袭击莫斯科炼油厂</li>
+<li><span class="highlight">📱 电信诈骗持续高发</span>：AI换脸、冒充公检法、世界杯假门票诈骗</li>
+</ul>
+
+<h2 id="sec2">二、美伊冲突急剧升级——全球安全警报 🔊<button class="read-btn" onclick="readSection('sec2')">朗读此节</button></h2>
+<p>6月21日，美军对伊朗福尔道（Fordow）、纳坦兹（Natanz）和伊斯法罕（Isfahan）三处核设施实施精确打击，动用7架B-2隐形轰炸机和125架以上各型战机，代号"午夜铁锤"。这是继2025年6月21日首次打击后，美方对伊朗核项目的第二次大规模军事行动。</p>
+<p>伊朗伊斯兰革命卫队随即发起"真实承诺-3"第十九轮反击，发射约40枚远程弹道导弹打击以色列机场及军事指挥中心。以色列防空系统拦截多数弹药，但23名平民受伤。以色列军方同步空袭伊朗西部军工及导弹生产基地，双方持续跨境打击。</p>
+<div class="warning">
+<strong>⚠️ 安全提醒：</strong>美国国务院6月22日发布全球安全警报，警告全球美国公民及关联人士提高安全警惕，多地存在反美示威、低级别袭击与网络攻击潜在风险。在德华人应避免前往美军基地、以色列使领馆等敏感场所周边，关注德外交部及警方安全通报。
+</div>
+<p>美伊和平谈判陷入阶段性僵局。6月17日双方远程签署停战谅解备忘录，6月21日瑞士比尔根山首轮正式磋商仅持续80分钟便因特朗普军事威胁被迫中断。伊朗代表团明确提出复谈两大前置条件：美方撤回军事威胁、以色列撤出黎巴嫩南部。霍尔木兹海峡航运风险大幅上升，多家国际航运企业临时绕行。布伦特原油价格高位震荡，对德国通胀及生活成本持续施加压力。</p>
+<p>埃及、沙特、土耳其、巴基斯坦四国外长召开开罗紧急会议，呼吁伊以立刻停火、重启和平谈判。美意外交矛盾持续发酵，意大利外长取消访美行程，跨大西洋盟友裂痕扩大。</p>
+
+<h2 id="sec3">三、欧洲致命热浪——法国18人死亡 🔊<button class="read-btn" onclick="readSection('sec3')">朗读此节</button></h2>
+<p>6月19日起，一场来自撒哈拉的热穹顶（heat dome）席卷欧洲多国，高压系统导致下沉空气被压缩增温，西欧气温比同期平均高出10°C以上。</p>
+<h3>法国：受灾最严重</h3>
+<p>6月22日法国49个省份发布最高级别高温红色预警，40个省份橙色预警。波尔多气温升至41.9°C，创下当地106年观测史上最高纪录。巴黎38.4°C。全法459项高温纪录被打破或追平。</p>
+<p>高温已导致至少18人死亡，其中包括沃克吕兹省两名被遗忘在车内致死的儿童（2岁和4岁），以及波尔多地区三名80至95岁老人。全境10起溺水死亡事件。845所学校完全关闭，1800所学校调整上课时间，2600余所学校受到影响。法国国家铁路公司预防性取消71趟城际列车。</p>
+<h3>德国：高温预警持续</h3>
+<p>6月19日德国气象局发布高温预警，北威州、下萨克森州和黑森州部分地区最高气温达38°C，西南部可能逼近40°C。德国空调普及率仅约19%，高温天气远比有空调地区难熬。</p>
+<h3>其他欧洲国家</h3>
+<p>西班牙多地40-42°C，意大利8个城市高温红色预警，英国预测6月气温可能打破历史纪录。法国部分城市实施公共场所禁酒、取消音乐会和体育赛事。</p>
+<div class="tip">
+<strong>💡 高温防范建议：</strong>①避免10:00-16:00时段户外活动；②充足饮水，日饮2-3升；③关窗拉帘，夜间通风；④关注DWD预警（www.dwd.de）；⑤老人儿童尤需关注，切勿将儿童留在车内；⑥中暑症状（头晕、恶心、皮肤灼热）立即就医。
+</div>
+
+<h2 id="sec4">四、俄乌冲突持续升级 🔊<button class="read-btn" onclick="readSection('sec4')">朗读此节</button></h2>
+<p>俄乌冲突已持续超1570天，超越一战时长。近期战况：</p>
+<ul>
+<li>乌军使用远程无人机和巡航导弹打击俄罗斯雅罗斯拉夫尔三处军工零部件仓库，造成仓储设备损毁</li>
+<li>乌军194架无人机大规模袭击莫斯科炼油厂</li>
+<li>泽连斯基6月4日致信普京提议直接会面遭拒绝</li>
+<li>罗马尼亚、德国、法国、意大利四国领导人访问基辅，承诺2026-2027年持续输送远程防空导弹和重型火炮</li>
+<li>扎波罗热核电站完成外部电网修复，恢复并网发电，IAEA确认无泄漏</li>
+</ul>
+<div class="warning">
+<strong>⚠️ 提醒：</strong>俄乌冲突对德国能源价格持续施加压力，在德华人关注联邦政府民防更新信息，保持应急准备。
+</div>
+
+<h2 id="sec5">五、世界杯赛事与安全提示 🔊<button class="read-btn" onclick="readSection('sec5')">朗读此节</button></h2>
+<p>2026美加墨世界杯6月11日开幕，德国队首轮7-1大胜库拉索，次轮2-1绝杀科特迪瓦，两战全胜稳居E组榜首，进攻火力冠绝本届，已提前一轮确定小组出线。</p>
+<div class="tip">
+<strong>💡 Public Viewing安全提示：</strong>
+<ul>
+<li>大型观赛场所人流量大，注意随身财物防盗，手机钱包放内侧口袋</li>
+<li>饮酒适度，避免因醉酒引发冲突或成为犯罪目标</li>
+<li>结伴出行，女性尤需注意夜间返家安全</li>
+<li>警惕世界杯假门票诈骗——仅通过FIFA官方渠道购票</li>
+<li>关注当地警方实时通报，遇紧急情况拨打110</li>
+</ul>
+</div>
+
+<h2 id="sec6">六、华人社区安全动态 🔊<button class="read-btn" onclick="readSection('sec6')">朗读此节</button></h2>
+<h3>电信诈骗五大类型</h3>
+<table>
+<tr><th>类型</th><th>特征</th><th>防范</th></tr>
+<tr><td>冒充公检法</td><td>自称使馆/公安，要求转账"保证金"</td><td>使馆从不电话要求转账，立即挂断</td></tr>
+<tr><td>AI换脸视频</td><td>伪造亲友视频通话紧急求助</td><td>二次核实，问细节问题验证</td></tr>
+<tr><td>世界杯假门票</td><td>低价兜售"内部渠道"门票</td><td>仅FIFA官方购票，非官方渠道一律不信</td></tr>
+<tr><td>机票退改签</td><td>短信/邮件声称航班取消要求付费改签</td><td>直接联系航空公司官网确认</td></tr>
+<tr><td>虚拟换汇</td><td>微信群"优惠汇率"私下换汇</td><td>银行/正规平台换汇，私下交易风险极高</td></tr>
+</table>
+<h3>中餐从业者安全</h3>
+<p>北威州中餐从业人员盗抢案件持续高发，驻杜塞尔多夫总领馆持续关注并敦促警方采取有效措施。建议营业时间锁好门窗，安装监控和报警系统，现金当天存银行勿留存店内。</p>
+<h3>学术审查趋严</h3>
+<p>慕尼黑华裔夫妇间谍案后续影响持续，BfV警告中国情报活动转向学术科研领域，在德华人留学生和科研人员面临更严审查。建议与使馆保持联系，遵守德国相关法规。</p>
+
+<h2 id="sec7">七、德国治安形势概要 🔊<button class="read-btn" onclick="readSection('sec7')">朗读此节</button></h2>
+<p>根据BKA 2025年数据：</p>
+<ul>
+<li>政治动机犯罪85,837起（+2%），十年翻倍，创历史新高</li>
+<li>极右翼犯罪42,544起占半数，暴力犯罪4,156起十年最高</li>
+<li>反犹犯罪6,548起（+5%），北威州身体袭击+78%</li>
+<li>"虚无主义犯罪"新现象——无明显政治动机的极端暴力</li>
+<li>柏林"跟随作案"抢劫潮——青少年模仿犯罪，弱势群体受害激增</li>
+</ul>
+<p>火车站及公共交通扒窃、抢劫案件高发，哥廷根枪击案追踪中（16岁嫌疑人已自首）。夏季户外活动增多，治安事件风险上升。</p>
+
+<h2 id="sec8">八、夏季安全实用指南 🔊<button class="read-btn" onclick="readSection('sec8')">朗读此节</button></h2>
+<h3>居住安全</h3>
+<ul>
+<li>出门必锁门窗，贵重物品不外露</li>
+<li>安装定时灯具模拟有人在家</li>
+<li>快递勿堆门口，委托邻居代收</li>
+</ul>
+<h3>出行安全</h3>
+<ul>
+<li>火车站、地铁扒窃高危，贵重物品贴身</li>
+<li>夜间避开偏僻街道和公园</li>
+<li>极端高温避免10-16时户外活动</li>
+</ul>
+<h3>社交防骗</h3>
+<ul>
+<li>"三不一多"：不轻信、不透露、不转账、多核实</li>
+<li>警惕陌生人搭讪，尤其涉及转账换汇</li>
+<li>世界杯期间假门票、假代购诈骗活跃</li>
+</ul>
+<h3>信息安全</h3>
+<ul>
+<li>美国全球安全警报下，避免讨论敏感政治话题</li>
+<li>社交媒体谨慎发布个人位置信息</li>
+<li>关注DWD高温预警和警方安全通报</li>
+</ul>
+<h3>心理健康</h3>
+<ul>
+<li>持续国际冲突新闻可能引发焦虑，适时远离</li>
+<li>高温天气影响情绪和睡眠，保持规律作息</li>
+<li>需要帮助请联系心理热线</li>
+</ul>
+<h3>应急准备</h3>
+<ul>
+<li>准备应急包（水、食物、药品、证件复印件、充电器）</li>
+<li>关注联邦民防办公室更新</li>
+<li>手机下载NINA预警App</li>
+</ul>
+
+<h2 id="sec9">九、紧急联系方式汇总 🔊<button class="read-btn" onclick="readSection('sec9')">朗读此节</button></h2>
+<table>
+<tr><th>用途</th><th>电话/渠道</th></tr>
+<tr><td>德国报警</td><td>110</td></tr>
+<tr><td>德国急救/火警</td><td>112</td></tr>
+<tr><td>中国全球领保热线</td><td>+86-10-12308（24小时）</td></tr>
+<tr><td>驻德大使馆（柏林）</td><td>+49-30-27588-0</td></tr>
+<tr><td>驻汉堡总领馆</td><td>+49-40-8197-6010</td></tr>
+<tr><td>驻慕尼黑总领馆</td><td>+49-89-1730-1618</td></tr>
+<tr><td>驻法兰克福总领馆</td><td>+49-69-7508-7125</td></tr>
+<tr><td>驻杜塞尔多夫总领馆</td><td>+49-211-1399-760</td></tr>
+<tr><td>德国心理危机热线</td><td>0800/111 0 111（免费）</td></tr>
+<tr><td>德国反诈热线</td><td>0800/5 55 000</td></tr>
+<tr><td>DWD气象预警</td><td>www.dwd.de</td></tr>
+<tr><td>NINA预警App</td><td>BBK官方预警应用</td></tr>
+</table>
+
+<div class="footer">
+<p>© 德国热线（www.dolc.de） | 留德安全汇报 | 2026年6月23日</p>
+<p>信息来源：央视新闻、新华网、法新社、路透社、BKA、DWD、驻德使领馆等</p>
+<p>本报告仅供参考，不构成法律或安全建议。如有紧急情况请拨打110/112或联系驻德使领馆。</p>
+</div>
+
+<script>
+const sections=['sec1','sec2','sec3','sec4','sec5','sec6','sec7','sec8','sec9'];
+let currentIdx=-1,utterance=null,isPaused=false,speed=1;
+
+function getSectionText(id){
+  const el=document.getElementById(id);
+  if(!el)return '';
+  let text='';
+  const next=el.nextElementSibling;
+  let node=next;
+  while(node&&!node.id||node&&sections.indexOf(node.id)<0){
+    if(node.tagName&&node.tagName.match(/^H[2-6]$/)&&node.id&&sections.indexOf(node.id)>=0)break;
+    text+=node.textContent+' ';
+    node=node.nextElementSibling;
+  }
+  return text.trim();
+}
+
+function getVoice(){
+  const voices=speechSynthesis.getVoices();
+  let zhVoice=voices.find(v=>v.lang==='zh-CN');
+  if(!zhVoice)zhVoice=voices.find(v=>v.lang.startsWith('zh'));
+  if(!zhVoice)zhVoice=voices.find(v=>v.lang.startsWith('cmn'));
+  return zhVoice||voices[0];
+}
+
+function readSection(id){
+  stopRead();
+  const idx=sections.indexOf(id);
+  if(idx<0)return;
+  currentIdx=idx;
+  speakSection(idx);
+}
+
+function speakSection(idx){
+  if(idx>=sections.length){stopRead();return;}
+  const text=getSectionText(sections[idx]);
+  if(!text){currentIdx=idx+1;speakSection(currentIdx);return;}
+  clearHighlights();
+  const el=document.getElementById(sections[idx]);
+  if(el)el.classList.add('section-highlight');
+  // Also highlight content paragraphs
+  let node=el.nextElementSibling;
+  while(node&&(!node.id||sections.indexOf(node.id)<0)){
+    if(node.tagName&&node.tagName.match(/^H[2-6]$/)&&node.id&&sections.indexOf(node.id)>=0)break;
+    node.classList.add('section-highlight');
+    node=node.nextElementSibling;
+  }
+  utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang='zh-CN';
+  const voice=getVoice();
+  if(voice)utterance.voice=voice;
+  utterance.rate=speed;
+  utterance.onend=function(){
+    clearHighlights();
+    currentIdx=idx+1;
+    if(currentIdx<sections.length)speakSection(currentIdx);
+    else stopRead();
+  };
+  utterance.onerror=function(){clearHighlights();};
+  speechSynthesis.speak(utterance);
+}
+
+function startReadAll(){
+  stopRead();
+  currentIdx=0;
+  speakSection(0);
+}
+
+function pauseResume(){
+  if(speechSynthesis.paused){
+    speechSynthesis.resume();
+    isPaused=false;
+  }else if(speechSynthesis.speaking){
+    speechSynthesis.pause();
+    isPaused=true;
+  }
+}
+
+function stopRead(){
+  speechSynthesis.cancel();
+  utterance=null;
+  currentIdx=-1;
+  isPaused=false;
+  clearHighlights();
+}
+
+function updateSpeed(val){
+  speed=parseFloat(val);
+  document.getElementById('speedLabel').textContent=speed+'x';
+  if(utterance&&speechSynthesis.speaking&&!speechSynthesis.paused){
+    speechSynthesis.cancel();
+    speakSection(currentIdx);
+  }
+}
+
+function clearHighlights(){
+  document.querySelectorAll('.section-highlight').forEach(el=>el.classList.remove('section-highlight'));
+}
+
+// Ensure voices are loaded
+if(speechSynthesis.onvoiceschanged!==undefined){
+  speechSynthesis.onvoiceschanged=function(){};
+}
+speechSynthesis.getVoices();
+</script>
+</body>
+</html>
