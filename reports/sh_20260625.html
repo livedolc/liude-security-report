@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留德安全汇报 — 2026年6月25日</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #1a1a2e; color: #e0e0e0; line-height: 1.8;
+  padding-bottom: 100px;
+}
+.container { max-width: 780px; margin: 0 auto; padding: 20px; }
+.header {
+  text-align: center; padding: 40px 20px 30px;
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  border-radius: 12px; margin-bottom: 30px;
+}
+.header h1 { font-size: 28px; color: #e94560; margin-bottom: 8px; }
+.header .subtitle { font-size: 14px; color: #a0a0b0; }
+.header .author { font-size: 13px; color: #7a7a90; margin-top: 6px; }
+.section {
+  background: #16213e; border-radius: 10px; padding: 24px;
+  margin-bottom: 18px; border-left: 4px solid #e94560;
+  position: relative;
+}
+.section.highlight { background: #2a2a1a; border-left-color: #ffd700; }
+.section h2 { font-size: 20px; color: #e94560; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.section h2 .speak-btn {
+  font-size: 16px; cursor: pointer; background: #e94560; color: #fff;
+  border: none; border-radius: 50%; width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all .2s; flex-shrink: 0;
+}
+.section h2 .speak-btn:hover { background: #ff6b81; transform: scale(1.1); }
+.section p { margin-bottom: 10px; font-size: 15px; }
+.section ul { margin: 8px 0 8px 20px; }
+.section ul li { margin-bottom: 6px; font-size: 14px; }
+.alert-box {
+  background: #3d1a1a; border: 1px solid #e94560; border-radius: 8px;
+  padding: 14px 18px; margin: 14px 0; font-size: 14px;
+}
+.alert-box.warn { background: #3d3a1a; border-color: #ffa500; }
+.info-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.info-table th { background: #0f3460; color: #e94560; padding: 8px 12px; text-align: left; }
+.info-table td { padding: 8px 12px; border-bottom: 1px solid #2a2a4a; }
+.info-table tr:hover td { background: #1e2a4a; }
+.emergency { background: #1a2a1a; border-left-color: #4caf50; }
+.emergency h2 { color: #4caf50; }
+.emergency a { color: #81c784; }
+
+/* Player bar */
+.player-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,.88); backdrop-filter: blur(10px);
+  padding: 12px 20px; display: flex; align-items: center; gap: 12px;
+  z-index: 1000; flex-wrap: wrap; justify-content: center;
+  border-top: 1px solid #333;
+}
+.player-bar button {
+  background: #e94560; color: #fff; border: none; border-radius: 6px;
+  padding: 8px 16px; cursor: pointer; font-size: 15px; transition: all .2s;
+}
+.player-bar button:hover { background: #ff6b81; }
+.player-bar button:disabled { background: #555; cursor: not-allowed; }
+.player-bar .speed-label { color: #aaa; font-size: 13px; }
+.player-bar input[type=range] { width: 100px; accent-color: #e94560; }
+.status-text { color: #aaa; font-size: 12px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+  <h1>🛡️ 留德安全汇报</h1>
+  <div class="subtitle">2026年6月25日（周四）</div>
+  <div class="author">作者：德国热线（www.dolc.de）</div>
+</div>
+
+<!-- 第1节：本周重点速览 -->
+<div class="section" id="sec1">
+  <h2>📋 本周重点安全事件速览 <button class="speak-btn" onclick="speakSection('sec1')" title="朗读此节">🔊</button></h2>
+  <p>本周，欧洲遭遇致命热浪，已致数百人死亡；德国本周五（6月26日）气温可能突破40°C，多地红色高温预警生效；美伊在瑞士比尔根山高级别谈判取得阶段性进展，技术级别继续推进；俄乌冲突持续胶着，乌军无人机频繁袭击俄境内目标；2026世界杯激战正酣，德国队两战全胜提前出线；中国驻德使领馆再次发布安全提醒，警惕电信诈骗与各类治安风险。</p>
+</div>
+
+<!-- 第2节：欧洲致命热浪 -->
+<div class="section alert-box" id="sec2">
+  <h2>🔥 欧洲致命热浪持续——德国周五或破40°C <button class="speak-btn" onclick="speakSection('sec2')" title="朗读此节">🔊</button></h2>
+  <p>一股来自撒哈拉的"热穹顶"正笼罩欧洲大陆。截至6月24日，<strong>法国全境58个省份处于最高级别红色高温预警</strong>，31个省份橙色预警，多地气温突破40°C。法国内政部数据显示，上周末以来已有<strong>至少45人因高温相关原因死亡</strong>，其中40例为避暑溺水、3名高龄老人和2名低龄儿童死于高温引发的健康突发问题。法国800余所学校停课、1800所调整教学时间，卢浮宫、埃菲尔铁塔等景点提前关闭或限制开放，巴黎紧急开放超1400个"清凉岛"避暑点。</p>
+  <p><strong>西班牙</strong>5月已有101人因高温死亡（创2015年来5月最高），全境6月热相关死亡超300人，马德里等中部地区夜间最低气温突破25°C（"热带夜"）。<strong>意大利</strong>卫生部已将罗马、米兰、佛罗伦萨等16座城市列入红色高温预警。<strong>英国</strong>对伦敦、伯明翰等地区发布罕见红色极端高温预警，6月25-26日可能打破英国6月最高气温纪录。</p>
+  <p>德国气象局（DWD）已发布<strong>极端热应力警告</strong>，预计本周五（6月26日）德国西部和西南部（莱茵河流域）气温将逼近或突破<strong>40°C</strong>，有望打破2019年6月在贝恩堡创下的39.6°C六月纪录。DWD同时提醒，高温湿热气团可能在本周末引发强雷暴、冰雹和暴风天气。</p>
+  <p><strong>⚠️ 在德华人请注意：</strong></p>
+  <ul>
+    <li>尽量避免11:00-16:00户外活动，外出做好防晒（SPF30+）</li>
+    <li>每日饮水不少于2升，可补充电解质饮料，避免酒精和咖啡因</li>
+    <li>老人、儿童、慢性病患者属高风险人群，需格外关注</li>
+    <li>切勿将儿童或宠物留在停放的车内（车内温度10分钟即可飙升20°C）</li>
+    <li>欧洲许多老建筑无空调，可购买移动式空调或电风扇；安装固定空调需向市政和物业申请</li>
+    <li>如出现头晕、恶心、肌肉痉挛等中暑症状，立即转移到阴凉处，拨打112</li>
+    <li>关注DWD官方高温预警（www.dwd.de）和NINA、KATWARN预警APP</li>
+  </ul>
+</div>
+
+<!-- 第3节：美伊谈判 -->
+<div class="section" id="sec3">
+  <h2>🌍 美伊瑞士谈判推进——对留德华人的影响 <button class="speak-btn" onclick="speakSection('sec3')" title="朗读此节">🔊</button></h2>
+  <p>6月21日至22日，美伊在瑞士比尔根山举行了自6月中旬签署《伊斯兰堡谅解备忘录》以来的首轮高级别面对面会谈。美方由副总统万斯、总统特使威特科夫及特朗普女婿库什纳出席，伊方由议长卡利巴夫和外长阿拉格齐领衔，卡塔尔和巴基斯坦担任调解方。</p>
+  <p>经过约<strong>18小时拉锯式磋商</strong>，双方同意设立高级别委员会，由技术小组继续就制裁解除、资产解冻、核查机制及地区安全等议题推进谈判，目标在<strong>60天内达成最终协议</strong>。伊朗外长称在石油出口豁免、部分资产解冻方面取得"重大进展"。6月24日，联合国原子能机构（IAEA）总干事格罗西表示，IAEA核查人员将赴伊朗核设施进行核查，这是协议推进的重要一步。</p>
+  <p>但围绕霍尔木兹海峡通航、黎巴嫩停火及伊朗核计划范围等核心议题，双方分歧依然明显。布伦特原油价格维持在约98美元/桶高位，对德国能源价格和通胀构成持续压力。</p>
+  <p><strong>对留德华人影响：</strong>若协议顺利推进，油价有望回落，德国通胀压力减轻；若谈判破裂导致军事冲突再起，能源价格可能再度飙升。建议保持关注但无需恐慌。</p>
+</div>
+
+<!-- 第4节：俄乌冲突 -->
+<div class="section" id="sec4">
+  <h2>⚔️ 俄乌冲突最新动态（6月25日） <button class="speak-btn" onclick="speakSection('sec4')" title="朗读此节">🔊</button></h2>
+  <p>俄乌冲突已进入第1576天，战场态势持续胶着。近期主要动态：</p>
+  <ul>
+    <li>6月25日凌晨，乌军无人机袭击俄罗斯<strong>克拉斯诺达尔边疆区一处油库</strong>，这是本月以来对俄境内能源基础设施的最新一次打击</li>
+    <li>6月24日，乌军对莫斯科炼油厂实施一周内第二次大规模无人机袭击，并强化对俄占克里米亚的打击</li>
+    <li>俄军持续对乌克兰发动大规模空袭，6月18-19日单日曾出动239架无人机和7枚弹道导弹</li>
+    <li>乌克兰塞瓦斯托波尔（克里米亚）发生大面积停电，电网风险上升</li>
+    <li>卢卡申科拒绝普京施压加入对乌战争（ISW评估）</li>
+    <li>俄乌双方可能近期进行新一轮战俘交换</li>
+  </ul>
+  <p>冲突对德国的外溢效应主要体现在能源价格波动、难民安置压力及国防开支增加。对在德华人直接影响有限，但建议关注局势变化。</p>
+</div>
+
+<!-- 第5节：世界杯 -->
+<div class="section" id="sec5">
+  <h2>⚽ 2026世界杯 —— 观赛安全提示 <button class="speak-btn" onclick="speakSection('sec5')" title="朗读此节">🔊</button></h2>
+  <p>2026美加墨世界杯激战正酣（6月11日—7月19日）。德国队在E组首轮7-1大胜库拉索，次轮2-1绝杀科特迪瓦，两战全胜已提前锁定出线资格。德国各地Public Viewing（公共观赛）活动持续火爆，本周赛事密集。</p>
+  <p><strong>观赛安全提醒：</strong></p>
+  <ul>
+    <li>公共观赛区人流量大，注意保管随身财物，谨防扒窃和"飞车抢夺"</li>
+    <li>本周德国多地高温预警生效，户外观赛务必做好防暑（遮阳帽、饮水、避免暴晒）</li>
+    <li>警惕世界杯相关假门票诈骗，切勿通过非官方渠道、社交媒体或陌生网友购票</li>
+    <li>计划赴美观赛的同胞：提前了解当地安全形势，购买旅行保险（含医疗），保存中国驻美使领馆联系方式</li>
+    <li>观赛后避免酒后驾车，德国对酒驾零容忍（血液酒精0.3‰即可面临罚款/吊销驾照）</li>
+    <li>与同胞聚会时注意聚会场所的消防与治安状况，结束尽早回家</li>
+  </ul>
+</div>
+
+<!-- 第6节：德国治安 -->
+<div class="section" id="sec6">
+  <h2>🏙️ 德国国内治安形势概要 <button class="speak-btn" onclick="speakSection('sec6')" title="朗读此节">🔊</button></h2>
+  <p>根据德国联邦刑事警察局（BKA）最新发布的2025年度数据：</p>
+  <ul>
+    <li>政治动机犯罪达85,837起（同比+2%），十年间翻倍，其中极右翼42,544起占半数</li>
+    <li>暴力犯罪4,156起创十年最高；反犹犯罪6,548起（+5%）</li>
+    <li>整体犯罪率下降5.6%，但性犯罪（+2.8%）和入室盗窃（+5.7%）仍在上升</li>
+    <li>柏林"跟随作案"抢劫潮引起关注，多为青少年模仿犯罪</li>
+    <li>汉堡机场6月12日因安全事件紧急疏散，6月22日已恢复正常运营</li>
+  </ul>
+  <p>夏季高温期间，德国各地盗抢案件往往有所上升，因为户外活动增多、门窗常开、财物暴露机会增加。请在德同胞保持警惕。</p>
+</div>
+
+<!-- 第7节：华人社区 -->
+<div class="section" id="sec7">
+  <h2>👥 华人社区安全动态 <button class="speak-btn" onclick="speakSection('sec7')" title="朗读此节">🔊</button></h2>
+  <p>近期涉及在德华人的安全事件回顾与提醒：</p>
+  <ul>
+    <li><strong>"德国高级驾校"跨国性侵案系列宣判收官：</strong>5月法兰克福、慕尼黑、柏林三地法院陆续宣判，核心8人团伙均为985名校背景。主犯张大鹏（43岁，哈工大本科、图宾根大学硕士）因22项严重强奸罪获刑14年+预防性羁押；蒋中懿11年3个月、周同5年9个月；最后一名被告邵之霆预计近期宣判。驻德使领馆持续跟进</li>
+    <li><strong>杜塞尔多夫中国公民遇刺案：</strong>5月24日，一名38岁中国公民在公寓内被刀刺身亡，两名嫌疑人被捕。驻杜塞尔多夫总领馆已紧急介入</li>
+    <li><strong>学术审查趋严：</strong>5月慕尼黑华裔夫妇间谍案后，德国联邦宪法保卫局（BfV）警告中国情报活动转向学术科研领域，在德华人留学生和科研人员可能面临更严格背景审查</li>
+    <li><strong>中餐从业者治安警报：</strong>北威州针对中餐馆和华人商铺的盗抢案件仍时有发生，建议安装监控、加强夜间防范</li>
+  </ul>
+</div>
+
+<!-- 第8节：电信诈骗 -->
+<div class="section alert-box warn" id="sec8">
+  <h2>📱 电信诈骗持续高发——五大类型防范指南 <button class="speak-btn" onclick="speakSection('sec8')" title="朗读此节">🔊</button></h2>
+  <p>中国驻德国使领馆5月28日再次发布安全提醒，电信诈骗持续高发，部分在德中国公民遭受重大经济损失。请牢记<strong>"三不一多"原则</strong>：未知链接不点击、陌生来电不轻信、个人信息不透露、转账汇款多核实。</p>
+  <table class="info-table">
+    <tr><th>诈骗类型</th><th>常见手法</th><th>防范要点</th></tr>
+    <tr><td>冒充公检法</td><td>假冒使馆/国内警方来电，称涉及刑事案件要求转账"保释金"</td><td>使馆不会电话通知涉案，立即挂断并拨打官方电话核实</td></tr>
+    <tr><td>AI换脸诈骗</td><td>利用AI技术伪造亲友视频/语音，以"紧急用钱"为由行骗</td><td>涉及转账必须通过其他渠道二次确认</td></tr>
+    <tr><td>假警察诈骗</td><td>冒充德国警察入户"检查财物"，或电话索要"罚款"</td><td>要求出示警徽，拨打110核实身份，拒绝开门放行</td></tr>
+    <tr><td>机票/门票诈骗</td><td>利用世界杯热点，出售假机票/假门票，收款后失联</td><td>仅通过航空公司官网或FIFA官方渠道购票</td></tr>
+    <tr><td>虚拟换汇诈骗</td><td>微信群/小红书以"优惠汇率"诱骗私下换汇</td><td>通过正规银行渠道换汇，拒绝私人转账</td></tr>
+  </table>
+</div>
+
+<!-- 第9节：夏季安全 -->
+<div class="section" id="sec9">
+  <h2>☀️ 夏季安全实用指南 <button class="speak-btn" onclick="speakSection('sec9')" title="朗读此节">🔊</button></h2>
+  <p><strong>居住安全：</strong>外出关好门窗，贵重物品妥善存放；夏季开窗通风时使用纱窗；安装烟雾报警器和一氧化碳报警器。</p>
+  <p><strong>出行安全：</strong>避免深夜独行偏僻区域；乘坐公共交通时注意随身物品；驾车遵守交规，长途驾驶每2小时休息一次；游泳选择有救生员看管的正规场所（欧洲近期溺水事件激增）。</p>
+  <p><strong>社交安全：</strong>谨慎对待陌生人的邀约和求助；不向不熟悉的人透露住址和行程；参加聚会注意饮品安全，不接受已离开视线的饮料。</p>
+  <p><strong>信息防护：</strong>警惕钓鱼邮件和短信；不在公共WiFi下登录银行账户；定期修改重要账号密码；启用双因素认证（2FA）。</p>
+  <p><strong>心理健康：</strong>留学生活压力大，遇到困难及时与家人朋友沟通；德国各大学普遍设有心理咨询服务（Psychologische Beratungsstelle），可免费使用。</p>
+  <p><strong>防暑降温：</strong>关注DWD官方预警；准备电风扇/移动空调；备好防暑药品（藿香正气水、人丹等）；遇紧急情况拨打112。</p>
+</div>
+
+<!-- 第10节：紧急联系方式 -->
+<div class="section emergency" id="sec10">
+  <h2>📞 紧急联系方式汇总 <button class="speak-btn" onclick="speakSection('sec10')" style="background:#4caf50;" title="朗读此节">🔊</button></h2>
+  <table class="info-table">
+    <tr><td>德国报警电话</td><td><strong>110</strong></td></tr>
+    <tr><td>德国急救/消防电话</td><td><strong>112</strong></td></tr>
+    <tr><td>德国反诈骗热线</td><td>0800 1234 000（免费）</td></tr>
+    <tr><td>中国外交部全球领事保护热线</td><td><strong>+86-10-12308</strong> 或 <strong>+86-10-65612308</strong></td></tr>
+    <tr><td>驻德国大使馆</td><td>030-27588529（领事保护）</td></tr>
+    <tr><td>驻杜塞尔多夫总领馆</td><td>0211-90996390</td></tr>
+    <tr><td>驻法兰克福总领馆</td><td>069-75085543</td></tr>
+    <tr><td>驻汉堡总领馆</td><td>040-826975</td></tr>
+    <tr><td>驻慕尼黑总领馆</td><td>089-206002270</td></tr>
+    <tr><td>心理危机热线（德语）</td><td>0800 111 0111 / 0800 111 0222</td></tr>
+    <tr><td>德国气象局高温预警</td><td><a href="https://www.dwd.de" target="_blank">www.dwd.de</a></td></tr>
+    <tr><td>德国预警APP</td><td>NINA / KATWARN（手机应用商店下载）</td></tr>
+  </table>
+  <p style="margin-top:12px;font-size:12px;color:#888;">本报告由德国热线（www.dolc.de）每日更新发布。安全无小事，防范于未然。祝各位在德同胞平安度夏！</p>
+</div>
+
+</div>
+
+<!-- Player Bar -->
+<div class="player-bar" id="playerBar">
+  <button id="btnPlayAll" onclick="playAll()">▶ 全部朗读</button>
+  <button id="btnPause" onclick="pauseSpeech()" disabled>⏸ 暂停</button>
+  <button id="btnStop" onclick="stopSpeech()" disabled>⏹ 停止</button>
+  <span class="speed-label">语速:</span>
+  <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed()">
+  <span class="speed-label" id="speedLabel">1x</span>
+  <span class="status-text" id="statusText"></span>
+</div>
+
+<script>
+(function() {
+  var synth = window.speechSynthesis;
+  var allSections = ['sec1','sec2','sec3','sec4','sec5','sec6','sec7','sec8','sec9','sec10'];
+  var currentIdx = -1;
+  var isPaused = false;
+  var rate = 1;
+  var currentUtterance = null;
+  var highlightEl = null;
+
+  function getText(el) {
+    var clone = el.cloneNode(true);
+    var btns = clone.querySelectorAll('.speak-btn');
+    btns.forEach(function(b) { b.remove(); });
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function highlight(id) {
+    if (highlightEl) { highlightEl.classList.remove('highlight'); }
+    var el = document.getElementById(id);
+    if (el) { el.classList.add('highlight'); highlightEl = el; }
+  }
+
+  function clearHighlight() {
+    if (highlightEl) { highlightEl.classList.remove('highlight'); highlightEl = null; }
+  }
+
+  function updateUI(state) {
+    var btnPlay = document.getElementById('btnPlayAll');
+    var btnPause = document.getElementById('btnPause');
+    var btnStop = document.getElementById('btnStop');
+    var status = document.getElementById('statusText');
+    if (state === 'speaking') {
+      btnPlay.disabled = true; btnPause.disabled = false; btnStop.disabled = false;
+      status.textContent = '正在朗读...';
+    } else if (state === 'paused') {
+      btnPlay.disabled = false; btnPlay.textContent = '▶ 继续朗读';
+      btnPause.disabled = true; btnStop.disabled = false;
+      status.textContent = '已暂停';
+    } else {
+      btnPlay.disabled = false; btnPlay.textContent = '▶ 全部朗读';
+      btnPause.disabled = true; btnStop.disabled = true;
+      status.textContent = '';
+      clearHighlight();
+      currentIdx = -1;
+    }
+  }
+
+  function speak(idx) {
+    if (idx >= allSections.length) {
+      updateUI('stopped');
+      synth.cancel();
+      return;
+    }
+    var id = allSections[idx];
+    var el = document.getElementById(id);
+    if (!el) { speak(idx + 1); return; }
+    highlight(id);
+    var text = getText(el);
+    currentUtterance = new SpeechSynthesisUtterance(text);
+    currentUtterance.lang = 'zh-CN';
+    currentUtterance.rate = rate;
+    currentUtterance.onend = function() {
+      currentIdx = idx + 1;
+      if (currentIdx < allSections.length && !isPaused) {
+        speak(currentIdx);
+      } else {
+        updateUI('stopped');
+      }
+    };
+    currentUtterance.onerror = function() {
+      currentIdx = idx + 1;
+      if (currentIdx < allSections.length && !isPaused) {
+        speak(currentIdx);
+      } else {
+        updateUI('stopped');
+      }
+    };
+    synth.speak(currentUtterance);
+  }
+
+  window.speakSection = function(id) {
+    synth.cancel();
+    clearHighlight();
+    updateUI('speaking');
+    var idx = allSections.indexOf(id);
+    if (idx >= 0) {
+      currentIdx = idx;
+      isPaused = false;
+      speak(idx);
+    }
+  };
+
+  window.playAll = function() {
+    synth.cancel();
+    clearHighlight();
+    updateUI('speaking');
+    currentIdx = 0;
+    isPaused = false;
+    speak(0);
+  };
+
+  window.pauseSpeech = function() {
+    if (synth.speaking && !synth.paused) {
+      isPaused = true;
+      synth.pause();
+      updateUI('paused');
+    }
+  };
+
+  window.stopSpeech = function() {
+    isPaused = false;
+    synth.cancel();
+    updateUI('stopped');
+  };
+
+  window.updateSpeed = function() {
+    rate = parseFloat(document.getElementById('speedSlider').value);
+    document.getElementById('speedLabel').textContent = rate + 'x';
+  };
+
+  // Ensure voices loaded
+  if (synth.getVoices().length === 0) {
+    synth.onvoiceschanged = function() {};
+  }
+})();
+</script>
+
+</body>
+</html>
